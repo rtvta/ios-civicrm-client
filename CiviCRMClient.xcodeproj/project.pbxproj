@@ -8,20 +8,50 @@
 
 /* Begin PBXBuildFile section */
 		AE1E51D4209588850068D6F2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1E51D3209588850068D6F2 /* AppDelegate.swift */; };
-		AE1E51D6209588850068D6F2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1E51D5209588850068D6F2 /* ViewController.swift */; };
 		AE1E51D9209588850068D6F2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE1E51D7209588850068D6F2 /* Main.storyboard */; };
 		AE1E51DB209588870068D6F2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE1E51DA209588870068D6F2 /* Assets.xcassets */; };
 		AE1E51DE209588870068D6F2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE1E51DC209588870068D6F2 /* LaunchScreen.storyboard */; };
+		AE1E51E620958FAB0068D6F2 /* EntitiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1E51E520958FAB0068D6F2 /* EntitiesViewController.swift */; };
+		AE5BDC9D209B3F0E00B7D726 /* CiviCRMEntityDisplayed.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5BDC9C209B3F0E00B7D726 /* CiviCRMEntityDisplayed.swift */; };
+		AE8BAE852095A167008943F3 /* PropertiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8BAE842095A167008943F3 /* PropertiesViewController.swift */; };
+		AE8BAE872095C097008943F3 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8BAE862095C097008943F3 /* CoreDataStack.swift */; };
+		AE8BAE892095CB2F008943F3 /* DemoCiviCRMData.plist in Resources */ = {isa = PBXBuildFile; fileRef = AE8BAE882095CB2F008943F3 /* DemoCiviCRMData.plist */; };
+		AE8BAE8C2095CC0E008943F3 /* CiviCRM Data.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AE8BAE8A2095CC0E008943F3 /* CiviCRM Data.xcdatamodeld */; };
+		AE8BAE952095E514008943F3 /* Participant+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8BAE8D2095E514008943F3 /* Participant+CoreDataClass.swift */; };
+		AE8BAE962095E514008943F3 /* Participant+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8BAE8E2095E514008943F3 /* Participant+CoreDataProperties.swift */; };
+		AE8BAE972095E514008943F3 /* Contact+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8BAE8F2095E514008943F3 /* Contact+CoreDataClass.swift */; };
+		AE8BAE982095E514008943F3 /* Contact+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8BAE902095E514008943F3 /* Contact+CoreDataProperties.swift */; };
+		AE8BAE992095E514008943F3 /* Contribution+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8BAE912095E514008943F3 /* Contribution+CoreDataClass.swift */; };
+		AE8BAE9A2095E514008943F3 /* Contribution+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8BAE922095E514008943F3 /* Contribution+CoreDataProperties.swift */; };
+		AE8BAE9B2095E514008943F3 /* Pledge+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8BAE932095E514008943F3 /* Pledge+CoreDataClass.swift */; };
+		AE8BAE9C2095E514008943F3 /* Pledge+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8BAE942095E514008943F3 /* Pledge+CoreDataProperties.swift */; };
+		AEBB41B12098A23C000B4866 /* DataMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBB41B02098A23C000B4866 /* DataMap.swift */; };
+		AEBB41B32098BB77000B4866 /* CoreDataAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBB41B22098BB77000B4866 /* CoreDataAdapter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		AE1E51D0209588850068D6F2 /* CiviCRMClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CiviCRMClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE1E51D3209588850068D6F2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		AE1E51D5209588850068D6F2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		AE1E51D8209588850068D6F2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		AE1E51DA209588870068D6F2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AE1E51DD209588870068D6F2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AE1E51DF209588870068D6F2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AE1E51E520958FAB0068D6F2 /* EntitiesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntitiesViewController.swift; sourceTree = "<group>"; };
+		AE5BDC9C209B3F0E00B7D726 /* CiviCRMEntityDisplayed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CiviCRMEntityDisplayed.swift; sourceTree = "<group>"; };
+		AE8BAE842095A167008943F3 /* PropertiesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertiesViewController.swift; sourceTree = "<group>"; };
+		AE8BAE862095C097008943F3 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		AE8BAE882095CB2F008943F3 /* DemoCiviCRMData.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = DemoCiviCRMData.plist; sourceTree = "<group>"; };
+		AE8BAE8B2095CC0E008943F3 /* CiviCRM Data.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "CiviCRM Data.xcdatamodel"; sourceTree = "<group>"; };
+		AE8BAE8D2095E514008943F3 /* Participant+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Participant+CoreDataClass.swift"; sourceTree = "<group>"; };
+		AE8BAE8E2095E514008943F3 /* Participant+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Participant+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		AE8BAE8F2095E514008943F3 /* Contact+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Contact+CoreDataClass.swift"; sourceTree = "<group>"; };
+		AE8BAE902095E514008943F3 /* Contact+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Contact+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		AE8BAE912095E514008943F3 /* Contribution+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Contribution+CoreDataClass.swift"; sourceTree = "<group>"; };
+		AE8BAE922095E514008943F3 /* Contribution+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Contribution+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		AE8BAE932095E514008943F3 /* Pledge+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Pledge+CoreDataClass.swift"; sourceTree = "<group>"; };
+		AE8BAE942095E514008943F3 /* Pledge+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Pledge+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		AEBB41B02098A23C000B4866 /* DataMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataMap.swift; sourceTree = "<group>"; };
+		AEBB41B22098BB77000B4866 /* CoreDataAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataAdapter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,6 +68,14 @@
 		AE1E51C7209588850068D6F2 = {
 			isa = PBXGroup;
 			children = (
+				AE8BAE8F2095E514008943F3 /* Contact+CoreDataClass.swift */,
+				AE8BAE902095E514008943F3 /* Contact+CoreDataProperties.swift */,
+				AE8BAE912095E514008943F3 /* Contribution+CoreDataClass.swift */,
+				AE8BAE922095E514008943F3 /* Contribution+CoreDataProperties.swift */,
+				AE8BAE932095E514008943F3 /* Pledge+CoreDataClass.swift */,
+				AE8BAE942095E514008943F3 /* Pledge+CoreDataProperties.swift */,
+				AE8BAE8D2095E514008943F3 /* Participant+CoreDataClass.swift */,
+				AE8BAE8E2095E514008943F3 /* Participant+CoreDataProperties.swift */,
 				AE1E51D2209588850068D6F2 /* CiviCRMClient */,
 				AE1E51D1209588850068D6F2 /* Products */,
 			);
@@ -54,14 +92,37 @@
 		AE1E51D2209588850068D6F2 /* CiviCRMClient */ = {
 			isa = PBXGroup;
 			children = (
+				AE8BAE9E2095E615008943F3 /* Controller */,
+				AE8BAE9D2095E5A2008943F3 /* Model */,
 				AE1E51D3209588850068D6F2 /* AppDelegate.swift */,
-				AE1E51D5209588850068D6F2 /* ViewController.swift */,
 				AE1E51D7209588850068D6F2 /* Main.storyboard */,
+				AE8BAE8A2095CC0E008943F3 /* CiviCRM Data.xcdatamodeld */,
 				AE1E51DA209588870068D6F2 /* Assets.xcassets */,
 				AE1E51DC209588870068D6F2 /* LaunchScreen.storyboard */,
 				AE1E51DF209588870068D6F2 /* Info.plist */,
+				AE8BAE882095CB2F008943F3 /* DemoCiviCRMData.plist */,
 			);
 			path = CiviCRMClient;
+			sourceTree = "<group>";
+		};
+		AE8BAE9D2095E5A2008943F3 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				AE8BAE862095C097008943F3 /* CoreDataStack.swift */,
+				AEBB41B02098A23C000B4866 /* DataMap.swift */,
+				AEBB41B22098BB77000B4866 /* CoreDataAdapter.swift */,
+				AE5BDC9C209B3F0E00B7D726 /* CiviCRMEntityDisplayed.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		AE8BAE9E2095E615008943F3 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				AE1E51E520958FAB0068D6F2 /* EntitiesViewController.swift */,
+				AE8BAE842095A167008943F3 /* PropertiesViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -125,6 +186,7 @@
 				AE1E51DE209588870068D6F2 /* LaunchScreen.storyboard in Resources */,
 				AE1E51DB209588870068D6F2 /* Assets.xcassets in Resources */,
 				AE1E51D9209588850068D6F2 /* Main.storyboard in Resources */,
+				AE8BAE892095CB2F008943F3 /* DemoCiviCRMData.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -135,8 +197,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AE1E51D6209588850068D6F2 /* ViewController.swift in Sources */,
+				AE5BDC9D209B3F0E00B7D726 /* CiviCRMEntityDisplayed.swift in Sources */,
+				AE8BAE9A2095E514008943F3 /* Contribution+CoreDataProperties.swift in Sources */,
+				AE1E51E620958FAB0068D6F2 /* EntitiesViewController.swift in Sources */,
+				AEBB41B32098BB77000B4866 /* CoreDataAdapter.swift in Sources */,
+				AE8BAE9B2095E514008943F3 /* Pledge+CoreDataClass.swift in Sources */,
 				AE1E51D4209588850068D6F2 /* AppDelegate.swift in Sources */,
+				AE8BAE8C2095CC0E008943F3 /* CiviCRM Data.xcdatamodeld in Sources */,
+				AE8BAE982095E514008943F3 /* Contact+CoreDataProperties.swift in Sources */,
+				AE8BAE962095E514008943F3 /* Participant+CoreDataProperties.swift in Sources */,
+				AE8BAE9C2095E514008943F3 /* Pledge+CoreDataProperties.swift in Sources */,
+				AEBB41B12098A23C000B4866 /* DataMap.swift in Sources */,
+				AE8BAE852095A167008943F3 /* PropertiesViewController.swift in Sources */,
+				AE8BAE872095C097008943F3 /* CoreDataStack.swift in Sources */,
+				AE8BAE972095E514008943F3 /* Contact+CoreDataClass.swift in Sources */,
+				AE8BAE992095E514008943F3 /* Contribution+CoreDataClass.swift in Sources */,
+				AE8BAE952095E514008943F3 /* Participant+CoreDataClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -334,6 +410,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		AE8BAE8A2095CC0E008943F3 /* CiviCRM Data.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				AE8BAE8B2095CC0E008943F3 /* CiviCRM Data.xcdatamodel */,
+			);
+			currentVersion = AE8BAE8B2095CC0E008943F3 /* CiviCRM Data.xcdatamodel */;
+			path = "CiviCRM Data.xcdatamodeld";
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = AE1E51C8209588850068D6F2 /* Project object */;
 }
