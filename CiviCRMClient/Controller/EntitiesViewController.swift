@@ -11,8 +11,7 @@ import CoreData
 
 class EntitiesViewController: UIViewController {
     
-    // MARK: - Class Properties
-    
+    // MARK: - Class Properties    
     lazy var coreDataAdapter: CoreDataAdapter = {
         let adapter = CoreDataAdapter(context: managedContext)
         return adapter
@@ -89,7 +88,6 @@ class EntitiesViewController: UIViewController {
     
 }
 
-
 // MARK: - UITableViewDataSource
 extension EntitiesViewController: UITableViewDataSource{
     
@@ -98,17 +96,10 @@ extension EntitiesViewController: UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        var sectionTitle = "(No Title)"
-        let object = entitiesArray[section].firstObject
-        
-        if object is Contribution {
-            sectionTitle = EntityMap.Contribution.entityTitle
-        } else if object is Participant {
-            sectionTitle = EntityMap.Participant.entityTitle
-        } else if object is Pledge {
-            sectionTitle = EntityMap.Pledge.entityTitle
+        guard let entity = entitiesArray[section].firstObject as? CiviCRMEntityDisplayed else {
+            return "(No Title)"
         }
-        return sectionTitle
+        return entity.entityTitle
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

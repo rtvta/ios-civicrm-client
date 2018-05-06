@@ -12,6 +12,7 @@ import CoreData
 
 @objc(Pledge)
 public class Pledge: NSManagedObject, CiviCRMEntityDisplayed {
+    
     var entityTitle: String {
         return EntityMap.Pledge.entityTitle
     }

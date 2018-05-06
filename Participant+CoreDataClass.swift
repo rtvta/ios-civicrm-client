@@ -12,6 +12,7 @@ import CoreData
 
 @objc(Participant)
 public class Participant: NSManagedObject, CiviCRMEntityDisplayed {
+    
     var entityTitle: String {
         return EntityMap.Participant.entityTitle
     }

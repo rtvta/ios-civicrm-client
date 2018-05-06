@@ -11,7 +11,7 @@ import CoreData
 
 class PropertiesViewController: UIViewController {
     
-    // MARK: - Properties
+    // MARK: - Properties    
     var propertiesDict: [(String, String)]?
 
     // MARK: - IBOutlets
@@ -21,14 +21,13 @@ class PropertiesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
-        
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
+    // MARK: - Configure view
     var entityMO: CiviCRMEntityDisplayed? {
         didSet {
             configureView()
@@ -54,7 +53,6 @@ extension PropertiesViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PropertiesCell", for: indexPath)
-        
         cell.textLabel?.text = propertiesDict![indexPath.row].0
         cell.detailTextLabel?.text = propertiesDict![indexPath.row].1
         return cell

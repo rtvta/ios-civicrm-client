@@ -8,7 +8,7 @@
 
 import Foundation
 
-// MARK: - Entity header
+// MARK: - Entity headers
 enum EntityMap: String {
     case Contact
     case Contribution

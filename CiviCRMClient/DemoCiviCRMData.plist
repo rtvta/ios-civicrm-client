@@ -53,7 +53,7 @@
 			<key>preferred_mail_format</key>
 			<string></string>
 			<key>first_name</key>
-			<string>Elina</string>
+			<string>Lena</string>
 			<key>middle_name</key>
 			<string>S</string>
 			<key>last_name</key>
@@ -308,7 +308,7 @@
 						<key>non_deductible_amount</key>
 						<real>0</real>
 						<key>total_amount</key>
-						<real>1200</real>
+						<real>1100</real>
 						<key>fee_amount</key>
 						<string></string>
 						<key>net_amount</key>
