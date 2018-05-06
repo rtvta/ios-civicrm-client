@@ -18,8 +18,5 @@ public class Contact: NSManagedObject {
         return "\(firstName) \(lastName)"
     }
     
-    func getFlatContactContext () -> NSOrderedSet {
-        return NSOrderedSet()
-    }
 }
 

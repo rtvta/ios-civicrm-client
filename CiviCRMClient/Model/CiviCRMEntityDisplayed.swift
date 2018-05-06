@@ -11,4 +11,5 @@ import Foundation
 protocol CiviCRMEntityDisplayed {
     func getPropertiesForDisplayDictionary() -> [(String,String)]
     var entityLable: String { get }
+    var entityTitle: String { get }
 }

@@ -25,8 +25,8 @@
 		AE8BAE9A2095E514008943F3 /* Contribution+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8BAE922095E514008943F3 /* Contribution+CoreDataProperties.swift */; };
 		AE8BAE9B2095E514008943F3 /* Pledge+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8BAE932095E514008943F3 /* Pledge+CoreDataClass.swift */; };
 		AE8BAE9C2095E514008943F3 /* Pledge+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8BAE942095E514008943F3 /* Pledge+CoreDataProperties.swift */; };
-		AEBB41B12098A23C000B4866 /* DataMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBB41B02098A23C000B4866 /* DataMap.swift */; };
 		AEBB41B32098BB77000B4866 /* CoreDataAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBB41B22098BB77000B4866 /* CoreDataAdapter.swift */; };
+		AED788E6209EF58900695D0C /* EntityMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = AED788E5209EF58900695D0C /* EntityMap.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,8 +50,8 @@
 		AE8BAE922095E514008943F3 /* Contribution+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Contribution+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		AE8BAE932095E514008943F3 /* Pledge+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Pledge+CoreDataClass.swift"; sourceTree = "<group>"; };
 		AE8BAE942095E514008943F3 /* Pledge+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Pledge+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		AEBB41B02098A23C000B4866 /* DataMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataMap.swift; sourceTree = "<group>"; };
 		AEBB41B22098BB77000B4866 /* CoreDataAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataAdapter.swift; sourceTree = "<group>"; };
+		AED788E5209EF58900695D0C /* EntityMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityMap.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,9 +109,9 @@
 			isa = PBXGroup;
 			children = (
 				AE8BAE862095C097008943F3 /* CoreDataStack.swift */,
-				AEBB41B02098A23C000B4866 /* DataMap.swift */,
 				AEBB41B22098BB77000B4866 /* CoreDataAdapter.swift */,
 				AE5BDC9C209B3F0E00B7D726 /* CiviCRMEntityDisplayed.swift */,
+				AED788E5209EF58900695D0C /* EntityMap.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -202,12 +202,12 @@
 				AE1E51E620958FAB0068D6F2 /* EntitiesViewController.swift in Sources */,
 				AEBB41B32098BB77000B4866 /* CoreDataAdapter.swift in Sources */,
 				AE8BAE9B2095E514008943F3 /* Pledge+CoreDataClass.swift in Sources */,
+				AED788E6209EF58900695D0C /* EntityMap.swift in Sources */,
 				AE1E51D4209588850068D6F2 /* AppDelegate.swift in Sources */,
 				AE8BAE8C2095CC0E008943F3 /* CiviCRM Data.xcdatamodeld in Sources */,
 				AE8BAE982095E514008943F3 /* Contact+CoreDataProperties.swift in Sources */,
 				AE8BAE962095E514008943F3 /* Participant+CoreDataProperties.swift in Sources */,
 				AE8BAE9C2095E514008943F3 /* Pledge+CoreDataProperties.swift in Sources */,
-				AEBB41B12098A23C000B4866 /* DataMap.swift in Sources */,
 				AE8BAE852095A167008943F3 /* PropertiesViewController.swift in Sources */,
 				AE8BAE872095C097008943F3 /* CoreDataStack.swift in Sources */,
 				AE8BAE972095E514008943F3 /* Contact+CoreDataClass.swift in Sources */,

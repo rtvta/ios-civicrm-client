@@ -42,8 +42,6 @@ class EntitiesViewController: UIViewController {
         }
         return arr
     }()
-        
-    
     
     // MARK: - IBOutlets
     @IBOutlet weak var tableView: UITableView!
@@ -51,6 +49,7 @@ class EntitiesViewController: UIViewController {
     @IBOutlet weak var emailLabel: UILabel!
     
     @IBOutlet weak var personalDetailsView: UIView!
+    
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,7 +69,6 @@ class EntitiesViewController: UIViewController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     // MARK: - IBActions
@@ -104,11 +102,11 @@ extension EntitiesViewController: UITableViewDataSource{
         let object = entitiesArray[section].firstObject
         
         if object is Contribution {
-            sectionTitle = DataMap.Contribution.displayLabel
+            sectionTitle = EntityMap.Contribution.entityTitle
         } else if object is Participant {
-            sectionTitle = DataMap.Participant.displayLabel
+            sectionTitle = EntityMap.Participant.entityTitle
         } else if object is Pledge {
-            sectionTitle = DataMap.Pledge.displayLabel
+            sectionTitle = EntityMap.Pledge.entityTitle
         }
         return sectionTitle
     }

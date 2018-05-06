@@ -12,19 +12,9 @@ import CoreData
 
 @objc(Contribution)
 public class Contribution: NSManagedObject, CiviCRMEntityDisplayed {
-    func getPropertiesForDisplayDictionary() -> [(String, String)] {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        
-        return [
-            ("For: ", "\(self.source ?? "(No Source)")"),
-            ("Amount: ","\(self.totalAmount) \(self.currency ?? "")"),
-            ("Paid by: ", self.paymentInstrument ?? ""),
-            ("Recieve Date", formatter.string(from: (self.recieveDate! as Date))),
-            ("Contribution Status: ", "\(self.status ?? "(No Status)")"),
-        ]
+    var entityTitle: String {
+        return EntityMap.Contribution.entityTitle
     }
-    
     
     var entityLable: String {
         guard let source = self.source else {
@@ -33,4 +23,17 @@ public class Contribution: NSManagedObject, CiviCRMEntityDisplayed {
         return  source
     }
 
+    func getPropertiesForDisplayDictionary() -> [(String, String)] {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        
+        return [
+            ("For: ", "\(self.source ?? "(No Source)")"),
+            ("Amount: ","\(self.totalAmount) \(self.currency ?? "")"),
+            ("Paid by: ", self.paymentInstrument ?? ""),
+            ("Recieve Date: ", formatter.string(from: (self.receiveDate! as Date))),
+            ("Contribution Status: ", "\(self.status ?? "(No Status)")"),
+        ]
+    }
+    
 }
