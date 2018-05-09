@@ -2,7 +2,7 @@
 //  Contact+CoreDataProperties.swift
 //  CiviCRMClient
 //
-//  Created by Roman Tiagni on 02/05/2018.
+//  Created by Roman Tiagni on 09/05/2018.
 //  Copyright © 2018 Roman Tiagni. All rights reserved.
 //
 //
@@ -17,18 +17,18 @@ extension Contact {
         return NSFetchRequest<Contact>(entityName: "Contact")
     }
 
-    @NSManaged public var addressId: Int32
+    @NSManaged public var addressId: Int64
     @NSManaged public var birthDate: NSDate?
     @NSManaged public var city: String?
-    @NSManaged public var contactId: Int32
+    @NSManaged public var contactId: Int64
     @NSManaged public var contactType: String?
     @NSManaged public var country: String?
     @NSManaged public var email: String?
-    @NSManaged public var emailId: Int32
+    @NSManaged public var emailId: Int64
     @NSManaged public var firstName: String?
     @NSManaged public var lastName: String?
     @NSManaged public var phone: String?
-    @NSManaged public var phoneId: Int32
+    @NSManaged public var phoneId: Int64
     @NSManaged public var streetAddress: String?
     @NSManaged public var contribution: NSOrderedSet?
     @NSManaged public var participant: NSOrderedSet?

@@ -9,13 +9,13 @@
 	<key>count</key>
 	<integer>1</integer>
 	<key>id</key>
-	<integer>144</integer>
+	<integer>1</integer>
 	<key>values</key>
 	<dict>
-		<key>144</key>
+		<key>1</key>
 		<dict>
 			<key>contact_id</key>
-			<integer>144</integer>
+			<string>1</string>
 			<key>contact_type</key>
 			<string>Individual</string>
 			<key>contact_sub_type</key>
@@ -53,7 +53,7 @@
 			<key>preferred_mail_format</key>
 			<string></string>
 			<key>first_name</key>
-			<string>Lena</string>
+			<string>Natasha</string>
 			<key>middle_name</key>
 			<string>S</string>
 			<key>last_name</key>
@@ -87,7 +87,7 @@
 			<key>current_employer</key>
 			<string></string>
 			<key>address_id</key>
-			<integer>128</integer>
+			<string>128</string>
 			<key>street_address</key>
 			<string>604C Northpoint Ln SE</string>
 			<key>supplemental_address_1</key>
@@ -111,13 +111,13 @@
 			<key>country_id</key>
 			<integer>1228</integer>
 			<key>phone_id</key>
-			<integer>98</integer>
+			<string>98</string>
 			<key>phone_type_id</key>
 			<integer>2</integer>
 			<key>phone</key>
 			<string>(707) 778-1687</string>
 			<key>email_id</key>
-			<integer>106</integer>
+			<string>106</string>
 			<key>email</key>
 			<string>elinaadams@airmail.biz</string>
 			<key>on_hold</key>
@@ -149,7 +149,7 @@
 			<key>country</key>
 			<string>United States</string>
 			<key>id</key>
-			<integer>144</integer>
+			<string>1</string>
 			<key>api.Contribution.get</key>
 			<dict>
 				<key>is_error</key>
@@ -157,14 +157,14 @@
 				<key>version</key>
 				<integer>3</integer>
 				<key>count</key>
-				<integer>3</integer>
+				<integer>1</integer>
 				<key>values</key>
 				<array>
 					<dict>
 						<key>contact_id</key>
-						<integer>144</integer>
+						<string>1</string>
 						<key>contribution_id</key>
-						<integer>96</integer>
+						<string>1</string>
 						<key>currency</key>
 						<string>USD</string>
 						<key>payment_instrument_id</key>
@@ -174,7 +174,7 @@
 						<key>non_deductible_amount</key>
 						<real>0</real>
 						<key>total_amount</key>
-						<real>25</real>
+						<string>25</string>
 						<key>fee_amount</key>
 						<string></string>
 						<key>net_amount</key>
@@ -224,139 +224,7 @@
 						<key>instrument_id</key>
 						<integer>3</integer>
 						<key>id</key>
-						<integer>96</integer>
-					</dict>
-					<dict>
-						<key>contact_id</key>
-						<integer>144</integer>
-						<key>contribution_id</key>
-						<integer>86</integer>
-						<key>currency</key>
-						<string>USD</string>
-						<key>payment_instrument</key>
-						<string>Credit Card</string>
-						<key>payment_instrument_id</key>
-						<integer>1</integer>
-						<key>receive_date</key>
-						<string>2018-01-12 09:52:50</string>
-						<key>non_deductible_amount</key>
-						<real>0</real>
-						<key>total_amount</key>
-						<real>50</real>
-						<key>fee_amount</key>
-						<string></string>
-						<key>net_amount</key>
-						<string></string>
-						<key>trxn_id</key>
-						<string></string>
-						<key>invoice_id</key>
-						<string></string>
-						<key>invoice_number</key>
-						<string></string>
-						<key>cancel_date</key>
-						<string></string>
-						<key>cancel_reason</key>
-						<string></string>
-						<key>receipt_date</key>
-						<string>2018-01-12 09:52:50</string>
-						<key>thankyou_date</key>
-						<string></string>
-						<key>contribution_source</key>
-						<string>Fall Fundraiser Dinner : Offline registration</string>
-						<key>amount_level</key>
-						<string></string>
-						<key>contribution_recur_id</key>
-						<string></string>
-						<key>is_test</key>
-						<integer>0</integer>
-						<key>is_pay_later</key>
-						<integer>0</integer>
-						<key>contribution_status</key>
-						<string>Completed</string>
-						<key>contribution_status_id</key>
-						<integer>1</integer>
-						<key>contribution_check_number</key>
-						<string></string>
-						<key>contribution_campaign_id</key>
-						<string></string>
-						<key>civicrm_value_donor_information_3_id</key>
-						<string></string>
-						<key>custom_5</key>
-						<string></string>
-						<key>custom_6</key>
-						<string></string>
-						<key>check_number</key>
-						<string></string>
-						<key>instrument_id</key>
-						<integer>1</integer>
-						<key>id</key>
-						<integer>86</integer>
-					</dict>
-					<dict>
-						<key>contact_id</key>
-						<integer>144</integer>
-						<key>contribution_id</key>
-						<integer>35</integer>
-						<key>currency</key>
-						<string>USD</string>
-						<key>payment_instrument</key>
-						<string>Credit Card</string>
-						<key>payment_instrument_id</key>
-						<integer>1</integer>
-						<key>receive_date</key>
-						<string>2018-01-12 09:52:49</string>
-						<key>non_deductible_amount</key>
-						<real>0</real>
-						<key>total_amount</key>
-						<real>1100</real>
-						<key>fee_amount</key>
-						<string></string>
-						<key>net_amount</key>
-						<string></string>
-						<key>trxn_id</key>
-						<string></string>
-						<key>invoice_id</key>
-						<string></string>
-						<key>invoice_number</key>
-						<string></string>
-						<key>cancel_date</key>
-						<string></string>
-						<key>cancel_reason</key>
-						<string></string>
-						<key>receipt_date</key>
-						<string></string>
-						<key>thankyou_date</key>
-						<string></string>
-						<key>contribution_source</key>
-						<string>Lifetime Membership: Offline signup</string>
-						<key>amount_level</key>
-						<string></string>
-						<key>contribution_recur_id</key>
-						<string></string>
-						<key>is_test</key>
-						<integer>0</integer>
-						<key>is_pay_later</key>
-						<integer>0</integer>
-						<key>contribution_status</key>
-						<string>Completed</string>
-						<key>contribution_status_id</key>
-						<integer>1</integer>
-						<key>contribution_check_number</key>
-						<string></string>
-						<key>contribution_campaign_id</key>
-						<string></string>
-						<key>civicrm_value_donor_information_3_id</key>
-						<string></string>
-						<key>custom_5</key>
-						<string></string>
-						<key>custom_6</key>
-						<string></string>
-						<key>check_number</key>
-						<string></string>
-						<key>instrument_id</key>
-						<integer>1</integer>
-						<key>id</key>
-						<integer>35</integer>
+						<string>1</string>
 					</dict>
 				</array>
 			</dict>
@@ -369,12 +237,12 @@
 				<key>count</key>
 				<integer>1</integer>
 				<key>id</key>
-				<integer>5</integer>
+				<integer>1</integer>
 				<key>values</key>
 				<array>
 					<dict>
 						<key>contact_id</key>
-						<integer>144</integer>
+						<string>1</string>
 						<key>contact_type</key>
 						<string>Individual</string>
 						<key>contact_sub_type</key>
@@ -384,9 +252,9 @@
 						<key>display_name</key>
 						<string>Mrs. Elina Adams</string>
 						<key>pledge_id</key>
-						<integer>5</integer>
+						<string>1</string>
 						<key>pledge_amount</key>
-						<real>100</real>
+						<string>100</string>
 						<key>pledge_create_date</key>
 						<string>2018-04-22 00:00:00</string>
 						<key>pledge_start_date</key>
@@ -394,11 +262,11 @@
 						<key>pledge_status</key>
 						<string>In Progress</string>
 						<key>pledge_total_paid</key>
-						<real>25</real>
+						<string>25</string>
 						<key>pledge_next_pay_date</key>
 						<string>2018-05-01 00:00:00</string>
 						<key>pledge_next_pay_amount</key>
-						<real>25</real>
+						<string>25</string>
 						<key>pledge_outstanding_amount</key>
 						<string></string>
 						<key>pledge_financial_type</key>
@@ -406,7 +274,7 @@
 						<key>pledge_contribution_page_id</key>
 						<string></string>
 						<key>pledge_frequency_interval</key>
-						<integer>1</integer>
+						<string>1</string>
 						<key>pledge_frequency_unit</key>
 						<string>month</string>
 						<key>pledge_is_test</key>
@@ -416,7 +284,7 @@
 						<key>pledge_currency</key>
 						<string>USD</string>
 						<key>id</key>
-						<integer>5</integer>
+						<string>1</string>
 					</dict>
 				</array>
 			</dict>
@@ -429,12 +297,12 @@
 				<key>count</key>
 				<integer>1</integer>
 				<key>id</key>
-				<integer>13</integer>
+				<integer>1</integer>
 				<key>values</key>
 				<array>
 					<dict>
 						<key>contact_id</key>
-						<integer>144</integer>
+						<string>1</string>
 						<key>contact_type</key>
 						<string>Individual</string>
 						<key>contact_sub_type</key>
@@ -444,7 +312,7 @@
 						<key>display_name</key>
 						<string>Mrs. Elina Adams</string>
 						<key>event_id</key>
-						<integer>1</integer>
+						<string>1</string>
 						<key>event_title</key>
 						<string>Fall Fundraiser Dinner</string>
 						<key>event_start_date</key>
@@ -456,11 +324,11 @@
 						<key>default_role_id</key>
 						<integer>1</integer>
 						<key>participant_id</key>
-						<integer>13</integer>
+						<string>1</string>
 						<key>participant_fee_level</key>
 						<string>Single</string>
 						<key>participant_fee_amount</key>
-						<real>50</real>
+						<string>50</string>
 						<key>participant_fee_currency</key>
 						<string>USD</string>
 						<key>event_type</key>
@@ -488,7 +356,7 @@
 						<key>participant_campaign_id</key>
 						<string></string>
 						<key>id</key>
-						<integer>13</integer>
+						<string>1</string>
 					</dict>
 				</array>
 			</dict>

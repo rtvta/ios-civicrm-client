@@ -2,7 +2,7 @@
 //  Participant+CoreDataProperties.swift
 //  CiviCRMClient
 //
-//  Created by Roman Tiagni on 01/05/2018.
+//  Created by Roman Tiagni on 09/05/2018.
 //  Copyright © 2018 Roman Tiagni. All rights reserved.
 //
 //
@@ -17,16 +17,16 @@ extension Participant {
         return NSFetchRequest<Participant>(entityName: "Participant")
     }
 
-    @NSManaged public var contactId: Int32
+    @NSManaged public var contactId: Int64
     @NSManaged public var eventEndDate: NSDate?
-    @NSManaged public var eventId: Int32
+    @NSManaged public var eventId: Int64
     @NSManaged public var eventStartDate: NSDate?
     @NSManaged public var eventTitle: String?
     @NSManaged public var eventType: String?
     @NSManaged public var feeAmount: Double
     @NSManaged public var feeCurrency: String?
     @NSManaged public var feeLevel: String?
-    @NSManaged public var participantId: Int32
+    @NSManaged public var participantId: Int64
     @NSManaged public var registerDate: NSDate?
     @NSManaged public var role: String?
     @NSManaged public var source: String?

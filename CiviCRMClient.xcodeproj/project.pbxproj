@@ -13,6 +13,7 @@
 		AE1E51DE209588870068D6F2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE1E51DC209588870068D6F2 /* LaunchScreen.storyboard */; };
 		AE1E51E620958FAB0068D6F2 /* EntitiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1E51E520958FAB0068D6F2 /* EntitiesViewController.swift */; };
 		AE5BDC9D209B3F0E00B7D726 /* CiviCRMEntityDisplayed.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5BDC9C209B3F0E00B7D726 /* CiviCRMEntityDisplayed.swift */; };
+		AE8A2D3D20A09B5100D6A537 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AE8A2D3C20A09B5100D6A537 /* Settings.bundle */; };
 		AE8BAE852095A167008943F3 /* PropertiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8BAE842095A167008943F3 /* PropertiesViewController.swift */; };
 		AE8BAE872095C097008943F3 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8BAE862095C097008943F3 /* CoreDataStack.swift */; };
 		AE8BAE892095CB2F008943F3 /* DemoCiviCRMData.plist in Resources */ = {isa = PBXBuildFile; fileRef = AE8BAE882095CB2F008943F3 /* DemoCiviCRMData.plist */; };
@@ -38,6 +39,7 @@
 		AE1E51DF209588870068D6F2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AE1E51E520958FAB0068D6F2 /* EntitiesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntitiesViewController.swift; sourceTree = "<group>"; };
 		AE5BDC9C209B3F0E00B7D726 /* CiviCRMEntityDisplayed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CiviCRMEntityDisplayed.swift; sourceTree = "<group>"; };
+		AE8A2D3C20A09B5100D6A537 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		AE8BAE842095A167008943F3 /* PropertiesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertiesViewController.swift; sourceTree = "<group>"; };
 		AE8BAE862095C097008943F3 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		AE8BAE882095CB2F008943F3 /* DemoCiviCRMData.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = DemoCiviCRMData.plist; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 				AE1E51DC209588870068D6F2 /* LaunchScreen.storyboard */,
 				AE1E51DF209588870068D6F2 /* Info.plist */,
 				AE8BAE882095CB2F008943F3 /* DemoCiviCRMData.plist */,
+				AE8A2D3C20A09B5100D6A537 /* Settings.bundle */,
 			);
 			path = CiviCRMClient;
 			sourceTree = "<group>";
@@ -185,6 +188,7 @@
 			files = (
 				AE1E51DE209588870068D6F2 /* LaunchScreen.storyboard in Resources */,
 				AE1E51DB209588870068D6F2 /* Assets.xcassets in Resources */,
+				AE8A2D3D20A09B5100D6A537 /* Settings.bundle in Resources */,
 				AE1E51D9209588850068D6F2 /* Main.storyboard in Resources */,
 				AE8BAE892095CB2F008943F3 /* DemoCiviCRMData.plist in Resources */,
 			);

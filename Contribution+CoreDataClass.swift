@@ -19,7 +19,10 @@ public class Contribution: NSManagedObject, CiviCRMEntityDisplayed {
     
     var entityLable: String {
         guard let source = self.source else {
-            return "(No Source)"
+            return "(No Description)"
+        }
+        if source.isEmpty {
+            return "(No Description)"
         }
         return  source
     }

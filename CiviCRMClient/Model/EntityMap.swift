@@ -35,6 +35,16 @@ enum EntityMap: String {
             return "My Events"
         }
     }
+    var relatedEntities: [String] {
+        switch self {
+        case .Contact:
+            return ["Contribution","Participant","Pledge"]
+        default:
+            return [""]
+        }
+        
+    }
+    
 }
 
 // MARK: - Contact fields

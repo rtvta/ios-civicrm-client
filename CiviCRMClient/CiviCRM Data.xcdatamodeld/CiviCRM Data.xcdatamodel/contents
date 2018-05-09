@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14133" systemVersion="17E202" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Contact" representedClassName="Contact" syncable="YES">
-        <attribute name="addressId" optional="YES" attributeType="Integer 32" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="addressId" optional="YES" attributeType="Integer 64" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="birthDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="city" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="contactId" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="contactId" optional="YES" attributeType="Integer 64" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="contactType" attributeType="String" syncable="YES"/>
         <attribute name="country" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="emailId" optional="YES" attributeType="Integer 32" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="emailId" optional="YES" attributeType="Integer 64" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="phone" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="phoneId" optional="YES" attributeType="Integer 32" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="phoneId" optional="YES" attributeType="Integer 64" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="streetAddress" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="contribution" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="Contribution" inverseName="contact" inverseEntity="Contribution" syncable="YES"/>
         <relationship name="participant" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="Participant" inverseName="contact" inverseEntity="Participant" syncable="YES"/>
@@ -24,8 +24,8 @@
         </uniquenessConstraints>
     </entity>
     <entity name="Contribution" representedClassName="Contribution" syncable="YES">
-        <attribute name="contactId" optional="YES" attributeType="Integer 32" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="contributionId" optional="YES" attributeType="Integer 32" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="contactId" optional="YES" attributeType="Integer 64" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="contributionId" optional="YES" attributeType="Integer 64" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="currency" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="paymentInstrument" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="receiveDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
@@ -35,16 +35,16 @@
         <relationship name="contact" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Contact" inverseName="contribution" inverseEntity="Contact" syncable="YES"/>
     </entity>
     <entity name="Participant" representedClassName="Participant" syncable="YES">
-        <attribute name="contactId" optional="YES" attributeType="Integer 32" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="contactId" optional="YES" attributeType="Integer 64" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="eventEndDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="eventId" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="eventId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="eventStartDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="eventTitle" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="eventType" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="feeAmount" optional="YES" attributeType="Double" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="feeCurrency" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="feeLevel" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="participantId" optional="YES" attributeType="Integer 32" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="participantId" optional="YES" attributeType="Integer 64" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="registerDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="role" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="source" optional="YES" attributeType="String" syncable="YES"/>
@@ -52,13 +52,13 @@
         <relationship name="contact" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Contact" inverseName="participant" inverseEntity="Contact" syncable="YES"/>
     </entity>
     <entity name="Pledge" representedClassName="Pledge" syncable="YES">
-        <attribute name="contactId" optional="YES" attributeType="Integer 32" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="contactId" optional="YES" attributeType="Integer 64" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="currency" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="financialType" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="frequencyUnit" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="nextPayAmount" optional="YES" attributeType="Double" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="nextPayDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="pledgeId" optional="YES" attributeType="Integer 32" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="pledgeId" optional="YES" attributeType="Integer 64" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="startDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="status" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="totalAmount" optional="YES" attributeType="Double" usesScalarValueType="YES" syncable="YES"/>
@@ -68,7 +68,7 @@
     <elements>
         <element name="Contact" positionX="-1017" positionY="-1746" width="128" height="285"/>
         <element name="Contribution" positionX="-648" positionY="-2002" width="128" height="180"/>
-        <element name="Participant" positionX="-648" positionY="-1746" width="128" height="268"/>
+        <element name="Participant" positionX="-648" positionY="-1746" width="128" height="270"/>
         <element name="Pledge" positionX="-648" positionY="-1396" width="128" height="225"/>
     </elements>
 </model>
