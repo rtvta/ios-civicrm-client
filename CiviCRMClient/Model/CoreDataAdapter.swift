@@ -165,7 +165,8 @@ class CoreDataAdapter {
         try! managedContext.save()
     }
     
-    // MARK: - File private functions
+    // MARK: - File private functions for set values to MO
+    // Contact
     fileprivate func setValuesContactMO(_ contactMO: Contact, _ contact: NSDictionary) {
         if let contactId = Int64(contact.value(forKey: ContactFields.contactId.rawValue) as! String) { contactMO.contactId = contactId }
         if let addressId = Int64(contact.value(forKey: ContactFields.addressId.rawValue)  as! String) { contactMO.addressId = addressId }
@@ -185,6 +186,7 @@ class CoreDataAdapter {
         }
     }
     
+    // Contribution
     fileprivate func setValuesContributionMO(_ contributionMO: Contribution, _ contribution: NSDictionary) {
         if let contactId = Int64(contribution.value(forKey: ContributionFields.contactId.rawValue)  as! String) { contributionMO.contactId = contactId }
         if let contributionId = Int64(contribution.value(forKey: ContributionFields.contributionId.rawValue)  as! String) { contributionMO.contributionId = contributionId }
@@ -199,7 +201,7 @@ class CoreDataAdapter {
         }
     }
     
-    
+    // Participant
     fileprivate func setValuesParticipantMO(_ participantMO: Participant, _ participant: NSDictionary) {
         if let contactId = Int64(participant.value(forKey: ParticipantFields.contactId.rawValue)  as! String) { participantMO.contactId = contactId }
         if let participantId = Int64(participant.value(forKey: ParticipantFields.participantId.rawValue)  as! String) { participantMO.participantId = participantId }
@@ -226,9 +228,11 @@ class CoreDataAdapter {
         }
     }
     
+    // Pledge
     fileprivate func setValuesPledgeMO(_ pledgeMO: Pledge, _ pledge: NSDictionary) {
         if let contactId = Int64(pledge.value(forKey: PledgeFields.contactId.rawValue) as! String) { pledgeMO.contactId = contactId }
         if let pledgeId = Int64(pledge.value(forKey: PledgeFields.pledgeId.rawValue)  as! String) { pledgeMO.pledgeId = pledgeId }
+        if let frequencyInterval = Int16(pledge.value(forKey: PledgeFields.frequencyInterval.rawValue)  as! String) { pledgeMO.frequencyInterval = frequencyInterval }
         if let totalAmount = Double(pledge.value(forKey: PledgeFields .totalAmount.rawValue) as! String){ pledgeMO.totalAmount = totalAmount }
         if let totalPaid = Double(pledge.value(forKey: PledgeFields.totalPaid.rawValue) as! String) { pledgeMO.totalPaid = totalPaid }
         if let currency = pledge.value(forKey: PledgeFields.currency.rawValue) as? String { pledgeMO.currency = currency }

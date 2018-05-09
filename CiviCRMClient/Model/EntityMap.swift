@@ -107,4 +107,5 @@ enum PledgeFields: String {
     case totalAmount = "pledge_amount"
     case totalPaid = "pledge_total_paid"
     case currency = "pledge_currency"
+    case frequencyInterval = "pledge_frequency_interval"
 }

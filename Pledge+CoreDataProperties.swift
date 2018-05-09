@@ -20,6 +20,7 @@ extension Pledge {
     @NSManaged public var contactId: Int64
     @NSManaged public var currency: String?
     @NSManaged public var financialType: String?
+    @NSManaged public var frequencyInterval: Int16
     @NSManaged public var frequencyUnit: String?
     @NSManaged public var nextPayAmount: Double
     @NSManaged public var nextPayDate: NSDate?

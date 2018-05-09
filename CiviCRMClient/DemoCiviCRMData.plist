@@ -274,7 +274,7 @@
 						<key>pledge_contribution_page_id</key>
 						<string></string>
 						<key>pledge_frequency_interval</key>
-						<string>1</string>
+						<string>3</string>
 						<key>pledge_frequency_unit</key>
 						<string>month</string>
 						<key>pledge_is_test</key>

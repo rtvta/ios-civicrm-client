@@ -20,7 +20,8 @@ public class Pledge: NSManagedObject, CiviCRMEntityDisplayed {
     var entityLable: String {
         let frequencyUnit = self.frequencyUnit ?? ""
         let financialType = self.financialType ?? ""
-        return "\(financialType): every \(frequencyUnit)"
+        let frequencyInterval = self.frequencyInterval
+        return "\(financialType): every \(frequencyInterval) \(frequencyUnit)"
     }
     
     func getPropertiesForDisplayDictionary() -> [(String, String)] {
@@ -32,7 +33,7 @@ public class Pledge: NSManagedObject, CiviCRMEntityDisplayed {
             ("Total Amount: ","\(self.totalAmount) \(self.currency ?? "")"),
             ("Start Date: ", formatter.string(from: (self.startDate! as Date))),
             ("Status: ", "\(self.status ?? "(No Status)")"),
-            ("Frequency: ", "\(self.frequencyUnit ?? "(No Frequency)")"),
+            ("Frequency: ", "per \(self.frequencyInterval) \(self.frequencyUnit ?? "(No Frequency)")"),
             ("Total Paid: ", "\(self.totalPaid) \(self.currency ?? "")"),
             ("Next Amount: ", "\(self.nextPayAmount) \(self.currency ?? "")"),
             ("Next Date: ", formatter.string(from: (self.nextPayDate! as Date))),
