@@ -53,8 +53,8 @@ extension PropertiesViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PropertiesCell", for: indexPath)
-        cell.textLabel?.text = propertiesDict![indexPath.row].0
-        cell.detailTextLabel?.text = propertiesDict![indexPath.row].1
+        cell.textLabel?.text = propertiesDict?[indexPath.row].0
+        cell.detailTextLabel?.text = propertiesDict?[indexPath.row].1
         return cell
     }
     
