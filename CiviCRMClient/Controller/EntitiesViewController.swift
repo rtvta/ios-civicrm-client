@@ -57,29 +57,7 @@ class EntitiesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let isDemo = userDefaults?.bool(forKey: "demo_mode_preference") ?? false
-        
-        let fetch: NSFetchRequest<Contact> = Contact.fetchRequest()
-        contacts = try! managedContext.fetch(fetch)
-        if contacts.count > 0 {
-            currentContact = contacts.first
-            
-            for c in contacts {
-                print(c.contactId)
-                if  c.contactId > 1, !isDemo {
-                    currentContact = c
-                    print("Contact changed to \(c.contactId)")
-                } else if  c.contactId == 1, isDemo {
-                    currentContact = c
-                    print("Contact changed to \(c.contactId)")
-                }
-            }
-        } else {
-            coreDataAdapter.insertSampleData()
-            contacts = try! managedContext.fetch(fetch)
-            currentContact = contacts.first
-        }
-
+        setCurrentContact()
         
         title = currentContact?.firstName
         emailLabel.text = currentContact?.email
@@ -135,7 +113,7 @@ class EntitiesViewController: UIViewController {
                                     "key":siteKey,
                                     "json":EntityMap.Contact.relatedEntities]
       
-        let request = clientUrlRequest(url: url, params: params, options: options)
+        let request = urlRequest(url: url, params: params, options: options)
         let configuration = URLSessionConfiguration.default
         let session = URLSession(configuration: configuration)
         let task: URLSessionTask = session.dataTask(with: request) { (data, response, error) -> Void in
@@ -146,8 +124,15 @@ class EntitiesViewController: UIViewController {
             
             do {
                 if let result = try JSONSerialization.jsonObject(with: data!, options: []) as? NSDictionary {
+                    print(result.description + NSDate().description)
                     self.coreDataAdapter.upsert(message: result)
-                    print(result.description)
+                    DispatchQueue.main.async {
+                        self.setCurrentContact()
+                        self.title = self.currentContact?.firstName
+                        self.emailLabel.text = self.currentContact?.email
+                        self.tableView.reloadData()
+                        print ("Finish loading..." + NSDate().description)
+                    }
                 }
             } catch let error as NSError{
                 print(error)
@@ -156,7 +141,7 @@ class EntitiesViewController: UIViewController {
         task.resume()
     }
 
-    func clientUrlRequest(url: URL, params: [String: Any], options: String) -> URLRequest {
+    func urlRequest(url: URL, params: [String: Any], options: String) -> URLRequest {
         
         print("Client URL: \(url.absoluteString)")
         
@@ -187,6 +172,31 @@ class EntitiesViewController: UIViewController {
         guard let body = paramsString.data(using: .utf8) else { return request}
         request.httpBody = body
         return request
+    }
+    
+    fileprivate func setCurrentContact() {
+        let isDemo = userDefaults?.bool(forKey: "demo_mode_preference") ?? false
+        
+        let fetch: NSFetchRequest<Contact> = Contact.fetchRequest()
+        contacts = try! managedContext.fetch(fetch)
+        if contacts.count > 0 {
+            currentContact = contacts.first
+            
+            for c in contacts {
+                print(c.contactId)
+                if  c.contactId > 1, !isDemo {
+                    currentContact = c
+                    print("Contact changed to \(c.contactId)")
+                } else if  c.contactId == 1, isDemo {
+                    currentContact = c
+                    print("Contact changed to \(c.contactId)")
+                }
+            }
+        } else {
+            coreDataAdapter.insertSampleData()
+            contacts = try! managedContext.fetch(fetch)
+            currentContact = contacts.first
+        }
     }
 }
 
