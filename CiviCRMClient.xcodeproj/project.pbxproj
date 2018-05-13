@@ -12,7 +12,7 @@
 		AE1E51DB209588870068D6F2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE1E51DA209588870068D6F2 /* Assets.xcassets */; };
 		AE1E51DE209588870068D6F2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE1E51DC209588870068D6F2 /* LaunchScreen.storyboard */; };
 		AE1E51E620958FAB0068D6F2 /* EntitiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1E51E520958FAB0068D6F2 /* EntitiesViewController.swift */; };
-		AE2F269920A82F5A007437C8 /* CiviCRMAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2F269820A82F5A007437C8 /* CiviCRMAPIManager.swift */; };
+		AE2F269920A82F5A007437C8 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2F269820A82F5A007437C8 /* NetworkManager.swift */; };
 		AE5BDC9D209B3F0E00B7D726 /* CiviCRMEntityDisplayed.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5BDC9C209B3F0E00B7D726 /* CiviCRMEntityDisplayed.swift */; };
 		AE8A2D3D20A09B5100D6A537 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AE8A2D3C20A09B5100D6A537 /* Settings.bundle */; };
 		AE8BAE852095A167008943F3 /* PropertiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8BAE842095A167008943F3 /* PropertiesViewController.swift */; };
@@ -39,7 +39,7 @@
 		AE1E51DD209588870068D6F2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AE1E51DF209588870068D6F2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AE1E51E520958FAB0068D6F2 /* EntitiesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntitiesViewController.swift; sourceTree = "<group>"; };
-		AE2F269820A82F5A007437C8 /* CiviCRMAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CiviCRMAPIManager.swift; sourceTree = "<group>"; };
+		AE2F269820A82F5A007437C8 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		AE5BDC9C209B3F0E00B7D726 /* CiviCRMEntityDisplayed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CiviCRMEntityDisplayed.swift; sourceTree = "<group>"; };
 		AE8A2D3C20A09B5100D6A537 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		AE8BAE842095A167008943F3 /* PropertiesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertiesViewController.swift; sourceTree = "<group>"; };
@@ -117,7 +117,7 @@
 				AEBB41B22098BB77000B4866 /* CoreDataAdapter.swift */,
 				AE5BDC9C209B3F0E00B7D726 /* CiviCRMEntityDisplayed.swift */,
 				AED788E5209EF58900695D0C /* EntityMap.swift */,
-				AE2F269820A82F5A007437C8 /* CiviCRMAPIManager.swift */,
+				AE2F269820A82F5A007437C8 /* NetworkManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -211,7 +211,7 @@
 				AE8BAE9B2095E514008943F3 /* Pledge+CoreDataClass.swift in Sources */,
 				AED788E6209EF58900695D0C /* EntityMap.swift in Sources */,
 				AE1E51D4209588850068D6F2 /* AppDelegate.swift in Sources */,
-				AE2F269920A82F5A007437C8 /* CiviCRMAPIManager.swift in Sources */,
+				AE2F269920A82F5A007437C8 /* NetworkManager.swift in Sources */,
 				AE8BAE8C2095CC0E008943F3 /* CiviCRM Data.xcdatamodeld in Sources */,
 				AE8BAE982095E514008943F3 /* Contact+CoreDataProperties.swift in Sources */,
 				AE8BAE962095E514008943F3 /* Participant+CoreDataProperties.swift in Sources */,
