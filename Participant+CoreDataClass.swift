@@ -25,19 +25,22 @@ public class Participant: NSManagedObject, CiviCRMEntityDisplayed {
     
     func getPropertiesForDisplayDictionary() -> [(String, String)] {
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
+        formatter.dateFormat = "MMM dd yyyy hh:mm"
+        let eventStartDate: String = (self.eventStartDate as Date?) != nil ? formatter.string(from: (self.eventStartDate! as Date)) : ""
+        let eventEndDate: String = (self.eventEndDate as Date?) != nil ? formatter.string(from: (self.eventEndDate! as Date)) : ""
+        formatter.dateFormat = "MMM dd yyyy"
+        let registerDate: String = (self.registerDate as Date?) != nil ? formatter.string(from: (self.registerDate! as Date)) : ""
         
         return [
             ("Event Name: ", "\(self.eventTitle ?? "(No Name)")"),
             ("Event Type: ", "\(self.eventType ?? "(No Type)")"),
-            ("From Date: ", formatter.string(from: (self.eventStartDate! as Date))),
-            ("To Date: ", formatter.string(from: (self.eventEndDate! as Date))),
+            ("From Date: ", eventStartDate),
+            ("To Date: ", eventEndDate),
             ("Fee Amount: ", "\(self.feeAmount) \(self.feeCurrency ?? "")"),
             ("Paid by: ", self.source ?? "(No Source)"),
             ("Your Role: ", self.role ?? "(No Role)"),
             ("Participant Status: ", self.status ?? "(No Status)"),
-            ("Register Date: ", formatter.string(from: (self.registerDate! as Date))),
+            ("Register Date: ", registerDate),
         ]
-    }
-    
+    }    
 }

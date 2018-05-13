@@ -16,11 +16,11 @@
 			<key>Type</key>
 			<string>PSTextFieldSpecifier</string>
 			<key>Title</key>
-			<string>Url</string>
+			<string>Base URL</string>
 			<key>Key</key>
-			<string>url_preference</string>
+			<string>civicrm_base_url</string>
 			<key>DefaultValue</key>
-			<string>http</string>
+			<string>https://&lt;example.com&gt;/</string>
 			<key>AutocapitalizationType</key>
 			<string>None</string>
 			<key>AutocorrectionType</key>
@@ -30,9 +30,23 @@
 			<key>Type</key>
 			<string>PSTextFieldSpecifier</string>
 			<key>Title</key>
+			<string>API Path</string>
+			<key>Key</key>
+			<string>civicrm_api_path</string>
+			<key>AutocapitalizationType</key>
+			<string>None</string>
+			<key>AutocorrectionType</key>
+			<string>No</string>
+			<key>DefaultValue</key>
+			<string>sites/all/modules/civicrm/extern/rest.php</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSTextFieldSpecifier</string>
+			<key>Title</key>
 			<string>API Key</string>
 			<key>Key</key>
-			<string>api_key_preference</string>
+			<string>civicrm_user_api_key</string>
 			<key>IsSecure</key>
 			<true/>
 			<key>AutocapitalizationType</key>
@@ -46,7 +60,7 @@
 			<key>Title</key>
 			<string>Site Key</string>
 			<key>Key</key>
-			<string>site_key_preference</string>
+			<string>civicrm_site_key</string>
 			<key>IsSecure</key>
 			<true/>
 			<key>AutocapitalizationType</key>

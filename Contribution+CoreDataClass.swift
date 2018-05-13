@@ -29,15 +29,15 @@ public class Contribution: NSManagedObject, CiviCRMEntityDisplayed {
 
     func getPropertiesForDisplayDictionary() -> [(String, String)] {
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
+        formatter.dateFormat = "MMM dd yyyy"
+        let receiveDate: String = (self.receiveDate as Date?) != nil ? formatter.string(from: (self.receiveDate! as Date)) : ""
         
         return [
-            ("For: ", "\(self.source ?? "(No Source)")"),
+            ("Paid for: ", "\(self.source ?? "(No Source)")"),
             ("Amount: ","\(self.totalAmount) \(self.currency ?? "")"),
             ("Paid by: ", self.paymentInstrument ?? ""),
-            ("Recieve Date: ", formatter.string(from: (self.receiveDate! as Date))),
+            ("Recieve Date: ", receiveDate),
             ("Contribution Status: ", "\(self.status ?? "(No Status)")"),
         ]
     }
-    
 }

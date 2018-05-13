@@ -26,18 +26,19 @@ public class Pledge: NSManagedObject, CiviCRMEntityDisplayed {
     
     func getPropertiesForDisplayDictionary() -> [(String, String)] {
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
+        formatter.dateFormat = "MMM dd yyyy"
+        let startDate: String = (self.startDate as Date?) != nil ? formatter.string(from: (self.startDate! as Date)) : ""
+        let nextPayDate: String = (self.nextPayDate as Date?) != nil ? formatter.string(from: (self.nextPayDate! as Date)) : ""
         
         return [
             ("Payment for: ", "\(self.financialType ?? "(No Data)")"),
             ("Total Amount: ","\(self.totalAmount) \(self.currency ?? "")"),
-            ("Start Date: ", formatter.string(from: (self.startDate! as Date))),
+            ("Start Date: ", startDate),
             ("Status: ", "\(self.status ?? "(No Status)")"),
             ("Frequency: ", "per \(self.frequencyInterval) \(self.frequencyUnit ?? "(No Frequency)")"),
             ("Total Paid: ", "\(self.totalPaid) \(self.currency ?? "")"),
             ("Next Amount: ", "\(self.nextPayAmount) \(self.currency ?? "")"),
-            ("Next Date: ", formatter.string(from: (self.nextPayDate! as Date))),
+            ("Next Date: ", nextPayDate),
         ]
     }
-    
 }

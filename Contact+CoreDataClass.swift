@@ -13,13 +13,15 @@ import CoreData
 @objc(Contact)
 public class Contact: NSManagedObject, CiviCRMEntityDisplayed {
     func getPropertiesForDisplayDictionary() -> [(String, String)] {
+        
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
+        formatter.dateFormat = "MMM dd yyyy"
+        let birthDate: String = (self.birthDate as Date?) != nil ? formatter.string(from: (self.birthDate! as Date)) : ""
         
         return [
             ("First Name: ", "\(self.firstName ?? "(No Name)")"),
             ("Last Name: ", "\(self.lastName ?? "(No Name)")"),
-//            ("Birth Date: ", formatter.string(from: (self.birthDate! as Date))),
+            ("Birth Date: ", birthDate),
             ("Email: ", "\(self.email ?? "(No Email)")"),
             ("Phone: ", "\(self.phone ?? "(No Phone)")"),
             ("Address: ", "\(self.streetAddress ?? "(No Address)")"),
@@ -38,6 +40,22 @@ public class Contact: NSManagedObject, CiviCRMEntityDisplayed {
         return EntityMap.Contact.entityTitle
     }
     
-    
+    lazy var  relationsArray = {() -> [NSOrderedSet] in
+        var arr: Array = [NSOrderedSet]()
+        var person = NSMutableOrderedSet()
+        person[0] = self
+        arr.append(person)
+      
+        if  let contributions = self.contribution, contributions.count > 0 {
+            arr.append(contributions)
+        }
+        if let participants = self.participant, participants.count > 0 {
+            arr.append(participants)
+        }
+        if let pledges = self.pledge, pledges.count > 0 {
+            arr.append(pledges)
+        }
+        return arr
+    }
 }
 

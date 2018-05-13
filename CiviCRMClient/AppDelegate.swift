@@ -25,7 +25,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 //        splitViewController.preferredDisplayMode = .allVisible
         viewController.managedContext = coreDataStack.managedContext
         UserDefaults.standard.register(defaults: [String: Any]())
-        viewController.userDefaults = UserDefaults.standard
         return true
     }
 
