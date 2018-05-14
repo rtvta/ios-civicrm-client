@@ -13,14 +13,10 @@ class EntitiesViewController: UIViewController {
     
     // MARK: - Properties
     var managedContext: NSManagedObjectContext!
-    
-    lazy var coreDataAdapter: CoreDataAdapter = {
-        let adapter = CoreDataAdapter(context: managedContext)
-        return adapter
-    }()
-    
+    var propertiesViewController: PropertiesViewController?
+    var dataTask:  URLSessionTask?
+    var entitiesArray: [NSOrderedSet]?
     var contacts: [Contact]!
-    
     var currentContact: Contact? {
         didSet {
             self.entitiesArray = currentContact?.relationsArray()
@@ -28,14 +24,19 @@ class EntitiesViewController: UIViewController {
             self.tableView.reloadData()
         }
     }
-    
-    var entitiesArray: [NSOrderedSet]?
-    
-    let userDefaults = UserDefaults.standard
-    
-    var dataTask:  URLSessionTask?
-    
-    var propertiesViewController: PropertiesViewController?
+    lazy var coreDataAdapter: CoreDataAdapter = {
+        let adapter = CoreDataAdapter(context: managedContext)
+        return adapter
+    }()
+    var errorMessage: String? {
+        didSet {
+            print("\(self.errorMessage!)")
+            let alert = UIAlertController(title: "API Error", message: self.errorMessage, preferredStyle: .alert)
+            let action = UIAlertAction(title: "Ok", style: .default, handler: nil)
+            alert.addAction(action)
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
 
     // MARK: - IBOutlets
     @IBOutlet weak var tableView: UITableView!
@@ -45,7 +46,6 @@ class EntitiesViewController: UIViewController {
         super.viewDidLoad()
         
         setCurrentContact()
-        loadData()
         
         if let split = splitViewController {
             let controllers = split.viewControllers
@@ -53,7 +53,7 @@ class EntitiesViewController: UIViewController {
             propertiesViewController?.entityMO = entitiesArray!.first?.firstObject as? CiviCRMEntityDisplayed
         }
         
-        
+        loadData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -83,49 +83,73 @@ class EntitiesViewController: UIViewController {
         print("Start loading..." + NSDate().description)
         
         dataTask?.cancel()
-
-        guard let request = NetworkManager.shared.defaultCiviCRMClientURLRequest() else { return }
+        guard let request = RestAPIManager.shared.restAPIDefaultURLRequest() else { return }
         let session = URLSession.shared
         dataTask = session.dataTask(with: request) { (data, response, error) -> Void in
-            guard error == nil else {
-                print(error.debugDescription)
+            if error != nil {
+                DispatchQueue.main.async {
+                    self.errorMessage = error?.localizedDescription
+                }
                 return
-            }
-            
-            do {
-                if let result = try JSONSerialization.jsonObject(with: data!, options: []) as? NSDictionary {
-                    print(result.description + NSDate().description)
-                    self.coreDataAdapter.upsert(message: result)
+            } else if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 {
+                
+                do {
+                    guard let result = try JSONSerialization.jsonObject(with: data!, options: []) as? NSDictionary else {
+                        DispatchQueue.main.async {
+                            self.errorMessage = RestAPIManager.ErrorMessage.internalError
+                        }
+                        return
+                    }
+                    
+                    if let isError = result.value(forKey: "is_error") as? Int, isError == 1,
+                        let apiErrorMessage = result.value(forKey: "error_message") as? String {
+                        DispatchQueue.main.async {
+                            self.errorMessage = apiErrorMessage + RestAPIManager.ErrorMessage.referToAdmin
+                        }
+                        return
+                    } else if let count = result.value(forKey: "count") as? Int, count > 1 {
+                        DispatchQueue.main.async {
+                            self.errorMessage = RestAPIManager.ErrorMessage.extraPermissions + RestAPIManager.ErrorMessage.referToAdmin
+                        }
+                        return
+                    } else if let id = result.value(forKey: "id") as? NSNumber {
+                        self.coreDataAdapter.upsert(for: id, message: result)
+                        DispatchQueue.main.async {
+                            self.setCurrentContact()
+                            print("Success!")
+                        }
+                    } else {
+                        DispatchQueue.main.async {
+                            self.errorMessage = RestAPIManager.ErrorMessage.msgNotValid + RestAPIManager.ErrorMessage.referToAdmin
+                        }
+                    }
+                    
+                } catch let error as NSError {
                     DispatchQueue.main.async {
-                        self.setCurrentContact()
-                        print ("Finish loading..." + NSDate().description)
+                        self.errorMessage = error.localizedDescription
                     }
                 }
-            } catch let error as NSError{
-                print(error)
+                
+            } else {
+                self.errorMessage = response!.description
             }
         }
         dataTask?.resume()
     }
 
     fileprivate func setCurrentContact() {
-        let demoMode = userDefaults.bool(forKey: "demo_mode_preference")
+        let demoMode: Bool = UserDefaults.standard.bool(forKey: "demo_mode_preference")
         
         let fetch: NSFetchRequest<Contact> = Contact.fetchRequest()
         contacts = try! managedContext.fetch(fetch)
+        print("Contact count: \(contacts.count)")
         if contacts.count > 0 {
             for c in contacts {
-                if  c.contactId > 1, !demoMode {
+                if  (c.contactId > 1 && !demoMode) || (c.contactId == 1 && demoMode) {
                     currentContact = c
-                    print(c.contactId)
-                    break
-                } else if  c.contactId == 1, demoMode {
-                    currentContact = c
-                    print(c.contactId)
                     break
                 } else {
-                    currentContact = contacts.last
-                    print(c.contactId)
+                    currentContact = contacts.first
                 }
             }
         } else {

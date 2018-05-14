@@ -8,14 +8,20 @@
 
 import Foundation
 
-final class NetworkManager {
-    static let shared = NetworkManager()
+final class RestAPIManager {
+    static let shared = RestAPIManager()
     private init () {}
     
     let userDefaults = UserDefaults.standard
     
+    struct ErrorMessage {
+        static let referToAdmin = "Please refer to CiviCRM administator."
+        static let msgNotValid = "Message not valid."
+        static let extraPermissions = "You have permissions to view other contacts."
+        static let internalError = "Internal error."
+    }
     
-    func defaultCiviCRMClientURLRequest() -> URLRequest? {
+    func restAPIDefaultURLRequest() -> URLRequest? {
         // Check application preference
         guard let baseURL = userDefaults.string(forKey: "civicrm_base_url"),
             let apiPath = userDefaults.string(forKey: "civicrm_api_path"),

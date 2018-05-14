@@ -30,26 +30,20 @@ class CoreDataAdapter {
     func insertSampleData() {
         print("Insert Sample Data")
         let path = Bundle.main.path(forResource: "DemoCiviCRMData", ofType: "plist")
-        
         let sampleData = NSDictionary(contentsOfFile: path!)!
-       
-        let _ = upsert(message: sampleData)
+        let id = sampleData.value(forKey: "id") as! NSNumber
+        let _ = upsert(for: id, message: sampleData)
     }
     
 
     
     // Upsert context from message
-    func upsert(message: NSDictionary) {
-        
-        guard let id = message.value(forKey: "id") as? NSNumber else {
-            print("Error get id")
-            return
-        }
+    func upsert(for contactId: NSNumber, message: NSDictionary) {
         
         // Check if contact already exists in database
         var contactMO: Contact
         let fetch: NSFetchRequest<Contact> = Contact.fetchRequest()
-        fetch.predicate = NSPredicate(format: "contactId == %@", id)
+        fetch.predicate = NSPredicate(format: "contactId == %@", contactId)
         let result = try! managedContext.fetch(fetch)
         if result.count > 0 {
             contactMO = result.first!
@@ -59,7 +53,7 @@ class CoreDataAdapter {
         }
 
         // Contact
-        if let contactsDict = message[EntityMap.Contact.propertySet] as? NSDictionary, let contact = contactsDict.object(forKey: "\(id)") as? NSDictionary {
+        if let contactsDict = message[EntityMap.Contact.propertySet] as? NSDictionary, let contact = contactsDict.object(forKey: "\(contactId)") as? NSDictionary {
             
             setValuesContactMO(contactMO, contact)
             
@@ -149,7 +143,6 @@ class CoreDataAdapter {
         } catch {
             print(error)
         }
-        
     }
     
     // Delete first contact
