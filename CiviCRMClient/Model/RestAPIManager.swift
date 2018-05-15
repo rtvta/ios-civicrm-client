@@ -62,7 +62,8 @@ final class RestAPIManager {
         }
         paramsString.removeLast(1)
         
-        print("Params: " + paramsString)
+        print("RestAPIManager.urlString: " + url.absoluteString)
+        print("RestAPIManager.paramString: " + paramsString)
         
         guard let body = paramsString.data(using: .utf8) else { return request}
         request.httpBody = body

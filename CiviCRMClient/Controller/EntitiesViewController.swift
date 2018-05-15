@@ -14,6 +14,7 @@ class EntitiesViewController: UIViewController {
     // MARK: - Properties
     var managedContext: NSManagedObjectContext!
     var propertiesViewController: PropertiesViewController?
+//    let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
     var dataTask:  URLSessionTask?
     var entitiesArray: [NSOrderedSet]?
     var contacts: [Contact]!
@@ -30,20 +31,25 @@ class EntitiesViewController: UIViewController {
     }()
     var errorMessage: String? {
         didSet {
-            print("\(self.errorMessage!)")
-            let alert = UIAlertController(title: "API Error", message: self.errorMessage, preferredStyle: .alert)
-            let action = UIAlertAction(title: "Ok", style: .default, handler: nil)
+            indicator.stopAnimating()
+            tableView.contentInset = UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0)
+            let alert = UIAlertController(title: "iCivi", message: self.errorMessage, preferredStyle: .alert)
+            let action = UIAlertAction(title: "Close", style: .default, handler: nil)
             alert.addAction(action)
             self.present(alert, animated: true, completion: nil)
+            dataTask?.cancel()
         }
     }
 
     // MARK: - IBOutlets
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var indicator: UIActivityIndicatorView!
     
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.delegate = self
+        indicator.hidesWhenStopped = true
         
         setCurrentContact()
         
@@ -53,7 +59,7 @@ class EntitiesViewController: UIViewController {
             propertiesViewController?.entityMO = entitiesArray!.first?.firstObject as? CiviCRMEntityDisplayed
         }
         
-        loadData()
+//        loadData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -80,9 +86,9 @@ class EntitiesViewController: UIViewController {
     
     // MARK: - Functions
     func loadData() {
-        print("Start loading..." + NSDate().description)
-        
         dataTask?.cancel()
+        indicator.startAnimating()
+        
         guard let request = RestAPIManager.shared.restAPIDefaultURLRequest() else { return }
         let session = URLSession.shared
         dataTask = session.dataTask(with: request) { (data, response, error) -> Void in
@@ -116,7 +122,8 @@ class EntitiesViewController: UIViewController {
                         self.coreDataAdapter.upsert(for: id, message: result)
                         DispatchQueue.main.async {
                             self.setCurrentContact()
-                            print("Success!")
+                            self.indicator.stopAnimating()
+                            self.tableView.contentInset = UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0)
                         }
                     } else {
                         DispatchQueue.main.async {
@@ -142,7 +149,6 @@ class EntitiesViewController: UIViewController {
         
         let fetch: NSFetchRequest<Contact> = Contact.fetchRequest()
         contacts = try! managedContext.fetch(fetch)
-        print("Contact count: \(contacts.count)")
         if contacts.count > 0 {
             for c in contacts {
                 if  (c.contactId > 1 && !demoMode) || (c.contactId == 1 && demoMode) {
@@ -184,5 +190,47 @@ extension EntitiesViewController: UITableViewDelegate, UITableViewDataSource {
             cell.textLabel?.text = entity.entityLable
         }
         return cell
+    }
+    
+    // Delete the row from the local data base
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            managedContext.delete(entitiesArray![indexPath.section][indexPath.row] as! NSManagedObject)
+            do {
+                try managedContext.save()
+            } catch {
+                print(error.localizedDescription)
+            }
+            
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            self.setCurrentContact()
+        }
+    }
+    
+    // Prevent deletion of root contact
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        guard let _ = entitiesArray![indexPath.section][indexPath.row] as? Contact else {
+            return true
+        }
+        return false
+    }
+    
+    // Start data load task by dragging
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        let loadingOffset: CGFloat = -100
+        
+        if tableView.contentOffset.y < loadingOffset {
+            tableView.contentInset = UIEdgeInsetsMake(60.0, 0.0, 0.0, 0.0)
+            loadData()
+        }
+    }
+    
+    // Cancell data load task
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if tableView.contentOffset.y > CGFloat(0), indicator.isAnimating {
+            dataTask?.cancel()
+            indicator.stopAnimating()
+            tableView.contentInset = UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0)
+        }
     }
 }

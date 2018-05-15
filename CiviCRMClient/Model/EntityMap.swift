@@ -26,7 +26,7 @@ enum EntityMap: String {
     var entityTitle: String {
         switch self {
         case .Contact:
-            return "Personal Details"
+            return "Summary"
         case .Contribution:
             return "My Payments"
         case .Pledge:
