@@ -12,14 +12,7 @@ final class RestAPIManager {
     static let shared = RestAPIManager()
     private init () {}
     
-    let userDefaults = UserDefaults.standard
-    
-    struct ErrorMessage {
-        static let referToAdmin = "Please refer to CiviCRM administator."
-        static let msgNotValid = "Message not valid."
-        static let extraPermissions = "You have permissions to view other contacts."
-        static let internalError = "Internal error."
-    }
+    private let userDefaults = UserDefaults.standard
     
     func restAPIDefaultURLRequest() -> URLRequest? {
         // Check application preference
@@ -32,7 +25,7 @@ final class RestAPIManager {
         guard let url = URL(string: baseURL + apiPath) else { return nil}
         
         // Set parameters
-        let limit = 10
+        let limit = userDefaults.integer(forKey: "limit_rows_preference")
         let options = "\"options\":{\"limit\":\(limit),\"sort\":\"id DESC\"}"
         let params: [String: Any] = ["entity":"Contact",
                                      "action":"get",

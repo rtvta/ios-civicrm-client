@@ -10,6 +10,22 @@
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 			<key>Title</key>
+			<string>Demo Mode</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+			<key>Title</key>
+			<string>Active</string>
+			<key>Key</key>
+			<string>demo_mode_preference</string>
+			<key>DefaultValue</key>
+			<false/>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
 			<string>Credentails</string>
 		</dict>
 		<dict>
@@ -72,17 +88,29 @@
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 			<key>Title</key>
-			<string>Demo Mode</string>
+			<string>Parameters</string>
 		</dict>
 		<dict>
 			<key>Type</key>
-			<string>PSToggleSwitchSpecifier</string>
+			<string>PSMultiValueSpecifier</string>
 			<key>Title</key>
-			<string>Enabled</string>
+			<string>Limit response rows quantity</string>
 			<key>Key</key>
-			<string>demo_mode_preference</string>
+			<string>limit_rows_preference</string>
 			<key>DefaultValue</key>
-			<false/>
+			<integer>10</integer>
+			<key>Titles</key>
+			<array>
+				<string>5</string>
+				<string>10</string>
+				<string>50</string>
+			</array>
+			<key>Values</key>
+			<array>
+				<integer>5</integer>
+				<integer>10</integer>
+				<integer>50</integer>
+			</array>
 		</dict>
 	</array>
 </dict>

@@ -141,21 +141,8 @@ class CoreDataAdapter {
         do {
             try managedContext.save()
         } catch {
-            print(error)
+            print(error.localizedDescription)
         }
-    }
-    
-    // Delete first contact
-    func deleteFirst() {
-        let fetch: NSFetchRequest<Contact> = Contact.fetchRequest()
-        let result = try! managedContext.fetch(fetch)
-        
-        if result.count > 0 {
-            print("Contact id == \(result.first!.contactId) will be deleted")
-            managedContext.delete(result.first!)
-            print("Contact deleted")
-        }
-        try! managedContext.save()
     }
     
     // MARK: - File private functions for set values to MO

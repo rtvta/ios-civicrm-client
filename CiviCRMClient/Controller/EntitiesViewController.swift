@@ -22,7 +22,7 @@ class EntitiesViewController: UIViewController {
         didSet {
             self.entitiesArray = currentContact?.relationsArray()
             self.title = currentContact!.firstName
-            self.tableView.reloadData()
+            self.tableView?.reloadData()
         }
     }
     lazy var coreDataAdapter: CoreDataAdapter = {
@@ -48,18 +48,15 @@ class EntitiesViewController: UIViewController {
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         tableView.delegate = self
         indicator.hidesWhenStopped = true
-        
-        setCurrentContact()
         
         if let split = splitViewController {
             let controllers = split.viewControllers
             propertiesViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? PropertiesViewController
             propertiesViewController?.entityMO = entitiesArray!.first?.firstObject as? CiviCRMEntityDisplayed
         }
-        
-//        loadData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -93,6 +90,7 @@ class EntitiesViewController: UIViewController {
         let session = URLSession.shared
         dataTask = session.dataTask(with: request) { (data, response, error) -> Void in
             if error != nil {
+                if error?.localizedDescription == "cancelled" { return }
                 DispatchQueue.main.async {
                     self.errorMessage = error?.localizedDescription
                 }
@@ -102,7 +100,7 @@ class EntitiesViewController: UIViewController {
                 do {
                     guard let result = try JSONSerialization.jsonObject(with: data!, options: []) as? NSDictionary else {
                         DispatchQueue.main.async {
-                            self.errorMessage = RestAPIManager.ErrorMessage.internalError
+                            self.errorMessage = UserMessage.internalError.rawValue
                         }
                         return
                     }
@@ -110,12 +108,12 @@ class EntitiesViewController: UIViewController {
                     if let isError = result.value(forKey: "is_error") as? Int, isError == 1,
                         let apiErrorMessage = result.value(forKey: "error_message") as? String {
                         DispatchQueue.main.async {
-                            self.errorMessage = apiErrorMessage + RestAPIManager.ErrorMessage.referToAdmin
+                            self.errorMessage = apiErrorMessage + UserMessage.referToAdmin.rawValue
                         }
                         return
                     } else if let count = result.value(forKey: "count") as? Int, count > 1 {
                         DispatchQueue.main.async {
-                            self.errorMessage = RestAPIManager.ErrorMessage.extraPermissions + RestAPIManager.ErrorMessage.referToAdmin
+                            self.errorMessage = UserMessage.extraPermissions.rawValue + UserMessage.referToAdmin.rawValue
                         }
                         return
                     } else if let id = result.value(forKey: "id") as? NSNumber {
@@ -127,7 +125,7 @@ class EntitiesViewController: UIViewController {
                         }
                     } else {
                         DispatchQueue.main.async {
-                            self.errorMessage = RestAPIManager.ErrorMessage.msgNotValid + RestAPIManager.ErrorMessage.referToAdmin
+                            self.errorMessage = UserMessage.msgNotValid.rawValue + UserMessage.referToAdmin.rawValue
                         }
                     }
                     
@@ -138,6 +136,7 @@ class EntitiesViewController: UIViewController {
                 }
                 
             } else {
+                
                 self.errorMessage = response!.description
             }
         }
@@ -158,10 +157,6 @@ class EntitiesViewController: UIViewController {
                     currentContact = contacts.first
                 }
             }
-        } else {
-            coreDataAdapter.insertSampleData()
-            contacts = try! managedContext.fetch(fetch)
-            currentContact = contacts.first
         }
     }
 }
@@ -199,6 +194,7 @@ extension EntitiesViewController: UITableViewDelegate, UITableViewDataSource {
             do {
                 try managedContext.save()
             } catch {
+                self.errorMessage = UserMessage.dbError.rawValue
                 print(error.localizedDescription)
             }
             
@@ -215,17 +211,24 @@ extension EntitiesViewController: UITableViewDelegate, UITableViewDataSource {
         return false
     }
     
-    // Start data load task by dragging
+    // Start data load task by dragging down
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         let loadingOffset: CGFloat = -100
+        let demoMode: Bool = UserDefaults.standard.bool(forKey: "demo_mode_preference")
         
         if tableView.contentOffset.y < loadingOffset {
-            tableView.contentInset = UIEdgeInsetsMake(60.0, 0.0, 0.0, 0.0)
-            loadData()
+            if demoMode {
+                coreDataAdapter.insertSampleData()
+                setCurrentContact()
+                tableView.reloadData()
+            } else {
+                tableView.contentInset = UIEdgeInsetsMake(60.0, 0.0, 0.0, 0.0)
+                loadData()
+            }
         }
     }
     
-    // Cancell data load task
+    // Cancell data load task by scroll up
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if tableView.contentOffset.y > CGFloat(0), indicator.isAnimating {
             dataTask?.cancel()

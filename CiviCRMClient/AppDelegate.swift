@@ -22,9 +22,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
             let viewController = navigationController.topViewController as? EntitiesViewController else {
                 return true
         }
-//        splitViewController.preferredDisplayMode = .allVisible
-        viewController.managedContext = coreDataStack.managedContext
+        
+        let context = coreDataStack.managedContext
+        
+        viewController.managedContext = context
         UserDefaults.standard.register(defaults: [String: Any]())
+        
+        let demoMode: Bool = UserDefaults.standard.bool(forKey: "demo_mode_preference")
+        let coreDataAdapter = CoreDataAdapter(context: context)
+        
+        let fetch: NSFetchRequest<Contact> = Contact.fetchRequest()
+        var contacts = try! context.fetch(fetch)
+        if contacts.count > 0 {
+            for c in contacts {
+                if  (c.contactId > 1 && !demoMode) || (c.contactId == 1 && demoMode) {
+                    viewController.currentContact = c
+                    break
+                } else {
+                    viewController.currentContact = contacts.first
+                }
+            }
+        } else {
+            coreDataAdapter.insertSampleData()
+            contacts = try! context.fetch(fetch)
+            viewController.currentContact = contacts.first
+        }
         return true
     }
 
