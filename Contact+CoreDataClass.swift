@@ -39,39 +39,24 @@ public class Contact: NSManagedObject, CiviCRMEntityDisplayed {
     var entityTitle: String {
         return EntityMap.Contact.entityTitle
     }
-/*
-    lazy var  relationsArray = {() -> [NSOrderedSet] in
-        var arr: Array = [NSOrderedSet]()
-        var person = NSMutableOrderedSet()
-        person[0] = self
-        arr.append(person)
-      
-        if  let contributions = self.contribution, contributions.count > 0 {
-            arr.append(contributions)
-        }
-        if let participants = self.participant, participants.count > 0 {
-            arr.append(participants)
-        }
-        if let pledges = self.pledge, pledges.count > 0 {
-            arr.append(pledges)
-        }
-        return arr
-    }()
-*/
+
     lazy var  sortedRelationsArray = {() -> Array<[NSManagedObject]> in
         var arr =  Array<[NSManagedObject]>()
         var person = Array<NSManagedObject>()
         person.append(self)
         arr.append(person)
         
+        let contributionSortDescr = NSSortDescriptor(key: "contributionId", ascending: false)
+        let participantSortDescr = NSSortDescriptor(key: "eventStartDate", ascending: false)
+        let pledgeSortDescr = NSSortDescriptor(key: "startDate", ascending: false)
         
-        if  let contributions = self.contribution?.allObjects as? Array<NSManagedObject>, contributions.count > 0 {
+        if  let contributions = self.contribution?.sortedArray(using: [contributionSortDescr]) as? Array<NSManagedObject>, contributions.count > 0 {
             arr.append(contributions)
         }
-        if let participants = self.participant?.allObjects as? Array<NSManagedObject>, participants.count > 0 {
+        if let participants = self.participant?.sortedArray(using: [participantSortDescr]) as? Array<NSManagedObject>, participants.count > 0 {
             arr.append(participants)
         }
-        if let pledges = self.pledge?.allObjects as? Array<NSManagedObject>, pledges.count > 0 {
+        if let pledges = self.pledge?.sortedArray(using: [pledgeSortDescr]) as? Array<NSManagedObject>, pledges.count > 0 {
             arr.append(pledges)
         }
         return arr

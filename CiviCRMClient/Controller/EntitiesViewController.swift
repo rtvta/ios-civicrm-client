@@ -187,7 +187,7 @@ extension EntitiesViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
-    // Delete the row from the local data base
+    // Delete the row from the local data base and tableview
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             managedContext.delete(entitiesArray![indexPath.section][indexPath.row])
@@ -197,7 +197,8 @@ extension EntitiesViewController: UITableViewDelegate, UITableViewDataSource {
                 self.errorMessage = UserMessage.dbError.rawValue
                 print(error.localizedDescription)
             }
-
+            // Deleting the last row in the section needs deletion of the section
+            // for reason to avoid out of range exception in titleForHeaderInSection function
             if entitiesArray![indexPath.section].count == 1 {
                 entitiesArray!.remove(at: indexPath.section)
                 tableView.deleteSections([indexPath.section], with: .fade)
@@ -217,12 +218,12 @@ extension EntitiesViewController: UITableViewDelegate, UITableViewDataSource {
         return false
     }
     
-    // Start data load task by dragging down
+    // Start data load task or load sample dat after end dragging down
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        let loadingOffset: CGFloat = -100
+        let draggingOffset: CGFloat = -100
         let demoMode: Bool = UserDefaults.standard.bool(forKey: "demo_mode_preference")
         
-        if tableView.contentOffset.y < loadingOffset {
+        if tableView.contentOffset.y < draggingOffset {
             if demoMode {
                 coreDataAdapter.insertSampleData()
                 setCurrentContact()
@@ -234,7 +235,7 @@ extension EntitiesViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-    // Cancell data load task by scroll up
+    // Cancell data load task by start scroll up
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if tableView.contentOffset.y > CGFloat(0), indicator.isAnimating {
             dataTask?.cancel()
