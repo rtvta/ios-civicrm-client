@@ -32,7 +32,7 @@ class CoreDataAdapter {
         let path = Bundle.main.path(forResource: "DemoCiviCRMData", ofType: "plist")
         let sampleData = NSDictionary(contentsOfFile: path!)!
         let id = sampleData.value(forKey: "id") as! NSNumber
-        let _ = upsert(for: id, message: sampleData)
+        upsert(for: id, message: sampleData)
     }
     
 

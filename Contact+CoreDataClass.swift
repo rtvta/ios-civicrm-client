@@ -39,7 +39,7 @@ public class Contact: NSManagedObject, CiviCRMEntityDisplayed {
     var entityTitle: String {
         return EntityMap.Contact.entityTitle
     }
-    
+/*
     lazy var  relationsArray = {() -> [NSOrderedSet] in
         var arr: Array = [NSOrderedSet]()
         var person = NSMutableOrderedSet()
@@ -53,6 +53,25 @@ public class Contact: NSManagedObject, CiviCRMEntityDisplayed {
             arr.append(participants)
         }
         if let pledges = self.pledge, pledges.count > 0 {
+            arr.append(pledges)
+        }
+        return arr
+    }()
+*/
+    lazy var  sortedRelationsArray = {() -> Array<[NSManagedObject]> in
+        var arr =  Array<[NSManagedObject]>()
+        var person = Array<NSManagedObject>()
+        person.append(self)
+        arr.append(person)
+        
+        
+        if  let contributions = self.contribution?.allObjects as? Array<NSManagedObject>, contributions.count > 0 {
+            arr.append(contributions)
+        }
+        if let participants = self.participant?.allObjects as? Array<NSManagedObject>, participants.count > 0 {
+            arr.append(participants)
+        }
+        if let pledges = self.pledge?.allObjects as? Array<NSManagedObject>, pledges.count > 0 {
             arr.append(pledges)
         }
         return arr

@@ -14,9 +14,9 @@
         <attribute name="phone" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="phoneId" optional="YES" attributeType="Integer 64" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="streetAddress" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="contribution" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="Contribution" inverseName="contact" inverseEntity="Contribution" syncable="YES"/>
-        <relationship name="participant" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="Participant" inverseName="contact" inverseEntity="Participant" syncable="YES"/>
-        <relationship name="pledge" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="Pledge" inverseName="contact" inverseEntity="Pledge" syncable="YES"/>
+        <relationship name="contribution" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Contribution" inverseName="contact" inverseEntity="Contribution" syncable="YES"/>
+        <relationship name="participant" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Participant" inverseName="contact" inverseEntity="Participant" syncable="YES"/>
+        <relationship name="pledge" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Pledge" inverseName="contact" inverseEntity="Pledge" syncable="YES"/>
         <uniquenessConstraints>
             <uniquenessConstraint>
                 <constraint value="contactId"/>

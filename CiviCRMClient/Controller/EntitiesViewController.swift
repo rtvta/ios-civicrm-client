@@ -16,11 +16,11 @@ class EntitiesViewController: UIViewController {
     var propertiesViewController: PropertiesViewController?
 //    let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
     var dataTask:  URLSessionTask?
-    var entitiesArray: [NSOrderedSet]?
+    var entitiesArray: Array<[NSManagedObject]>?
     var contacts: [Contact]!
     var currentContact: Contact? {
         didSet {
-            self.entitiesArray = currentContact?.relationsArray()
+            self.entitiesArray = currentContact?.sortedRelationsArray()
             self.title = currentContact!.firstName
             self.tableView?.reloadData()
         }
@@ -55,7 +55,7 @@ class EntitiesViewController: UIViewController {
         if let split = splitViewController {
             let controllers = split.viewControllers
             propertiesViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? PropertiesViewController
-            propertiesViewController?.entityMO = entitiesArray!.first?.firstObject as? CiviCRMEntityDisplayed
+            propertiesViewController?.entityMO = entitiesArray![0][0] as? CiviCRMEntityDisplayed
         }
     }
     
@@ -169,8 +169,8 @@ extension EntitiesViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        guard let entity = entitiesArray![section].firstObject as? CiviCRMEntityDisplayed else {
-            return "(No Title)"
+        guard let entity = entitiesArray![section][0] as? CiviCRMEntityDisplayed else {
+            return nil
         }
         return entity.entityTitle
     }
@@ -190,16 +190,22 @@ extension EntitiesViewController: UITableViewDelegate, UITableViewDataSource {
     // Delete the row from the local data base
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            managedContext.delete(entitiesArray![indexPath.section][indexPath.row] as! NSManagedObject)
+            managedContext.delete(entitiesArray![indexPath.section][indexPath.row])
             do {
                 try managedContext.save()
             } catch {
                 self.errorMessage = UserMessage.dbError.rawValue
                 print(error.localizedDescription)
             }
-            
-            tableView.deleteRows(at: [indexPath], with: .fade)
-            self.setCurrentContact()
+
+            if entitiesArray![indexPath.section].count == 1 {
+                entitiesArray!.remove(at: indexPath.section)
+                tableView.deleteSections([indexPath.section], with: .fade)
+            } else {
+                entitiesArray![indexPath.section].remove(at: indexPath.row)
+                tableView.deleteRows(at: [indexPath], with: .fade)
+            }
+            setCurrentContact()
         }
     }
     
