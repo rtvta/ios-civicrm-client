@@ -18,7 +18,6 @@
 		AE8A2D3D20A09B5100D6A537 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AE8A2D3C20A09B5100D6A537 /* Settings.bundle */; };
 		AE8BAE852095A167008943F3 /* PropertiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8BAE842095A167008943F3 /* PropertiesViewController.swift */; };
 		AE8BAE872095C097008943F3 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8BAE862095C097008943F3 /* CoreDataStack.swift */; };
-		AE8BAE892095CB2F008943F3 /* DemoCiviCRMData.plist in Resources */ = {isa = PBXBuildFile; fileRef = AE8BAE882095CB2F008943F3 /* DemoCiviCRMData.plist */; };
 		AE8BAE8C2095CC0E008943F3 /* CiviCRM Data.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AE8BAE8A2095CC0E008943F3 /* CiviCRM Data.xcdatamodeld */; };
 		AE8BAE952095E514008943F3 /* Participant+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8BAE8D2095E514008943F3 /* Participant+CoreDataClass.swift */; };
 		AE8BAE962095E514008943F3 /* Participant+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8BAE8E2095E514008943F3 /* Participant+CoreDataProperties.swift */; };
@@ -28,6 +27,7 @@
 		AE8BAE9A2095E514008943F3 /* Contribution+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8BAE922095E514008943F3 /* Contribution+CoreDataProperties.swift */; };
 		AE8BAE9B2095E514008943F3 /* Pledge+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8BAE932095E514008943F3 /* Pledge+CoreDataClass.swift */; };
 		AE8BAE9C2095E514008943F3 /* Pledge+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8BAE942095E514008943F3 /* Pledge+CoreDataProperties.swift */; };
+		AEB5168320AD6DC3004D390B /* SampleData.plist in Resources */ = {isa = PBXBuildFile; fileRef = AEB5168220AD6DC2004D390B /* SampleData.plist */; };
 		AEBB41B32098BB77000B4866 /* CoreDataAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBB41B22098BB77000B4866 /* CoreDataAdapter.swift */; };
 		AED788E6209EF58900695D0C /* EntityMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = AED788E5209EF58900695D0C /* EntityMap.swift */; };
 /* End PBXBuildFile section */
@@ -46,7 +46,6 @@
 		AE8A2D3C20A09B5100D6A537 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		AE8BAE842095A167008943F3 /* PropertiesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertiesViewController.swift; sourceTree = "<group>"; };
 		AE8BAE862095C097008943F3 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
-		AE8BAE882095CB2F008943F3 /* DemoCiviCRMData.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = DemoCiviCRMData.plist; sourceTree = "<group>"; };
 		AE8BAE8B2095CC0E008943F3 /* CiviCRM Data.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "CiviCRM Data.xcdatamodel"; sourceTree = "<group>"; };
 		AE8BAE8D2095E514008943F3 /* Participant+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Participant+CoreDataClass.swift"; sourceTree = "<group>"; };
 		AE8BAE8E2095E514008943F3 /* Participant+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Participant+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -56,6 +55,7 @@
 		AE8BAE922095E514008943F3 /* Contribution+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Contribution+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		AE8BAE932095E514008943F3 /* Pledge+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Pledge+CoreDataClass.swift"; sourceTree = "<group>"; };
 		AE8BAE942095E514008943F3 /* Pledge+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Pledge+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		AEB5168220AD6DC2004D390B /* SampleData.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = SampleData.plist; sourceTree = "<group>"; };
 		AEBB41B22098BB77000B4866 /* CoreDataAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataAdapter.swift; sourceTree = "<group>"; };
 		AED788E5209EF58900695D0C /* EntityMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityMap.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -106,8 +106,8 @@
 				AE1E51DA209588870068D6F2 /* Assets.xcassets */,
 				AE1E51DC209588870068D6F2 /* LaunchScreen.storyboard */,
 				AE1E51DF209588870068D6F2 /* Info.plist */,
-				AE8BAE882095CB2F008943F3 /* DemoCiviCRMData.plist */,
 				AE8A2D3C20A09B5100D6A537 /* Settings.bundle */,
+				AEB5168220AD6DC2004D390B /* SampleData.plist */,
 			);
 			path = CiviCRMClient;
 			sourceTree = "<group>";
@@ -192,11 +192,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AEB5168320AD6DC3004D390B /* SampleData.plist in Resources */,
 				AE1E51DE209588870068D6F2 /* LaunchScreen.storyboard in Resources */,
 				AE1E51DB209588870068D6F2 /* Assets.xcassets in Resources */,
 				AE8A2D3D20A09B5100D6A537 /* Settings.bundle in Resources */,
 				AE1E51D9209588850068D6F2 /* Main.storyboard in Resources */,
-				AE8BAE892095CB2F008943F3 /* DemoCiviCRMData.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

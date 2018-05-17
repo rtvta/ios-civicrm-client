@@ -35,6 +35,7 @@ enum EntityMap: String {
             return "My Events"
         }
     }
+    
     var relatedEntities: [String] {
         switch self {
         case .Contact:
@@ -42,70 +43,67 @@ enum EntityMap: String {
         default:
             return [""]
         }
-        
     }
-    
 }
 
 // MARK: - Contact fields
 enum ContactFields: String {
+    case contactId = "id"
     case lastName = "last_name"
     case firstName = "first_name"
-    case contactId = "contact_id"
-    case streetAddress = "street_address"
-    case addressId = "address_id"
-    case birthDate = "birth_date"
-    case city = "city"
-    case contactType = "contact_type"
-    case country = "country"
     case email = "email"
-    case emailId = "email_id"
     case phone = "phone"
+    case birthDate = "birth_date"
+    case streetAddress = "street_address"
+    case city = "city"
+    case country = "country"
+    case contactType = "contact_type"
+    case addressId = "address_id"
+    case emailId = "email_id"
     case phoneId = "phone_id"
 }
 
 // MARK: - Contribution fields
 enum ContributionFields: String {
-    case contactId = "contact_id"
-    case contributionId = "contribution_id"
-    case currency = "currency"
-    case paymentInstrument = "payment_instrument"
-    case receiveDate = "receive_date"
+    case contributionId = "id"
     case source = "contribution_source"
     case status = "contribution_status"
     case totalAmount = "total_amount"
+    case currency = "currency"
+    case receiveDate = "receive_date"
+    case paymentInstrument = "payment_instrument"
+    case contactId = "contact_id"
 }
 
 // MARK: - Participant fields
 enum ParticipantFields: String {
-    case contactId = "contact_id"
-    case eventEndDate = "event_end_date"
-    case eventStartDate = "event_start_date"
-    case eventId = "event_id"
-    case eventTitle = "event_title"
-    case eventType = "event_type"
-    case feeAmount = "participant_fee_amount"
-    case feeCurrency = "participant_fee_currency"
-    case feeLevel = "participant_fee_level"
-    case participantId = "participant_id"
+    case participantId = "id"
     case registerDate = "participant_register_date"
     case role = "participant_role"
     case source = "participant_source"
     case status = "participant_status"
+    case eventEndDate = "event_end_date"
+    case eventStartDate = "event_start_date"
+    case eventTitle = "event_title"
+    case eventType = "event_type"
+    case feeAmount = "participant_fee_amount"
+    case feeCurrency = "participant_fee_currency"
+    case eventId = "event_id"
+    case contactId = "contact_id"
 }
 
 // MARK: - Contact fields
 enum PledgeFields: String {
-    case contactId = "contact_id"
-    case pledgeId = "pledge_id"
+    case pledgeId = "id"
+    case totalAmount = "pledge_amount"
+    case currency = "pledge_currency"
+    case totalPaid = "pledge_total_paid"
+    case status = "pledge_status"
     case financialType = "pledge_financial_type"
     case frequencyUnit = "pledge_frequency_unit"
+    case startDate = "pledge_start_date"
     case nextPayAmount = "pledge_next_pay_amount"
     case nextPayDate = "pledge_next_pay_date"
-    case startDate = "pledge_start_date"
-    case status = "pledge_status"
-    case totalAmount = "pledge_amount"
-    case totalPaid = "pledge_total_paid"
-    case currency = "pledge_currency"
     case frequencyInterval = "pledge_frequency_interval"
+    case contactId = "contact_id"
 }

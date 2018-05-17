@@ -21,7 +21,7 @@ class EntitiesViewController: UIViewController {
     var currentContact: Contact? {
         didSet {
             self.entitiesArray = currentContact?.sortedRelationsArray()
-            self.title = currentContact!.firstName
+            self.title = currentContact?.contactName
             self.tableView?.reloadData()
         }
     }

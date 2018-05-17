@@ -33,13 +33,19 @@ public class Contact: NSManagedObject, CiviCRMEntityDisplayed {
     var entityLable: String {
         let lastName = self.lastName ?? ""
         let firstName = self.firstName ?? ""
-        return "\(firstName) \(lastName)"
+        let label = self.email ?? "\(firstName) \(lastName)"
+        return "\(label)"
     }
     
     var entityTitle: String {
         return EntityMap.Contact.entityTitle
     }
 
+    var contactName: String {
+        let name = self.firstName ?? (self.lastName ?? (self.email ?? "(No Name)"))
+        return "\(name)"
+    }
+    
     lazy var  sortedRelationsArray = {() -> Array<[NSManagedObject]> in
         var arr =  Array<[NSManagedObject]>()
         var person = Array<NSManagedObject>()

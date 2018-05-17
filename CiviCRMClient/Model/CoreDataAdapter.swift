@@ -28,8 +28,7 @@ class CoreDataAdapter {
     // MARK: - Functions
     // Insert Sample Data
     func insertSampleData() {
-        print("Insert Sample Data")
-        let path = Bundle.main.path(forResource: "DemoCiviCRMData", ofType: "plist")
+        let path = Bundle.main.path(forResource: "SampleData", ofType: "plist")
         let sampleData = NSDictionary(contentsOfFile: path!)!
         let id = sampleData.value(forKey: "id") as! NSNumber
         upsert(for: id, message: sampleData)
@@ -192,7 +191,6 @@ class CoreDataAdapter {
         if let status = participant.value(forKey: ParticipantFields.status.rawValue) as? String { participantMO.status = status }
         if let role = participant.value(forKey: ParticipantFields.role.rawValue) as? String { participantMO.role = role }
         if let feeCurrency = participant.value(forKey: ParticipantFields.feeCurrency.rawValue) as? String { participantMO.feeCurrency = feeCurrency }
-        if let feeLevel = participant.value(forKey: ParticipantFields.feeLevel.rawValue) as? String { participantMO.feeLevel = feeLevel }
         if let feeAmount = Double(participant.value(forKey: ParticipantFields.feeAmount.rawValue) as! String) { participantMO.feeAmount = feeAmount }
         if let registerDateStr = participant.value(forKey: ParticipantFields.registerDate.rawValue) as? String,
             let registerDate = dateFormatter.date(from: registerDateStr) {

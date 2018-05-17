@@ -43,7 +43,6 @@
         <attribute name="eventType" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="feeAmount" optional="YES" attributeType="Double" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="feeCurrency" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="feeLevel" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="participantId" optional="YES" attributeType="Integer 64" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="registerDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="role" optional="YES" attributeType="String" syncable="YES"/>
@@ -69,7 +68,7 @@
     <elements>
         <element name="Contact" positionX="-1017" positionY="-1746" width="128" height="285"/>
         <element name="Contribution" positionX="-648" positionY="-2002" width="128" height="180"/>
-        <element name="Participant" positionX="-648" positionY="-1746" width="128" height="270"/>
+        <element name="Participant" positionX="-648" positionY="-1746" width="128" height="255"/>
         <element name="Pledge" positionX="-648" positionY="-1396" width="128" height="240"/>
     </elements>
 </model>
