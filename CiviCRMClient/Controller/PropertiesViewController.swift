@@ -28,15 +28,15 @@ class PropertiesViewController: UIViewController {
     }
     
     // MARK: - Configure view
-    var entityMO: CiviCRMEntityDisplayed? {
+    var entityMO: CiviEntityDisplayed? {
         didSet {
             configureView()
         }
     }
     
     func configureView() {
-        propertiesDict = entityMO?.getPropertiesForDisplayDictionary()
-        self.title = entityMO?.entityLable
+        propertiesDict = entityMO?.propertiesForDisplay()
+        self.title = entityMO?.entityLabel
     }
 
 }

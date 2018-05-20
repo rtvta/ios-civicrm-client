@@ -11,20 +11,20 @@ import Foundation
 import CoreData
 
 @objc(Pledge)
-public class Pledge: NSManagedObject, CiviCRMEntityDisplayed {
+public class Pledge: NSManagedObject, CiviEntityDisplayed {
     
     var entityTitle: String {
-        return EntityMap.Pledge.entityTitle
+        return "Pledges"
     }
     
-    var entityLable: String {
+    var entityLabel: String {
         let frequencyUnit = self.frequencyUnit ?? ""
         let financialType = self.financialType ?? ""
         let frequencyInterval = self.frequencyInterval
         return "\(financialType): every \(frequencyInterval) \(frequencyUnit)"
     }
     
-    func getPropertiesForDisplayDictionary() -> [(String, String)] {
+    func propertiesForDisplay() -> [(String, String)] {
         let formatter = DateFormatter()
         formatter.dateFormat = "MMM dd yyyy"
         let startDate: String = (self.startDate as Date?) != nil ? formatter.string(from: (self.startDate! as Date)) : ""

@@ -11,19 +11,19 @@ import Foundation
 import CoreData
 
 @objc(Participant)
-public class Participant: NSManagedObject, CiviCRMEntityDisplayed {
+public class Participant: NSManagedObject, CiviEntityDisplayed {
     
     var entityTitle: String {
-        return EntityMap.Participant.entityTitle
+        return "Events"
     }
     
-    var entityLable: String {
+    var entityLabel: String {
         let eventTitle = self.eventTitle ?? ""
         let eventType = self.eventType ?? ""
         return "\(eventTitle) - \(eventType)"
     }
     
-    func getPropertiesForDisplayDictionary() -> [(String, String)] {
+    func propertiesForDisplay() -> [(String, String)] {
         let formatter = DateFormatter()
         formatter.dateFormat = "MMM dd yyyy hh:mm"
         let eventStartDate: String = (self.eventStartDate as Date?) != nil ? formatter.string(from: (self.eventStartDate! as Date)) : ""

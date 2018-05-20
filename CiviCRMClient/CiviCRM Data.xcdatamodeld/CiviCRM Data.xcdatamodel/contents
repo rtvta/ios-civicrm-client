@@ -1,69 +1,258 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14133" systemVersion="17E202" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Contact" representedClassName="Contact" syncable="YES">
-        <attribute name="addressId" optional="YES" attributeType="Integer 64" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="birthDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="city" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="contactId" optional="YES" attributeType="Integer 64" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="contactType" attributeType="String" syncable="YES"/>
-        <attribute name="country" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="emailId" optional="YES" attributeType="Integer 64" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="phone" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="phoneId" optional="YES" attributeType="Integer 64" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="streetAddress" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="addressId" optional="YES" attributeType="Integer 64" usesScalarValueType="YES" syncable="YES">
+            <userInfo>
+                <entry key="jsonKey" value="address_id"/>
+            </userInfo>
+        </attribute>
+        <attribute name="birthDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES">
+            <userInfo>
+                <entry key="jsonKey" value="birth_date"/>
+            </userInfo>
+        </attribute>
+        <attribute name="city" optional="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="jsonKey" value="city"/>
+            </userInfo>
+        </attribute>
+        <attribute name="contactType" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="jsonKey" value="contact_type"/>
+            </userInfo>
+        </attribute>
+        <attribute name="country" optional="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="jsonKey" value="country"/>
+            </userInfo>
+        </attribute>
+        <attribute name="email" optional="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="jsonKey" value="email"/>
+            </userInfo>
+        </attribute>
+        <attribute name="emailId" optional="YES" attributeType="Integer 64" usesScalarValueType="YES" syncable="YES">
+            <userInfo>
+                <entry key="jsonKey" value="email_id"/>
+            </userInfo>
+        </attribute>
+        <attribute name="firstName" optional="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="jsonKey" value="first_name"/>
+            </userInfo>
+        </attribute>
+        <attribute name="lastName" optional="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="jsonKey" value="last_name"/>
+            </userInfo>
+        </attribute>
+        <attribute name="phone" optional="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="jsonKey" value="phone"/>
+            </userInfo>
+        </attribute>
+        <attribute name="phoneId" optional="YES" attributeType="Integer 64" usesScalarValueType="YES" syncable="YES">
+            <userInfo>
+                <entry key="jsonKey" value="phone_id"/>
+            </userInfo>
+        </attribute>
+        <attribute name="rowId" optional="YES" attributeType="Integer 64" usesScalarValueType="YES" syncable="YES">
+            <userInfo>
+                <entry key="jsonKey" value="id"/>
+            </userInfo>
+        </attribute>
+        <attribute name="streetAddress" optional="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="jsonKey" value="street_address"/>
+            </userInfo>
+        </attribute>
         <relationship name="contribution" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Contribution" inverseName="contact" inverseEntity="Contribution" syncable="YES"/>
         <relationship name="participant" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Participant" inverseName="contact" inverseEntity="Participant" syncable="YES"/>
         <relationship name="pledge" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Pledge" inverseName="contact" inverseEntity="Pledge" syncable="YES"/>
         <uniquenessConstraints>
             <uniquenessConstraint>
-                <constraint value="contactId"/>
+                <constraint value="rowId"/>
             </uniquenessConstraint>
         </uniquenessConstraints>
     </entity>
     <entity name="Contribution" representedClassName="Contribution" syncable="YES">
-        <attribute name="contactId" optional="YES" attributeType="Integer 64" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="contributionId" optional="YES" attributeType="Integer 64" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="currency" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="paymentInstrument" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="receiveDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="source" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="status" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="totalAmount" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="contactId" optional="YES" attributeType="Integer 64" usesScalarValueType="YES" syncable="YES">
+            <userInfo>
+                <entry key="jsonKey" value="contact_id"/>
+            </userInfo>
+        </attribute>
+        <attribute name="currency" optional="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="jsonKey" value="currency"/>
+            </userInfo>
+        </attribute>
+        <attribute name="paymentInstrument" optional="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="jsonKey" value="payment_instrument"/>
+            </userInfo>
+        </attribute>
+        <attribute name="receiveDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES">
+            <userInfo>
+                <entry key="jsonKey" value="receive_date"/>
+            </userInfo>
+        </attribute>
+        <attribute name="rowId" optional="YES" attributeType="Integer 64" usesScalarValueType="YES" syncable="YES">
+            <userInfo>
+                <entry key="jsonKey" value="id"/>
+            </userInfo>
+        </attribute>
+        <attribute name="source" optional="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="jsonKey" value="contribution_source"/>
+            </userInfo>
+        </attribute>
+        <attribute name="status" optional="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="jsonKey" value="contribution_status"/>
+            </userInfo>
+        </attribute>
+        <attribute name="totalAmount" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES" syncable="YES">
+            <userInfo>
+                <entry key="jsonKey" value="total_amount"/>
+            </userInfo>
+        </attribute>
         <relationship name="contact" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Contact" inverseName="contribution" inverseEntity="Contact" syncable="YES"/>
+        <userInfo>
+            <entry key="jsonKey" value="api.Contribution.get"/>
+        </userInfo>
     </entity>
     <entity name="Participant" representedClassName="Participant" syncable="YES">
-        <attribute name="contactId" optional="YES" attributeType="Integer 64" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="eventEndDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="eventId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="eventStartDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="eventTitle" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="contactId" optional="YES" attributeType="Integer 64" usesScalarValueType="YES" syncable="YES">
+            <userInfo>
+                <entry key="jsonKey" value="contact_id"/>
+            </userInfo>
+        </attribute>
+        <attribute name="eventEndDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES">
+            <userInfo>
+                <entry key="jsonKey" value="event_end_date"/>
+            </userInfo>
+        </attribute>
+        <attribute name="eventId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES">
+            <userInfo>
+                <entry key="jsonKey" value="event_id"/>
+            </userInfo>
+        </attribute>
+        <attribute name="eventStartDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES">
+            <userInfo>
+                <entry key="jsonKey" value="event_start_date"/>
+            </userInfo>
+        </attribute>
+        <attribute name="eventTitle" optional="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="jsonKey" value="event_title"/>
+            </userInfo>
+        </attribute>
         <attribute name="eventType" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="feeAmount" optional="YES" attributeType="Double" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="feeCurrency" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="participantId" optional="YES" attributeType="Integer 64" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="registerDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="role" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="source" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="status" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="feeAmount" optional="YES" attributeType="Double" usesScalarValueType="YES" syncable="YES">
+            <userInfo>
+                <entry key="jsonKey" value="participant_fee_amount"/>
+            </userInfo>
+        </attribute>
+        <attribute name="feeCurrency" optional="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="jsonKey" value="participant_fee_currency"/>
+            </userInfo>
+        </attribute>
+        <attribute name="registerDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES">
+            <userInfo>
+                <entry key="jsonKey" value="participant_register_date"/>
+            </userInfo>
+        </attribute>
+        <attribute name="role" optional="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="jsonKey" value="participant_role"/>
+            </userInfo>
+        </attribute>
+        <attribute name="rowId" optional="YES" attributeType="Integer 64" usesScalarValueType="YES" syncable="YES">
+            <userInfo>
+                <entry key="jsonKey" value="id"/>
+            </userInfo>
+        </attribute>
+        <attribute name="source" optional="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="jsonKey" value="participant_source"/>
+            </userInfo>
+        </attribute>
+        <attribute name="status" optional="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="jsonKey" value="participant_status"/>
+            </userInfo>
+        </attribute>
         <relationship name="contact" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Contact" inverseName="participant" inverseEntity="Contact" syncable="YES"/>
+        <userInfo>
+            <entry key="jsonKey" value="api.Participant.get"/>
+        </userInfo>
     </entity>
     <entity name="Pledge" representedClassName="Pledge" syncable="YES">
-        <attribute name="contactId" optional="YES" attributeType="Integer 64" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="currency" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="financialType" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="frequencyInterval" optional="YES" attributeType="Integer 16" defaultValueString="1" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="frequencyUnit" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="nextPayAmount" optional="YES" attributeType="Double" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="nextPayDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="pledgeId" optional="YES" attributeType="Integer 64" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="startDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="status" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="totalAmount" optional="YES" attributeType="Double" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="totalPaid" optional="YES" attributeType="Double" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="contactId" optional="YES" attributeType="Integer 64" usesScalarValueType="YES" syncable="YES">
+            <userInfo>
+                <entry key="jsonKey" value="contact_id"/>
+            </userInfo>
+        </attribute>
+        <attribute name="currency" optional="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="jsonKey" value="pledge_currency"/>
+            </userInfo>
+        </attribute>
+        <attribute name="financialType" optional="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="jsonKey" value="pledge_financial_type"/>
+            </userInfo>
+        </attribute>
+        <attribute name="frequencyInterval" optional="YES" attributeType="Integer 16" defaultValueString="1" usesScalarValueType="YES" syncable="YES">
+            <userInfo>
+                <entry key="jsonKey" value="pledge_frequency_interval"/>
+            </userInfo>
+        </attribute>
+        <attribute name="frequencyUnit" optional="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="jsonKey" value="pledge_frequency_unit"/>
+            </userInfo>
+        </attribute>
+        <attribute name="nextPayAmount" optional="YES" attributeType="Double" usesScalarValueType="YES" syncable="YES">
+            <userInfo>
+                <entry key="jsonKey" value="pledge_next_pay_amount"/>
+            </userInfo>
+        </attribute>
+        <attribute name="nextPayDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES">
+            <userInfo>
+                <entry key="jsonKey" value="pledge_next_pay_date"/>
+            </userInfo>
+        </attribute>
+        <attribute name="rowId" optional="YES" attributeType="Integer 64" usesScalarValueType="YES" syncable="YES">
+            <userInfo>
+                <entry key="jsonKey" value="id"/>
+            </userInfo>
+        </attribute>
+        <attribute name="startDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES">
+            <userInfo>
+                <entry key="jsonKey" value="pledge_start_date"/>
+            </userInfo>
+        </attribute>
+        <attribute name="status" optional="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="jsonKey" value="pledge_status"/>
+            </userInfo>
+        </attribute>
+        <attribute name="totalAmount" optional="YES" attributeType="Double" usesScalarValueType="YES" syncable="YES">
+            <userInfo>
+                <entry key="jsonKey" value="pledge_amount"/>
+            </userInfo>
+        </attribute>
+        <attribute name="totalPaid" optional="YES" attributeType="Double" usesScalarValueType="YES" syncable="YES">
+            <userInfo>
+                <entry key="jsonKey" value="pledge_total_paid"/>
+            </userInfo>
+        </attribute>
         <relationship name="contact" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Contact" inverseName="pledge" inverseEntity="Contact" syncable="YES"/>
+        <userInfo>
+            <entry key="jsonKey" value="api.Pledge.get"/>
+        </userInfo>
     </entity>
     <elements>
         <element name="Contact" positionX="-1017" positionY="-1746" width="128" height="285"/>

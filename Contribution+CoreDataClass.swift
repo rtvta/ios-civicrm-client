@@ -11,13 +11,13 @@ import Foundation
 import CoreData
 
 @objc(Contribution)
-public class Contribution: NSManagedObject, CiviCRMEntityDisplayed {
+public class Contribution: NSManagedObject, CiviEntityDisplayed {
     
     var entityTitle: String {
-        return EntityMap.Contribution.entityTitle
+        return "Payments"
     }
     
-    var entityLable: String {
+    var entityLabel: String {
         guard let source = self.source else {
             return "(No Description)"
         }
@@ -27,7 +27,7 @@ public class Contribution: NSManagedObject, CiviCRMEntityDisplayed {
         return  source
     }
 
-    func getPropertiesForDisplayDictionary() -> [(String, String)] {
+    func propertiesForDisplay() -> [(String, String)] {
         let formatter = DateFormatter()
         formatter.dateFormat = "MMM dd yyyy"
         let receiveDate: String = (self.receiveDate as Date?) != nil ? formatter.string(from: (self.receiveDate! as Date)) : ""

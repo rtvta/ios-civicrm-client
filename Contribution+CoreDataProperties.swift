@@ -2,7 +2,7 @@
 //  Contribution+CoreDataProperties.swift
 //  CiviCRMClient
 //
-//  Created by Roman Tiagni on 09/05/2018.
+//  Created by Roman Tiagni on 20/05/2018.
 //  Copyright © 2018 Roman Tiagni. All rights reserved.
 //
 //
@@ -18,7 +18,7 @@ extension Contribution {
     }
 
     @NSManaged public var contactId: Int64
-    @NSManaged public var contributionId: Int64
+    @NSManaged public var rowId: Int64
     @NSManaged public var currency: String?
     @NSManaged public var paymentInstrument: String?
     @NSManaged public var receiveDate: NSDate?

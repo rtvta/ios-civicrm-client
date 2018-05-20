@@ -11,8 +11,8 @@ import Foundation
 import CoreData
 
 @objc(Contact)
-public class Contact: NSManagedObject, CiviCRMEntityDisplayed {
-    func getPropertiesForDisplayDictionary() -> [(String, String)] {
+public class Contact: NSManagedObject, CiviEntityDisplayed {
+    func propertiesForDisplay() -> [(String, String)] {
         
         let formatter = DateFormatter()
         formatter.dateFormat = "MMM dd yyyy"
@@ -30,7 +30,7 @@ public class Contact: NSManagedObject, CiviCRMEntityDisplayed {
         ]
     }
     
-    var entityLable: String {
+    var entityLabel: String {
         let lastName = self.lastName ?? ""
         let firstName = self.firstName ?? ""
         let label = self.email ?? "\(firstName) \(lastName)"
@@ -38,7 +38,7 @@ public class Contact: NSManagedObject, CiviCRMEntityDisplayed {
     }
     
     var entityTitle: String {
-        return EntityMap.Contact.entityTitle
+        return "Summary"
     }
 
     var contactName: String {
@@ -52,7 +52,7 @@ public class Contact: NSManagedObject, CiviCRMEntityDisplayed {
         person.append(self)
         arr.append(person)
         
-        let contributionSortDescr = NSSortDescriptor(key: "contributionId", ascending: false)
+        let contributionSortDescr = NSSortDescriptor(key: "rowId", ascending: false)
         let participantSortDescr = NSSortDescriptor(key: "eventStartDate", ascending: false)
         let pledgeSortDescr = NSSortDescriptor(key: "startDate", ascending: false)
         

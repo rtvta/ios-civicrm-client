@@ -35,7 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         var contacts = try! context.fetch(fetch)
         if contacts.count > 0 {
             for c in contacts {
-                if  (c.contactId > 1 && !demoMode) || (c.contactId == 1 && demoMode) {
+                if  (c.rowId > 1 && !demoMode) || (c.rowId == 1 && demoMode) {
                     viewController.currentContact = c
                     break
                 } else {

@@ -2,7 +2,7 @@
 //  Contact+CoreDataProperties.swift
 //  CiviCRMClient
 //
-//  Created by Roman Tiagni on 16/05/2018.
+//  Created by Roman Tiagni on 20/05/2018.
 //  Copyright © 2018 Roman Tiagni. All rights reserved.
 //
 //
@@ -20,7 +20,7 @@ extension Contact {
     @NSManaged public var addressId: Int64
     @NSManaged public var birthDate: NSDate?
     @NSManaged public var city: String?
-    @NSManaged public var contactId: Int64
+    @NSManaged public var rowId: Int64
     @NSManaged public var contactType: String?
     @NSManaged public var country: String?
     @NSManaged public var email: String?

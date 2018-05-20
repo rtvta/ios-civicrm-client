@@ -25,10 +25,12 @@ class EntitiesViewController: UIViewController {
             self.tableView?.reloadData()
         }
     }
+    
     lazy var coreDataAdapter: CoreDataAdapter = {
         let adapter = CoreDataAdapter(context: managedContext)
         return adapter
     }()
+    
     var errorMessage: String? {
         didSet {
             indicator.stopAnimating()
@@ -55,7 +57,7 @@ class EntitiesViewController: UIViewController {
         if let split = splitViewController {
             let controllers = split.viewControllers
             propertiesViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? PropertiesViewController
-            propertiesViewController?.entityMO = entitiesArray![0][0] as? CiviCRMEntityDisplayed
+            propertiesViewController?.entityMO = entitiesArray![0][0] as? CiviEntityDisplayed
         }
     }
     
@@ -74,7 +76,7 @@ class EntitiesViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowProperties" {
             if let indexPath = tableView.indexPathForSelectedRow {
-                let entityMO = entitiesArray![indexPath.section][indexPath.row] as! CiviCRMEntityDisplayed
+                let entityMO = entitiesArray![indexPath.section][indexPath.row] as! CiviEntityDisplayed
                 let controller = (segue.destination as! UINavigationController).topViewController as! PropertiesViewController
                 controller.entityMO = entityMO
             }
@@ -86,7 +88,7 @@ class EntitiesViewController: UIViewController {
         dataTask?.cancel()
         indicator.startAnimating()
         
-        guard let request = RestAPIManager.shared.restAPIDefaultURLRequest() else { return }
+        guard let request = CiviAPIManager.shared.defaultURLRequest() else { return }
         let session = URLSession.shared
         dataTask = session.dataTask(with: request) { (data, response, error) -> Void in
             if error != nil {
@@ -150,7 +152,7 @@ class EntitiesViewController: UIViewController {
         contacts = try! managedContext.fetch(fetch)
         if contacts.count > 0 {
             for c in contacts {
-                if  (c.contactId > 1 && !demoMode) || (c.contactId == 1 && demoMode) {
+                if  (c.rowId > 1 && !demoMode) || (c.rowId == 1 && demoMode) {
                     currentContact = c
                     break
                 } else {
@@ -169,7 +171,7 @@ extension EntitiesViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        guard let entity = entitiesArray![section][0] as? CiviCRMEntityDisplayed else {
+        guard let entity = entitiesArray![section][0] as? CiviEntityDisplayed else {
             return nil
         }
         return entity.entityTitle
@@ -181,8 +183,8 @@ extension EntitiesViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "EntityCell", for: indexPath)
-        if let entity = entitiesArray![indexPath.section][indexPath.row] as? CiviCRMEntityDisplayed {
-            cell.textLabel?.text = entity.entityLable
+        if let entity = entitiesArray![indexPath.section][indexPath.row] as? CiviEntityDisplayed {
+            cell.textLabel?.text = entity.entityLabel
         }
         return cell
     }

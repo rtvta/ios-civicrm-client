@@ -8,8 +8,8 @@
 
 import Foundation
 
-protocol CiviCRMEntityDisplayed {
-    func getPropertiesForDisplayDictionary() -> [(String,String)]
-    var entityLable: String { get }
+protocol CiviEntityDisplayed {
+    func propertiesForDisplay() -> [(String,String)]
+    var entityLabel: String { get }
     var entityTitle: String { get }
 }

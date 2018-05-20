@@ -12,9 +12,8 @@
 		AE1E51DB209588870068D6F2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE1E51DA209588870068D6F2 /* Assets.xcassets */; };
 		AE1E51DE209588870068D6F2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE1E51DC209588870068D6F2 /* LaunchScreen.storyboard */; };
 		AE1E51E620958FAB0068D6F2 /* EntitiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1E51E520958FAB0068D6F2 /* EntitiesViewController.swift */; };
-		AE2F269920A82F5A007437C8 /* RestAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2F269820A82F5A007437C8 /* RestAPIManager.swift */; };
-		AE5BDC9D209B3F0E00B7D726 /* CiviCRMEntityDisplayed.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5BDC9C209B3F0E00B7D726 /* CiviCRMEntityDisplayed.swift */; };
-		AE8914E820AB100D0070D019 /* UserMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8914E720AB100D0070D019 /* UserMessage.swift */; };
+		AE2F269920A82F5A007437C8 /* CiviAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2F269820A82F5A007437C8 /* CiviAPIManager.swift */; };
+		AE5BDC9D209B3F0E00B7D726 /* CiviEntityDisplayed.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5BDC9C209B3F0E00B7D726 /* CiviEntityDisplayed.swift */; };
 		AE8A2D3D20A09B5100D6A537 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AE8A2D3C20A09B5100D6A537 /* Settings.bundle */; };
 		AE8BAE852095A167008943F3 /* PropertiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8BAE842095A167008943F3 /* PropertiesViewController.swift */; };
 		AE8BAE872095C097008943F3 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8BAE862095C097008943F3 /* CoreDataStack.swift */; };
@@ -29,7 +28,6 @@
 		AE8BAE9C2095E514008943F3 /* Pledge+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8BAE942095E514008943F3 /* Pledge+CoreDataProperties.swift */; };
 		AEB5168320AD6DC3004D390B /* SampleData.plist in Resources */ = {isa = PBXBuildFile; fileRef = AEB5168220AD6DC2004D390B /* SampleData.plist */; };
 		AEBB41B32098BB77000B4866 /* CoreDataAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBB41B22098BB77000B4866 /* CoreDataAdapter.swift */; };
-		AED788E6209EF58900695D0C /* EntityMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = AED788E5209EF58900695D0C /* EntityMap.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,9 +38,8 @@
 		AE1E51DD209588870068D6F2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AE1E51DF209588870068D6F2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AE1E51E520958FAB0068D6F2 /* EntitiesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntitiesViewController.swift; sourceTree = "<group>"; };
-		AE2F269820A82F5A007437C8 /* RestAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestAPIManager.swift; sourceTree = "<group>"; };
-		AE5BDC9C209B3F0E00B7D726 /* CiviCRMEntityDisplayed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CiviCRMEntityDisplayed.swift; sourceTree = "<group>"; };
-		AE8914E720AB100D0070D019 /* UserMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMessage.swift; sourceTree = "<group>"; };
+		AE2F269820A82F5A007437C8 /* CiviAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CiviAPIManager.swift; sourceTree = "<group>"; };
+		AE5BDC9C209B3F0E00B7D726 /* CiviEntityDisplayed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CiviEntityDisplayed.swift; sourceTree = "<group>"; };
 		AE8A2D3C20A09B5100D6A537 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		AE8BAE842095A167008943F3 /* PropertiesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertiesViewController.swift; sourceTree = "<group>"; };
 		AE8BAE862095C097008943F3 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
@@ -57,7 +54,6 @@
 		AE8BAE942095E514008943F3 /* Pledge+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Pledge+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		AEB5168220AD6DC2004D390B /* SampleData.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = SampleData.plist; sourceTree = "<group>"; };
 		AEBB41B22098BB77000B4866 /* CoreDataAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataAdapter.swift; sourceTree = "<group>"; };
-		AED788E5209EF58900695D0C /* EntityMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityMap.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,10 +113,8 @@
 			children = (
 				AE8BAE862095C097008943F3 /* CoreDataStack.swift */,
 				AEBB41B22098BB77000B4866 /* CoreDataAdapter.swift */,
-				AE5BDC9C209B3F0E00B7D726 /* CiviCRMEntityDisplayed.swift */,
-				AED788E5209EF58900695D0C /* EntityMap.swift */,
-				AE2F269820A82F5A007437C8 /* RestAPIManager.swift */,
-				AE8914E720AB100D0070D019 /* UserMessage.swift */,
+				AE5BDC9C209B3F0E00B7D726 /* CiviEntityDisplayed.swift */,
+				AE2F269820A82F5A007437C8 /* CiviAPIManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -207,15 +201,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AE5BDC9D209B3F0E00B7D726 /* CiviCRMEntityDisplayed.swift in Sources */,
+				AE5BDC9D209B3F0E00B7D726 /* CiviEntityDisplayed.swift in Sources */,
 				AE8BAE9A2095E514008943F3 /* Contribution+CoreDataProperties.swift in Sources */,
 				AE1E51E620958FAB0068D6F2 /* EntitiesViewController.swift in Sources */,
 				AEBB41B32098BB77000B4866 /* CoreDataAdapter.swift in Sources */,
 				AE8BAE9B2095E514008943F3 /* Pledge+CoreDataClass.swift in Sources */,
-				AED788E6209EF58900695D0C /* EntityMap.swift in Sources */,
-				AE8914E820AB100D0070D019 /* UserMessage.swift in Sources */,
 				AE1E51D4209588850068D6F2 /* AppDelegate.swift in Sources */,
-				AE2F269920A82F5A007437C8 /* RestAPIManager.swift in Sources */,
+				AE2F269920A82F5A007437C8 /* CiviAPIManager.swift in Sources */,
 				AE8BAE8C2095CC0E008943F3 /* CiviCRM Data.xcdatamodeld in Sources */,
 				AE8BAE982095E514008943F3 /* Contact+CoreDataProperties.swift in Sources */,
 				AE8BAE962095E514008943F3 /* Participant+CoreDataProperties.swift in Sources */,
