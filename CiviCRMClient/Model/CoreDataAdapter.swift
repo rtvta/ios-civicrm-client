@@ -60,12 +60,12 @@ class CoreDataAdapter {
         for i in 1..<descriptions.count {
             let description = descriptions[i]
             guard let relationsDict = contactDict.value(forKey: description.jsonKey) as? NSDictionary,
-                let entities = relationsDict[CiviAPIManager.valuesKey] as? [NSDictionary] else {continue}
+                let relations = relationsDict[CiviAPIManager.valuesKey] as? [NSDictionary] else {continue}
 
 
             let entityDescription = NSEntityDescription.entity(forEntityName: description.name, in: managedContext)!
             
-            for entityDict in entities {
+            for entityDict in relations {
                 print(description.name)
                 guard let id = Int(entityDict.value(forKey: "id") as! String) as NSNumber? else {
                     continue
@@ -83,6 +83,7 @@ class CoreDataAdapter {
                         entityMO = Contribution(entity: entityDescription, insertInto: managedContext)
                     }
                     updateManagedObjectFromJSON(for: entityMO, with: description, from: entityDict)
+                    entityMO.isNew = entityMO.isNew ? entityMO.isNew : entityMO.isInserted
                     entityMO.contact = contactMO
                     break
                 case "Participant":
@@ -96,6 +97,7 @@ class CoreDataAdapter {
                         entityMO = Participant(entity: entityDescription, insertInto: managedContext)
                     }
                     updateManagedObjectFromJSON(for: entityMO, with: description, from: entityDict)
+                    entityMO.isNew = entityMO.isNew ? entityMO.isNew : entityMO.isInserted
                     entityMO.contact = contactMO
                     break
                 case "Pledge":
@@ -109,6 +111,21 @@ class CoreDataAdapter {
                         entityMO = Pledge(entity: entityDescription, insertInto: managedContext)
                     }
                     updateManagedObjectFromJSON(for: entityMO, with: description, from: entityDict)
+                    entityMO.isNew = entityMO.isNew ? entityMO.isNew : entityMO.isInserted
+                    entityMO.contact = contactMO
+                    break
+                case "Membership":
+                    let fetch: NSFetchRequest<Membership> = Membership.fetchRequest()
+                    var entityMO: Membership
+                    fetch.predicate = NSPredicate(format: "rowId == %@", id)
+                    let result = try! managedContext.fetch(fetch)
+                    if result.count > 0 {
+                        entityMO = result.first!
+                    } else {
+                        entityMO = Membership(entity: entityDescription, insertInto: managedContext)
+                    }
+                    updateManagedObjectFromJSON(for: entityMO, with: description, from: entityDict)
+                    entityMO.isNew = entityMO.isNew ? entityMO.isNew : entityMO.isInserted
                     entityMO.contact = contactMO
                     break
                 default:
@@ -125,30 +142,30 @@ class CoreDataAdapter {
     }
     
     // Set values to MO
-    fileprivate func updateManagedObjectFromJSON(for entityMO: NSManagedObject, with entityDectription: CiviEntityDescription, from message: NSDictionary) {
-        for attribute in entityDectription.attributes {
+    fileprivate func updateManagedObjectFromJSON(for mo: NSManagedObject, with descr: CiviEntityDescription, from message: NSDictionary) {
+        for attribute in descr.attributes {
             guard let jsonValue = message.value(forKey: attribute.jsonKey) as? String else {continue}
             print("    \(attribute.key), \(attribute.jsonKey), \(attribute.type) == \(jsonValue)")
             switch attribute.type {
             case 300:
                 guard let value = Int64(jsonValue) else {continue}
-                entityMO.setValue(value, forKey: attribute.key)
+                mo.setValue(value, forKey: attribute.key)
                 break
             case 500:
                 guard let value = Double(jsonValue) else {continue}
-                entityMO.setValue(value, forKey: attribute.key)
+                mo.setValue(value, forKey: attribute.key)
                 break
             case 700:
-                entityMO.setValue(jsonValue, forKey: attribute.key)
+                mo.setValue(jsonValue, forKey: attribute.key)
                 break
             case 900:
                 dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
                 if let value = dateFormatter.date(from: jsonValue as String) {
-                    entityMO.setValue(value as NSDate, forKey: attribute.key)
+                    mo.setValue(value as NSDate, forKey: attribute.key)
                 } else {
                     dateFormatter.dateFormat = "yyyy-MM-dd"
                     guard let value = dateFormatter.date(from: jsonValue) as NSDate? else {continue}
-                    entityMO.setValue(value as NSDate, forKey: attribute.key)
+                    mo.setValue(value as NSDate, forKey: attribute.key)
                 }
                 break
             default:

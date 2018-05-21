@@ -2,7 +2,7 @@
 //  Pledge+CoreDataProperties.swift
 //  CiviCRMClient
 //
-//  Created by Roman Tiagni on 20/05/2018.
+//  Created by Roman Tiagni on 21/05/2018.
 //  Copyright © 2018 Roman Tiagni. All rights reserved.
 //
 //

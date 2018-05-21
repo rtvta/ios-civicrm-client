@@ -12,6 +12,13 @@ import CoreData
 
 @objc(Participant)
 public class Participant: NSManagedObject, CiviEntityDisplayed {
+    var isNew: Bool = false
+    
+    private lazy var formatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMM dd yyyy"
+        return formatter
+    }()
     
     var entityTitle: String {
         return "Events"
@@ -24,12 +31,11 @@ public class Participant: NSManagedObject, CiviEntityDisplayed {
     }
     
     func propertiesForDisplay() -> [(String, String)] {
-        let formatter = DateFormatter()
+        formatter.dateFormat = "MMM dd yyyy"
+        let registerDate: String = (self.registerDate as Date?) != nil ? formatter.string(from: (self.registerDate! as Date)) : ""
         formatter.dateFormat = "MMM dd yyyy hh:mm"
         let eventStartDate: String = (self.eventStartDate as Date?) != nil ? formatter.string(from: (self.eventStartDate! as Date)) : ""
         let eventEndDate: String = (self.eventEndDate as Date?) != nil ? formatter.string(from: (self.eventEndDate! as Date)) : ""
-        formatter.dateFormat = "MMM dd yyyy"
-        let registerDate: String = (self.registerDate as Date?) != nil ? formatter.string(from: (self.registerDate! as Date)) : ""
         
         return [
             ("Event Name: ", "\(self.eventTitle ?? "(No Name)")"),

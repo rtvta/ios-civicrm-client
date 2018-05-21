@@ -25,6 +25,7 @@ enum Action: String {
     case create
 }
 
+
 final class CiviAPIManager {
     // MARK: - Singleton
     static let shared = CiviAPIManager()
@@ -36,7 +37,7 @@ final class CiviAPIManager {
     // MARK: - Properties
     private let userDefaults = UserDefaults.standard
     lazy var coreDataStack = CoreDataStack(modelName: "CiviCRM Data")
-    lazy var entitiesArray: [String] = ["Contact","Contribution","Participant","Pledge"]
+    lazy var entitiesArray: [String] = ["Contact","Contribution","Participant","Pledge","Membership"]
     
     final lazy var civiEntitiesDescription: Array<CiviEntityDescription> = {
         var descriptions: Array<CiviEntityDescription> = [CiviEntityDescription]()
@@ -90,10 +91,17 @@ final class CiviAPIManager {
     fileprivate func defaultJSONString(limit: Int) -> String {
         var jsonString = ""
         let options = "\"options\":{\"limit\":\(limit),\"sort\":\"id DESC\"}"
+        let returnKey = "\"return\":"
+        let contactAttributesString = requestedAttributes(attributes: civiEntitiesDescription[0].attributes)
         
         jsonString += "json={"
+        jsonString += "\(returnKey)\"\(contactAttributesString)\","
         for i in 1..<civiEntitiesDescription.count {
-            jsonString += "\"\(civiEntitiesDescription[i].jsonKey)\":{\(options)},"
+            let attributesString = requestedAttributes(attributes: civiEntitiesDescription[i].attributes)
+            jsonString += "\"\(civiEntitiesDescription[i].jsonKey)\":{"
+            jsonString += "\(returnKey)\"\(attributesString)\","
+            jsonString += "\(options)"
+            jsonString += "},"
         }
         jsonString.removeLast(1)
         jsonString += "}"
@@ -111,5 +119,14 @@ final class CiviAPIManager {
         }
         
         return attributes
+    }
+    
+    fileprivate func requestedAttributes(attributes: Array<CiviAttributeDescription>) -> String {
+        var attributesString = ""
+        for a in attributes where a.jsonKey != "id" {
+            attributesString += "\(a.jsonKey),"
+        }
+        attributesString.removeLast(1)
+        return attributesString
     }
 }

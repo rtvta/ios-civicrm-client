@@ -943,6 +943,8 @@
 						<string>1</string>
 						<key>membership_type_id</key>
 						<string>3</string>
+						<key>membership_type_id.name</key>
+						<string>Lifetime</string>
 						<key>join_date</key>
 						<string>2017-12-22</string>
 						<key>start_date</key>
@@ -951,6 +953,8 @@
 						<string>Check</string>
 						<key>status_id</key>
 						<string>1</string>
+						<key>status_id.name</key>
+						<string>New</string>
 						<key>is_test</key>
 						<string>0</string>
 						<key>is_pay_later</key>

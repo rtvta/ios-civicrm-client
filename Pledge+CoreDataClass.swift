@@ -12,6 +12,13 @@ import CoreData
 
 @objc(Pledge)
 public class Pledge: NSManagedObject, CiviEntityDisplayed {
+    var isNew: Bool = false
+    
+    private lazy var formatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMM dd yyyy"
+        return formatter
+    }()
     
     var entityTitle: String {
         return "Pledges"
@@ -25,8 +32,6 @@ public class Pledge: NSManagedObject, CiviEntityDisplayed {
     }
     
     func propertiesForDisplay() -> [(String, String)] {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "MMM dd yyyy"
         let startDate: String = (self.startDate as Date?) != nil ? formatter.string(from: (self.startDate! as Date)) : ""
         let nextPayDate: String = (self.nextPayDate as Date?) != nil ? formatter.string(from: (self.nextPayDate! as Date)) : ""
         

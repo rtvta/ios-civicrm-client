@@ -67,6 +67,7 @@
             </userInfo>
         </attribute>
         <relationship name="contribution" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Contribution" inverseName="contact" inverseEntity="Contribution" syncable="YES"/>
+        <relationship name="membership" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Membership" inverseName="contact" inverseEntity="Membership" syncable="YES"/>
         <relationship name="participant" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Participant" inverseName="contact" inverseEntity="Participant" syncable="YES"/>
         <relationship name="pledge" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Pledge" inverseName="contact" inverseEntity="Pledge" syncable="YES"/>
         <uniquenessConstraints>
@@ -86,9 +87,14 @@
                 <entry key="jsonKey" value="currency"/>
             </userInfo>
         </attribute>
-        <attribute name="paymentInstrument" optional="YES" attributeType="String" syncable="YES">
+        <attribute name="payInstrument" optional="YES" attributeType="String" syncable="YES">
             <userInfo>
                 <entry key="jsonKey" value="payment_instrument"/>
+            </userInfo>
+        </attribute>
+        <attribute name="payInstrumentId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES">
+            <userInfo>
+                <entry key="jsonKey" value="payment_instrument_id"/>
             </userInfo>
         </attribute>
         <attribute name="receiveDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES">
@@ -121,6 +127,47 @@
             <entry key="jsonKey" value="api.Contribution.get"/>
         </userInfo>
     </entity>
+    <entity name="Membership" representedClassName="Membership" syncable="YES">
+        <attribute name="contactId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES">
+            <userInfo>
+                <entry key="jsonKey" value="contact_id"/>
+            </userInfo>
+        </attribute>
+        <attribute name="endDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES">
+            <userInfo>
+                <entry key="jsonKey" value="end_date"/>
+            </userInfo>
+        </attribute>
+        <attribute name="joinDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES">
+            <userInfo>
+                <entry key="jsonKey" value="join_date"/>
+            </userInfo>
+        </attribute>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="jsonKey" value="membership_name"/>
+            </userInfo>
+        </attribute>
+        <attribute name="rowId" optional="YES" attributeType="Integer 64" usesScalarValueType="YES" syncable="YES">
+            <userInfo>
+                <entry key="jsonKey" value="id"/>
+            </userInfo>
+        </attribute>
+        <attribute name="startDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES">
+            <userInfo>
+                <entry key="jsonKey" value="start_date"/>
+            </userInfo>
+        </attribute>
+        <attribute name="status" optional="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="jsonKey" value="status_id.name"/>
+            </userInfo>
+        </attribute>
+        <relationship name="contact" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Contact" inverseName="membership" inverseEntity="Contact" syncable="YES"/>
+        <userInfo>
+            <entry key="jsonKey" value="api.Membership.get"/>
+        </userInfo>
+    </entity>
     <entity name="Participant" representedClassName="Participant" syncable="YES">
         <attribute name="contactId" optional="YES" attributeType="Integer 64" usesScalarValueType="YES" syncable="YES">
             <userInfo>
@@ -147,7 +194,11 @@
                 <entry key="jsonKey" value="event_title"/>
             </userInfo>
         </attribute>
-        <attribute name="eventType" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="eventType" optional="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="jsonKey" value="event_type"/>
+            </userInfo>
+        </attribute>
         <attribute name="feeAmount" optional="YES" attributeType="Double" usesScalarValueType="YES" syncable="YES">
             <userInfo>
                 <entry key="jsonKey" value="participant_fee_amount"/>
@@ -255,8 +306,9 @@
         </userInfo>
     </entity>
     <elements>
-        <element name="Contact" positionX="-1017" positionY="-1746" width="128" height="285"/>
-        <element name="Contribution" positionX="-648" positionY="-2002" width="128" height="180"/>
+        <element name="Contact" positionX="-1017" positionY="-1746" width="128" height="300"/>
+        <element name="Contribution" positionX="-648" positionY="-2002" width="128" height="195"/>
+        <element name="Membership" positionX="-828" positionY="-1854" width="128" height="165"/>
         <element name="Participant" positionX="-648" positionY="-1746" width="128" height="255"/>
         <element name="Pledge" positionX="-648" positionY="-1396" width="128" height="240"/>
     </elements>

@@ -12,6 +12,13 @@ import CoreData
 
 @objc(Contribution)
 public class Contribution: NSManagedObject, CiviEntityDisplayed {
+    var isNew: Bool = false
+    
+    private lazy var formatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMM dd yyyy"
+        return formatter
+    }()
     
     var entityTitle: String {
         return "Payments"
@@ -28,14 +35,12 @@ public class Contribution: NSManagedObject, CiviEntityDisplayed {
     }
 
     func propertiesForDisplay() -> [(String, String)] {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "MMM dd yyyy"
         let receiveDate: String = (self.receiveDate as Date?) != nil ? formatter.string(from: (self.receiveDate! as Date)) : ""
         
         return [
             ("Paid for: ", "\(self.source ?? "(No Source)")"),
             ("Amount: ","\(self.totalAmount) \(self.currency ?? "")"),
-            ("Paid by: ", self.paymentInstrument ?? ""),
+            ("Paid by: ", self.payInstrument ?? ""),
             ("Recieve Date: ", receiveDate),
             ("Contribution Status: ", "\(self.status ?? "(No Status)")"),
         ]

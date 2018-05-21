@@ -12,6 +12,8 @@
 		AE1E51DB209588870068D6F2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE1E51DA209588870068D6F2 /* Assets.xcassets */; };
 		AE1E51DE209588870068D6F2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE1E51DC209588870068D6F2 /* LaunchScreen.storyboard */; };
 		AE1E51E620958FAB0068D6F2 /* EntitiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1E51E520958FAB0068D6F2 /* EntitiesViewController.swift */; };
+		AE2430D420B2A8A800C41235 /* Membership+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2430D220B2A8A800C41235 /* Membership+CoreDataClass.swift */; };
+		AE2430D520B2A8A800C41235 /* Membership+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2430D320B2A8A800C41235 /* Membership+CoreDataProperties.swift */; };
 		AE2F269920A82F5A007437C8 /* CiviAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2F269820A82F5A007437C8 /* CiviAPIManager.swift */; };
 		AE5BDC9D209B3F0E00B7D726 /* CiviEntityDisplayed.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5BDC9C209B3F0E00B7D726 /* CiviEntityDisplayed.swift */; };
 		AE8A2D3D20A09B5100D6A537 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AE8A2D3C20A09B5100D6A537 /* Settings.bundle */; };
@@ -38,6 +40,8 @@
 		AE1E51DD209588870068D6F2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AE1E51DF209588870068D6F2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AE1E51E520958FAB0068D6F2 /* EntitiesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntitiesViewController.swift; sourceTree = "<group>"; };
+		AE2430D220B2A8A800C41235 /* Membership+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Membership+CoreDataClass.swift"; sourceTree = "<group>"; };
+		AE2430D320B2A8A800C41235 /* Membership+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Membership+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		AE2F269820A82F5A007437C8 /* CiviAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CiviAPIManager.swift; sourceTree = "<group>"; };
 		AE5BDC9C209B3F0E00B7D726 /* CiviEntityDisplayed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CiviEntityDisplayed.swift; sourceTree = "<group>"; };
 		AE8A2D3C20A09B5100D6A537 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
@@ -70,6 +74,8 @@
 		AE1E51C7209588850068D6F2 = {
 			isa = PBXGroup;
 			children = (
+				AE2430D220B2A8A800C41235 /* Membership+CoreDataClass.swift */,
+				AE2430D320B2A8A800C41235 /* Membership+CoreDataProperties.swift */,
 				AE8BAE8F2095E514008943F3 /* Contact+CoreDataClass.swift */,
 				AE8BAE902095E514008943F3 /* Contact+CoreDataProperties.swift */,
 				AE8BAE912095E514008943F3 /* Contribution+CoreDataClass.swift */,
@@ -208,7 +214,9 @@
 				AE8BAE9B2095E514008943F3 /* Pledge+CoreDataClass.swift in Sources */,
 				AE1E51D4209588850068D6F2 /* AppDelegate.swift in Sources */,
 				AE2F269920A82F5A007437C8 /* CiviAPIManager.swift in Sources */,
+				AE2430D420B2A8A800C41235 /* Membership+CoreDataClass.swift in Sources */,
 				AE8BAE8C2095CC0E008943F3 /* CiviCRM Data.xcdatamodeld in Sources */,
+				AE2430D520B2A8A800C41235 /* Membership+CoreDataProperties.swift in Sources */,
 				AE8BAE982095E514008943F3 /* Contact+CoreDataProperties.swift in Sources */,
 				AE8BAE962095E514008943F3 /* Participant+CoreDataProperties.swift in Sources */,
 				AE8BAE9C2095E514008943F3 /* Pledge+CoreDataProperties.swift in Sources */,

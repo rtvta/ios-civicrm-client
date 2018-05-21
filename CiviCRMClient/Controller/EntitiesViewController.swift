@@ -76,9 +76,11 @@ class EntitiesViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowProperties" {
             if let indexPath = tableView.indexPathForSelectedRow {
-                let entityMO = entitiesArray![indexPath.section][indexPath.row] as! CiviEntityDisplayed
+                var entityMO = entitiesArray![indexPath.section][indexPath.row] as! CiviEntityDisplayed
                 let controller = (segue.destination as! UINavigationController).topViewController as! PropertiesViewController
                 controller.entityMO = entityMO
+                entityMO.isNew = false
+                tableView.reloadData()
             }
         }
     }
@@ -119,6 +121,7 @@ class EntitiesViewController: UIViewController {
                         }
                         return
                     } else if let id = result.value(forKey: "id") as? NSNumber {
+                        print(result.description)
                         self.coreDataAdapter.upsert(for: id, message: result)
                         DispatchQueue.main.async {
                             self.setCurrentContact()
@@ -185,6 +188,11 @@ extension EntitiesViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "EntityCell", for: indexPath)
         if let entity = entitiesArray![indexPath.section][indexPath.row] as? CiviEntityDisplayed {
             cell.textLabel?.text = entity.entityLabel
+            if entity.isNew {
+                cell.imageView?.image = UIImage(named: "blue-spot")
+            } else {
+                cell.imageView?.image = UIImage(named: "grey-spot")
+            }
         }
         return cell
     }

@@ -12,9 +12,17 @@ import CoreData
 
 @objc(Contact)
 public class Contact: NSManagedObject, CiviEntityDisplayed {
+    var isNew: Bool = false
+    
+    private lazy var formatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMM dd yyyy"
+        return formatter
+    }()
+    
     func propertiesForDisplay() -> [(String, String)] {
         
-        let formatter = DateFormatter()
+//        var formatter = DateFormatter()
         formatter.dateFormat = "MMM dd yyyy"
         let birthDate: String = (self.birthDate as Date?) != nil ? formatter.string(from: (self.birthDate! as Date)) : ""
         
@@ -55,6 +63,7 @@ public class Contact: NSManagedObject, CiviEntityDisplayed {
         let contributionSortDescr = NSSortDescriptor(key: "rowId", ascending: false)
         let participantSortDescr = NSSortDescriptor(key: "eventStartDate", ascending: false)
         let pledgeSortDescr = NSSortDescriptor(key: "startDate", ascending: false)
+        let membershipSortDescr = NSSortDescriptor(key: "startDate", ascending: false)
         
         if  let contributions = self.contribution?.sortedArray(using: [contributionSortDescr]) as? Array<NSManagedObject>, contributions.count > 0 {
             arr.append(contributions)
@@ -64,6 +73,9 @@ public class Contact: NSManagedObject, CiviEntityDisplayed {
         }
         if let pledges = self.pledge?.sortedArray(using: [pledgeSortDescr]) as? Array<NSManagedObject>, pledges.count > 0 {
             arr.append(pledges)
+        }
+        if let memberships = self.membership?.sortedArray(using: [membershipSortDescr]) as? Array<NSManagedObject>, memberships.count > 0 {
+            arr.append(memberships)
         }
         return arr
     }

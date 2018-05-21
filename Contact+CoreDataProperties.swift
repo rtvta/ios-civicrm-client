@@ -2,7 +2,7 @@
 //  Contact+CoreDataProperties.swift
 //  CiviCRMClient
 //
-//  Created by Roman Tiagni on 20/05/2018.
+//  Created by Roman Tiagni on 21/05/2018.
 //  Copyright © 2018 Roman Tiagni. All rights reserved.
 //
 //
@@ -20,7 +20,6 @@ extension Contact {
     @NSManaged public var addressId: Int64
     @NSManaged public var birthDate: NSDate?
     @NSManaged public var city: String?
-    @NSManaged public var rowId: Int64
     @NSManaged public var contactType: String?
     @NSManaged public var country: String?
     @NSManaged public var email: String?
@@ -29,10 +28,12 @@ extension Contact {
     @NSManaged public var lastName: String?
     @NSManaged public var phone: String?
     @NSManaged public var phoneId: Int64
+    @NSManaged public var rowId: Int64
     @NSManaged public var streetAddress: String?
     @NSManaged public var contribution: NSSet?
     @NSManaged public var participant: NSSet?
     @NSManaged public var pledge: NSSet?
+    @NSManaged public var membership: NSSet?
 
 }
 
@@ -84,5 +85,22 @@ extension Contact {
 
     @objc(removePledge:)
     @NSManaged public func removeFromPledge(_ values: NSSet)
+
+}
+
+// MARK: Generated accessors for membership
+extension Contact {
+
+    @objc(addMembershipObject:)
+    @NSManaged public func addToMembership(_ value: Membership)
+
+    @objc(removeMembershipObject:)
+    @NSManaged public func removeFromMembership(_ value: Membership)
+
+    @objc(addMembership:)
+    @NSManaged public func addToMembership(_ values: NSSet)
+
+    @objc(removeMembership:)
+    @NSManaged public func removeFromMembership(_ values: NSSet)
 
 }

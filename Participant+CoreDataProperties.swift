@@ -2,7 +2,7 @@
 //  Participant+CoreDataProperties.swift
 //  CiviCRMClient
 //
-//  Created by Roman Tiagni on 20/05/2018.
+//  Created by Roman Tiagni on 21/05/2018.
 //  Copyright © 2018 Roman Tiagni. All rights reserved.
 //
 //
@@ -25,9 +25,9 @@ extension Participant {
     @NSManaged public var eventType: String?
     @NSManaged public var feeAmount: Double
     @NSManaged public var feeCurrency: String?
-    @NSManaged public var rowId: Int64
     @NSManaged public var registerDate: NSDate?
     @NSManaged public var role: String?
+    @NSManaged public var rowId: Int64
     @NSManaged public var source: String?
     @NSManaged public var status: String?
     @NSManaged public var contact: Contact?
