@@ -191,7 +191,7 @@ extension EntitiesViewController: UITableViewDelegate, UITableViewDataSource {
             if entity.isNew {
                 cell.imageView?.image = UIImage(named: "blue-spot")
             } else {
-                cell.imageView?.image = UIImage(named: "grey-spot")
+                cell.imageView?.image = UIImage(named: "grey-light-spot")
             }
         }
         return cell

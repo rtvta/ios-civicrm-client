@@ -404,7 +404,7 @@
 						<key>is_pay_later</key>
 						<string>0</string>
 						<key>contribution_status</key>
-						<string>0</string>
+						<string>Completed</string>
 						<key>contribution_status_id</key>
 						<string>1</string>
 						<key>contribution_check_number</key>
