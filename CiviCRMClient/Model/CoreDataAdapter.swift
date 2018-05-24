@@ -56,8 +56,8 @@ class CoreDataAdapter {
                 let contactDict = contactsDict.object(forKey: "\(contactId)") as? NSDictionary else {return}
         
         updateManagedObjectFromJSON(for: contactMO, with: contactDescription, from: contactDict)
-        if contactMO.isInserted {
-            contactMO.notYetViewed = contactMO.isInserted
+        if contactMO.isInserted || !contactMO.changedValues().isEmpty {
+            contactMO.notYetViewed = true
             contactMO.changeDate = NSDate()
         }
         
@@ -87,8 +87,8 @@ class CoreDataAdapter {
                         entityMO = Contribution(entity: entityDescription, insertInto: managedContext)
                     }
                     updateManagedObjectFromJSON(for: entityMO, with: description, from: entityDict)
-                    if entityMO.isInserted {
-                        entityMO.notYetViewed = entityMO.isInserted
+                    if entityMO.isInserted || !entityMO.changedValues().isEmpty {
+                        entityMO.notYetViewed = true
                         entityMO.changeDate = NSDate()
                     }
                     entityMO.contact = contactMO
@@ -104,8 +104,8 @@ class CoreDataAdapter {
                         entityMO = Participant(entity: entityDescription, insertInto: managedContext)
                     }
                     updateManagedObjectFromJSON(for: entityMO, with: description, from: entityDict)
-                    if entityMO.isInserted {
-                        entityMO.notYetViewed = entityMO.isInserted
+                    if entityMO.isInserted || !entityMO.changedValues().isEmpty {
+                        entityMO.notYetViewed = true
                         entityMO.changeDate = NSDate()
                     }
                     entityMO.contact = contactMO
@@ -121,8 +121,8 @@ class CoreDataAdapter {
                         entityMO = Pledge(entity: entityDescription, insertInto: managedContext)
                     }
                     updateManagedObjectFromJSON(for: entityMO, with: description, from: entityDict)
-                    if entityMO.isInserted {
-                        entityMO.notYetViewed = entityMO.isInserted
+                    if entityMO.isInserted || !entityMO.changedValues().isEmpty {
+                        entityMO.notYetViewed = true
                         entityMO.changeDate = NSDate()
                     }
                     entityMO.contact = contactMO
@@ -138,8 +138,8 @@ class CoreDataAdapter {
                         entityMO = Membership(entity: entityDescription, insertInto: managedContext)
                     }
                     updateManagedObjectFromJSON(for: entityMO, with: description, from: entityDict)
-                    if entityMO.isInserted {
-                        entityMO.notYetViewed = entityMO.isInserted
+                    if entityMO.isInserted || !entityMO.changedValues().isEmpty {
+                        entityMO.notYetViewed = true
                         entityMO.changeDate = NSDate()
                     }
                     entityMO.contact = contactMO
