@@ -14,8 +14,8 @@ class EntitiesViewController: UIViewController {
     // MARK: - Properties
     var managedContext: NSManagedObjectContext!
     var propertiesViewController: PropertiesViewController?
-//    let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
     var dataTask:  URLSessionTask?
+    var isLoading = false
     var entitiesArray: Array<[NSManagedObject]>?
     var contacts: [Contact]!
     var currentContact: Contact? {
@@ -33,13 +33,13 @@ class EntitiesViewController: UIViewController {
     
     var errorMessage: String? {
         didSet {
+            dataTask?.cancel()
             indicator.stopAnimating()
             tableView.contentInset = UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0)
             let alert = UIAlertController(title: "iCivi", message: self.errorMessage, preferredStyle: .alert)
             let action = UIAlertAction(title: "Close", style: .default, handler: nil)
             alert.addAction(action)
             self.present(alert, animated: true, completion: nil)
-            dataTask?.cancel()
         }
     }
 
@@ -79,7 +79,12 @@ class EntitiesViewController: UIViewController {
                 var entityMO = entitiesArray![indexPath.section][indexPath.row] as! CiviEntityDisplayed
                 let controller = (segue.destination as! UINavigationController).topViewController as! PropertiesViewController
                 controller.entityMO = entityMO
-                entityMO.isNew = false
+                entityMO.alreadyViewed = true
+                do {
+                    try managedContext.save()
+                } catch {
+                    print(error.localizedDescription)
+                }
                 tableView.reloadData()
             }
         }
@@ -87,10 +92,13 @@ class EntitiesViewController: UIViewController {
     
     // MARK: - Functions
     func loadData() {
+        if isLoading { return }
+        guard let request = CiviAPIManager.shared.defaultURLRequest() else { return }
+        
         dataTask?.cancel()
         indicator.startAnimating()
+        tableView.contentInset = UIEdgeInsetsMake(60.0, 0.0, 0.0, 0.0)
         
-        guard let request = CiviAPIManager.shared.defaultURLRequest() else { return }
         let session = URLSession.shared
         dataTask = session.dataTask(with: request) { (data, response, error) -> Void in
             if error != nil {
@@ -115,22 +123,34 @@ class EntitiesViewController: UIViewController {
                             self.errorMessage = apiErrorMessage + UserMessage.referToAdmin.rawValue
                         }
                         return
-                    } else if let count = result.value(forKey: "count") as? Int, count > 1 {
-                        DispatchQueue.main.async {
-                            self.errorMessage = UserMessage.extraPermissions.rawValue + UserMessage.referToAdmin.rawValue
-                        }
-                        return
-                    } else if let id = result.value(forKey: "id") as? NSNumber {
-                        print(result.description)
-                        self.coreDataAdapter.upsert(for: id, message: result)
-                        DispatchQueue.main.async {
-                            self.setCurrentContact()
-                            self.indicator.stopAnimating()
-                            self.tableView.contentInset = UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0)
+                    } else if let count = result.value(forKey: "count") as? Int {
+                        
+                        if count > 1 {
+                            DispatchQueue.main.async {
+                                self.errorMessage = UserMessage.extraPermissions.rawValue + UserMessage.referToAdmin.rawValue
+                            }
+                            return
+                        } else if count == 0 {
+                            DispatchQueue.main.async {
+                                self.errorMessage = UserMessage.emptyData.rawValue + UserMessage.referToAdmin.rawValue
+                            }
+                            return
                         }
                     } else {
                         DispatchQueue.main.async {
                             self.errorMessage = UserMessage.msgNotValid.rawValue + UserMessage.referToAdmin.rawValue
+                        }
+                        return
+                    }
+                    
+                    if let id = result.value(forKey: "id") as? Int {
+                        self.isLoading = true
+                        self.coreDataAdapter.upsert(for: id, message: result)
+                        self.isLoading = false
+                        DispatchQueue.main.async {
+                            self.setCurrentContact()
+                            self.indicator.stopAnimating()
+                            self.tableView.contentInset = UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0)
                         }
                     }
                     
@@ -138,11 +158,13 @@ class EntitiesViewController: UIViewController {
                     DispatchQueue.main.async {
                         self.errorMessage = error.localizedDescription
                     }
+                    return
                 }
                 
             } else {
-                
-                self.errorMessage = response!.description
+                DispatchQueue.main.async {
+                    self.errorMessage = response!.description
+                }
             }
         }
         dataTask?.resume()
@@ -188,10 +210,10 @@ extension EntitiesViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "EntityCell", for: indexPath)
         if let entity = entitiesArray![indexPath.section][indexPath.row] as? CiviEntityDisplayed {
             cell.textLabel?.text = entity.entityLabel
-            if entity.isNew {
-                cell.imageView?.image = UIImage(named: "blue-spot")
-            } else {
+            if entity.alreadyViewed {
                 cell.imageView?.image = UIImage(named: "grey-light-spot")
+            } else {
+                cell.imageView?.image = UIImage(named: "blue-spot")
             }
         }
         return cell
@@ -230,7 +252,7 @@ extension EntitiesViewController: UITableViewDelegate, UITableViewDataSource {
     
     // Start data load task or load sample dat after end dragging down
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        let draggingOffset: CGFloat = -100
+        let draggingOffset: CGFloat = -120
         let demoMode: Bool = UserDefaults.standard.bool(forKey: "demo_mode_preference")
         
         if tableView.contentOffset.y < draggingOffset {
@@ -239,7 +261,6 @@ extension EntitiesViewController: UITableViewDelegate, UITableViewDataSource {
                 setCurrentContact()
                 tableView.reloadData()
             } else {
-                tableView.contentInset = UIEdgeInsetsMake(60.0, 0.0, 0.0, 0.0)
                 loadData()
             }
         }

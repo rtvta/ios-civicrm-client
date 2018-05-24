@@ -30,20 +30,20 @@ class CoreDataAdapter {
     func insertSampleData() {
         let path = Bundle.main.path(forResource: "SampleData", ofType: "plist")
         let sampleData = NSDictionary(contentsOfFile: path!)!
-        let id = sampleData.value(forKey: "id") as! NSNumber
+        let id = sampleData.value(forKey: "id") as! Int
         upsert(for: id, message: sampleData)
     }
     
 
     
     // Upsert context from message
-    func upsert(for contactId: NSNumber, message: NSDictionary) {
+    func upsert(for contactId: Int, message: NSDictionary) {
         let descriptions = CiviAPIManager.shared.civiEntitiesDescription
         let contactDescription = descriptions.first!
         
         var contactMO: Contact
         let fetch: NSFetchRequest<Contact> = Contact.fetchRequest()
-        fetch.predicate = NSPredicate(format: "rowId == %@", contactId)
+        fetch.predicate = NSPredicate(format: "rowId == %@", contactId as NSNumber)
         let result = try! managedContext.fetch(fetch)
         let contactEntity = NSEntityDescription.entity(forEntityName: contactDescription.name, in: managedContext)!
         if result.count > 0 {
@@ -56,6 +56,10 @@ class CoreDataAdapter {
                 let contactDict = contactsDict.object(forKey: "\(contactId)") as? NSDictionary else {return}
         
         updateManagedObjectFromJSON(for: contactMO, with: contactDescription, from: contactDict)
+        if contactMO.isInserted {
+            contactMO.notYetViewed = contactMO.isInserted
+            contactMO.changeDate = NSDate()
+        }
         
         for i in 1..<descriptions.count {
             let description = descriptions[i]
@@ -66,7 +70,7 @@ class CoreDataAdapter {
             let entityDescription = NSEntityDescription.entity(forEntityName: description.name, in: managedContext)!
             
             for entityDict in relations {
-                print(description.name)
+//                print(description.name)
                 guard let id = Int(entityDict.value(forKey: "id") as! String) as NSNumber? else {
                     continue
                 }
@@ -83,7 +87,10 @@ class CoreDataAdapter {
                         entityMO = Contribution(entity: entityDescription, insertInto: managedContext)
                     }
                     updateManagedObjectFromJSON(for: entityMO, with: description, from: entityDict)
-                    entityMO.isNew = entityMO.isNew ? entityMO.isNew : entityMO.isInserted
+                    if entityMO.isInserted {
+                        entityMO.notYetViewed = entityMO.isInserted
+                        entityMO.changeDate = NSDate()
+                    }
                     entityMO.contact = contactMO
                     break
                 case "Participant":
@@ -97,7 +104,10 @@ class CoreDataAdapter {
                         entityMO = Participant(entity: entityDescription, insertInto: managedContext)
                     }
                     updateManagedObjectFromJSON(for: entityMO, with: description, from: entityDict)
-                    entityMO.isNew = entityMO.isNew ? entityMO.isNew : entityMO.isInserted
+                    if entityMO.isInserted {
+                        entityMO.notYetViewed = entityMO.isInserted
+                        entityMO.changeDate = NSDate()
+                    }
                     entityMO.contact = contactMO
                     break
                 case "Pledge":
@@ -111,7 +121,10 @@ class CoreDataAdapter {
                         entityMO = Pledge(entity: entityDescription, insertInto: managedContext)
                     }
                     updateManagedObjectFromJSON(for: entityMO, with: description, from: entityDict)
-                    entityMO.isNew = entityMO.isNew ? entityMO.isNew : entityMO.isInserted
+                    if entityMO.isInserted {
+                        entityMO.notYetViewed = entityMO.isInserted
+                        entityMO.changeDate = NSDate()
+                    }
                     entityMO.contact = contactMO
                     break
                 case "Membership":
@@ -125,7 +138,10 @@ class CoreDataAdapter {
                         entityMO = Membership(entity: entityDescription, insertInto: managedContext)
                     }
                     updateManagedObjectFromJSON(for: entityMO, with: description, from: entityDict)
-                    entityMO.isNew = entityMO.isNew ? entityMO.isNew : entityMO.isInserted
+                    if entityMO.isInserted {
+                        entityMO.notYetViewed = entityMO.isInserted
+                        entityMO.changeDate = NSDate()
+                    }
                     entityMO.contact = contactMO
                     break
                 default:
@@ -143,9 +159,9 @@ class CoreDataAdapter {
     
     // Set values to MO
     fileprivate func updateManagedObjectFromJSON(for mo: NSManagedObject, with descr: CiviEntityDescription, from message: NSDictionary) {
-        for attribute in descr.attributes {
+        for attribute in descr.attributes where !attribute.jsonKey.isEmpty{
             guard let jsonValue = message.value(forKey: attribute.jsonKey) as? String else {continue}
-            print("    \(attribute.key), \(attribute.jsonKey), \(attribute.type) == \(jsonValue)")
+//            print("    \(attribute.key), \(attribute.jsonKey), \(attribute.type) == \(jsonValue)")
             switch attribute.type {
             case 300:
                 guard let value = Int64(jsonValue) else {continue}

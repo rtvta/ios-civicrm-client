@@ -11,6 +11,7 @@
                 <entry key="jsonKey" value="birth_date"/>
             </userInfo>
         </attribute>
+        <attribute name="changeDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="city" optional="YES" attributeType="String" syncable="YES">
             <userInfo>
                 <entry key="jsonKey" value="city"/>
@@ -46,6 +47,7 @@
                 <entry key="jsonKey" value="last_name"/>
             </userInfo>
         </attribute>
+        <attribute name="notYetViewed" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="phone" optional="YES" attributeType="String" syncable="YES">
             <userInfo>
                 <entry key="jsonKey" value="phone"/>
@@ -77,6 +79,7 @@
         </uniquenessConstraints>
     </entity>
     <entity name="Contribution" representedClassName="Contribution" syncable="YES">
+        <attribute name="changeDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="contactId" optional="YES" attributeType="Integer 64" usesScalarValueType="YES" syncable="YES">
             <userInfo>
                 <entry key="jsonKey" value="contact_id"/>
@@ -87,6 +90,7 @@
                 <entry key="jsonKey" value="currency"/>
             </userInfo>
         </attribute>
+        <attribute name="notYetViewed" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="payInstrument" optional="YES" attributeType="String" syncable="YES">
             <userInfo>
                 <entry key="jsonKey" value="payment_instrument"/>
@@ -128,6 +132,7 @@
         </userInfo>
     </entity>
     <entity name="Membership" representedClassName="Membership" syncable="YES">
+        <attribute name="changeDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="contactId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES">
             <userInfo>
                 <entry key="jsonKey" value="contact_id"/>
@@ -148,6 +153,7 @@
                 <entry key="jsonKey" value="membership_name"/>
             </userInfo>
         </attribute>
+        <attribute name="notYetViewed" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="rowId" optional="YES" attributeType="Integer 64" usesScalarValueType="YES" syncable="YES">
             <userInfo>
                 <entry key="jsonKey" value="id"/>
@@ -169,6 +175,7 @@
         </userInfo>
     </entity>
     <entity name="Participant" representedClassName="Participant" syncable="YES">
+        <attribute name="changeDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="contactId" optional="YES" attributeType="Integer 64" usesScalarValueType="YES" syncable="YES">
             <userInfo>
                 <entry key="jsonKey" value="contact_id"/>
@@ -209,6 +216,7 @@
                 <entry key="jsonKey" value="participant_fee_currency"/>
             </userInfo>
         </attribute>
+        <attribute name="notYetViewed" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="registerDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES">
             <userInfo>
                 <entry key="jsonKey" value="participant_register_date"/>
@@ -240,6 +248,7 @@
         </userInfo>
     </entity>
     <entity name="Pledge" representedClassName="Pledge" syncable="YES">
+        <attribute name="changeDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="contactId" optional="YES" attributeType="Integer 64" usesScalarValueType="YES" syncable="YES">
             <userInfo>
                 <entry key="jsonKey" value="contact_id"/>
@@ -275,6 +284,7 @@
                 <entry key="jsonKey" value="pledge_next_pay_date"/>
             </userInfo>
         </attribute>
+        <attribute name="notYetViewed" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="rowId" optional="YES" attributeType="Integer 64" usesScalarValueType="YES" syncable="YES">
             <userInfo>
                 <entry key="jsonKey" value="id"/>
@@ -306,10 +316,10 @@
         </userInfo>
     </entity>
     <elements>
-        <element name="Contact" positionX="-1017" positionY="-1746" width="128" height="300"/>
-        <element name="Contribution" positionX="-648" positionY="-2002" width="128" height="195"/>
-        <element name="Membership" positionX="-828" positionY="-1854" width="128" height="165"/>
-        <element name="Participant" positionX="-648" positionY="-1746" width="128" height="255"/>
-        <element name="Pledge" positionX="-648" positionY="-1396" width="128" height="240"/>
+        <element name="Contact" positionX="-1017" positionY="-1746" width="128" height="330"/>
+        <element name="Contribution" positionX="-648" positionY="-2002" width="128" height="225"/>
+        <element name="Membership" positionX="-828" positionY="-1854" width="128" height="195"/>
+        <element name="Participant" positionX="-648" positionY="-1746" width="128" height="285"/>
+        <element name="Pledge" positionX="-648" positionY="-1396" width="128" height="270"/>
     </elements>
 </model>

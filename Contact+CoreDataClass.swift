@@ -12,7 +12,14 @@ import CoreData
 
 @objc(Contact)
 public class Contact: NSManagedObject, CiviEntityDisplayed {
-    var isNew: Bool = false
+    var alreadyViewed: Bool {
+        set {
+            self.notYetViewed = !newValue
+        }
+        get {
+            return !notYetViewed
+        }
+    }
     
     private lazy var formatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -60,22 +67,28 @@ public class Contact: NSManagedObject, CiviEntityDisplayed {
         person.append(self)
         arr.append(person)
         
+        let chageDateSortDescr = NSSortDescriptor(key: "changeDate", ascending: false)
+        let notYetViewedSortDescr = NSSortDescriptor(key: "notYetViewed", ascending: false)
         let contributionSortDescr = NSSortDescriptor(key: "rowId", ascending: false)
         let participantSortDescr = NSSortDescriptor(key: "eventStartDate", ascending: false)
         let pledgeSortDescr = NSSortDescriptor(key: "startDate", ascending: false)
         let membershipSortDescr = NSSortDescriptor(key: "startDate", ascending: false)
-        
-        if  let contributions = self.contribution?.sortedArray(using: [contributionSortDescr]) as? Array<NSManagedObject>, contributions.count > 0 {
-            arr.append(contributions)
-        }
-        if let participants = self.participant?.sortedArray(using: [participantSortDescr]) as? Array<NSManagedObject>, participants.count > 0 {
+  
+        if let participants = self.participant?.sortedArray(using: [notYetViewedSortDescr, chageDateSortDescr, participantSortDescr]) as? Array<NSManagedObject>,
+            participants.count > 0 {
             arr.append(participants)
         }
-        if let pledges = self.pledge?.sortedArray(using: [pledgeSortDescr]) as? Array<NSManagedObject>, pledges.count > 0 {
+        if let pledges = self.pledge?.sortedArray(using: [notYetViewedSortDescr, chageDateSortDescr, pledgeSortDescr]) as? Array<NSManagedObject>,
+            pledges.count > 0 {
             arr.append(pledges)
         }
-        if let memberships = self.membership?.sortedArray(using: [membershipSortDescr]) as? Array<NSManagedObject>, memberships.count > 0 {
+        if let memberships = self.membership?.sortedArray(using: [chageDateSortDescr, membershipSortDescr]) as? Array<NSManagedObject>,
+            memberships.count > 0 {
             arr.append(memberships)
+        }
+        if  let contributions = self.contribution?.sortedArray(using: [notYetViewedSortDescr, chageDateSortDescr, contributionSortDescr]) as? Array<NSManagedObject>,
+            contributions.count > 0 {
+            arr.append(contributions)
         }
         return arr
     }

@@ -10,7 +10,7 @@ import Foundation
 
 protocol CiviEntityDisplayed {
     func propertiesForDisplay() -> [(String,String)]
-    var isNew: Bool { get set }
+    var alreadyViewed: Bool { get set }
     var entityLabel: String { get }
     var entityTitle: String { get }
 }

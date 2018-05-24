@@ -12,7 +12,14 @@ import CoreData
 
 @objc(Contribution)
 public class Contribution: NSManagedObject, CiviEntityDisplayed {
-    var isNew: Bool = false
+    var alreadyViewed: Bool {
+        set {
+            self.notYetViewed = !newValue
+        }
+        get {
+            return !notYetViewed
+        }
+    }
     
     private lazy var formatter: DateFormatter = {
         let formatter = DateFormatter()

@@ -2,7 +2,7 @@
 //  Contact+CoreDataProperties.swift
 //  CiviCRMClient
 //
-//  Created by Roman Tiagni on 21/05/2018.
+//  Created by Roman Tiagni on 24/05/2018.
 //  Copyright © 2018 Roman Tiagni. All rights reserved.
 //
 //
@@ -30,10 +30,12 @@ extension Contact {
     @NSManaged public var phoneId: Int64
     @NSManaged public var rowId: Int64
     @NSManaged public var streetAddress: String?
+    @NSManaged public var notYetViewed: Bool
+    @NSManaged public var changeDate: NSDate?
     @NSManaged public var contribution: NSSet?
+    @NSManaged public var membership: NSSet?
     @NSManaged public var participant: NSSet?
     @NSManaged public var pledge: NSSet?
-    @NSManaged public var membership: NSSet?
 
 }
 
@@ -51,6 +53,23 @@ extension Contact {
 
     @objc(removeContribution:)
     @NSManaged public func removeFromContribution(_ values: NSSet)
+
+}
+
+// MARK: Generated accessors for membership
+extension Contact {
+
+    @objc(addMembershipObject:)
+    @NSManaged public func addToMembership(_ value: Membership)
+
+    @objc(removeMembershipObject:)
+    @NSManaged public func removeFromMembership(_ value: Membership)
+
+    @objc(addMembership:)
+    @NSManaged public func addToMembership(_ values: NSSet)
+
+    @objc(removeMembership:)
+    @NSManaged public func removeFromMembership(_ values: NSSet)
 
 }
 
@@ -85,22 +104,5 @@ extension Contact {
 
     @objc(removePledge:)
     @NSManaged public func removeFromPledge(_ values: NSSet)
-
-}
-
-// MARK: Generated accessors for membership
-extension Contact {
-
-    @objc(addMembershipObject:)
-    @NSManaged public func addToMembership(_ value: Membership)
-
-    @objc(removeMembershipObject:)
-    @NSManaged public func removeFromMembership(_ value: Membership)
-
-    @objc(addMembership:)
-    @NSManaged public func addToMembership(_ values: NSSet)
-
-    @objc(removeMembership:)
-    @NSManaged public func removeFromMembership(_ values: NSSet)
 
 }

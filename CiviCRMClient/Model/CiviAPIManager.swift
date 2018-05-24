@@ -16,6 +16,7 @@ enum UserMessage: String {
     case referToAdmin = " Please refer to CiviCRM administator."
     case msgNotValid = "Message not valid."
     case extraPermissions = "You have permissions to view other contacts."
+    case emptyData = "No data retreived."
     case internalError = "Internal error occures. Please retry later."
     case dbError = "Data base error occures. Please retry later."
 }
@@ -37,7 +38,7 @@ final class CiviAPIManager {
     // MARK: - Properties
     private let userDefaults = UserDefaults.standard
     lazy var coreDataStack = CoreDataStack(modelName: "CiviCRM Data")
-    lazy var entitiesArray: [String] = ["Contact","Contribution","Participant","Pledge","Membership"]
+    lazy var entitiesArray: [String] = ["Contact", "Participant", "Contribution", "Pledge", "Membership"]
     
     final lazy var civiEntitiesDescription: Array<CiviEntityDescription> = {
         var descriptions: Array<CiviEntityDescription> = [CiviEntityDescription]()
@@ -97,6 +98,9 @@ final class CiviAPIManager {
         jsonString += "json={"
         jsonString += "\(returnKey)\"\(contactAttributesString)\","
         for i in 1..<civiEntitiesDescription.count {
+            if !userDefaults.bool(forKey: "\(civiEntitiesDescription[i].name.lowercased())_enabled") {
+                continue
+            }
             let attributesString = requestedAttributes(attributes: civiEntitiesDescription[i].attributes)
             jsonString += "\"\(civiEntitiesDescription[i].jsonKey)\":{"
             jsonString += "\(returnKey)\"\(attributesString)\","
@@ -123,7 +127,7 @@ final class CiviAPIManager {
     
     fileprivate func requestedAttributes(attributes: Array<CiviAttributeDescription>) -> String {
         var attributesString = ""
-        for a in attributes where a.jsonKey != "id" {
+        for a in attributes where a.jsonKey != "id" && !a.jsonKey.isEmpty {
             attributesString += "\(a.jsonKey),"
         }
         attributesString.removeLast(1)
