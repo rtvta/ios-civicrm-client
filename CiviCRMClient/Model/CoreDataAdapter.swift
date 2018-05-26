@@ -70,7 +70,7 @@ class CoreDataAdapter {
             let entityDescription = NSEntityDescription.entity(forEntityName: description.name, in: managedContext)!
             
             for entityDict in relations {
-//                print(description.name)
+                print(description.name)
                 guard let id = Int(entityDict.value(forKey: "id") as! String) as NSNumber? else {
                     continue
                 }
@@ -161,7 +161,7 @@ class CoreDataAdapter {
     fileprivate func updateManagedObjectFromJSON(for mo: NSManagedObject, with descr: CiviEntityDescription, from message: NSDictionary) {
         for attribute in descr.attributes where !attribute.jsonKey.isEmpty{
             guard let jsonValue = message.value(forKey: attribute.jsonKey) as? String else {continue}
-//            print("    \(attribute.key), \(attribute.jsonKey), \(attribute.type) == \(jsonValue)")
+            print("    \(attribute.key), \(attribute.jsonKey), \(attribute.type) == \(jsonValue)")
             switch attribute.type {
             case 300:
                 guard let value = Int64(jsonValue) else {continue}

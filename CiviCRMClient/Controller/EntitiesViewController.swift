@@ -211,7 +211,7 @@ extension EntitiesViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "EntityCell", for: indexPath)
         if let entity = entitiesArray![indexPath.section][indexPath.row] as? CiviEntityDisplayed {
             cell.textLabel?.text = entity.entityLabel
-            cell.imageView?.image = UIImage(named: "blue-spot")
+            cell.imageView?.image = UIImage(named: "blue-spot-1")
             cell.imageView?.alpha = entity.alreadyViewed ? CGFloat(0) : CGFloat(1)
         }
         return cell
