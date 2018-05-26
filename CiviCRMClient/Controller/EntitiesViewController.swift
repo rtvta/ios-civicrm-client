@@ -36,7 +36,8 @@ class EntitiesViewController: UIViewController {
             dataTask?.cancel()
             indicator.stopAnimating()
             tableView.contentInset = UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0)
-            let alert = UIAlertController(title: "iCivi", message: self.errorMessage, preferredStyle: .alert)
+            if self.errorMessage == "cancelled" {return}
+            let alert = UIAlertController(title: "iCivi says", message: self.errorMessage, preferredStyle: .alert)
             let action = UIAlertAction(title: "Close", style: .default, handler: nil)
             alert.addAction(action)
             self.present(alert, animated: true, completion: nil)
@@ -102,9 +103,8 @@ class EntitiesViewController: UIViewController {
         let session = URLSession.shared
         dataTask = session.dataTask(with: request) { (data, response, error) -> Void in
             if error != nil {
-                if error?.localizedDescription == "cancelled" { return }
                 DispatchQueue.main.async {
-                    self.errorMessage = error?.localizedDescription
+                    self.errorMessage = error?.localizedDescription 
                 }
                 return
             } else if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 {
@@ -165,6 +165,7 @@ class EntitiesViewController: UIViewController {
                 DispatchQueue.main.async {
                     self.errorMessage = response!.description
                 }
+                return
             }
         }
         dataTask?.resume()
@@ -246,7 +247,7 @@ extension EntitiesViewController: UITableViewDelegate, UITableViewDataSource {
         }
         return false
     }
-    
+
     // Start data load task or load sample dat after end dragging down
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         let draggingOffset: CGFloat = -120

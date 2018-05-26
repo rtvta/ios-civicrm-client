@@ -96,7 +96,7 @@
                 <entry key="jsonKey" value="payment_instrument"/>
             </userInfo>
         </attribute>
-        <attribute name="payInstrumentId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES">
+        <attribute name="payInstrumentId" optional="YES" attributeType="Integer 64" usesScalarValueType="NO" syncable="YES">
             <userInfo>
                 <entry key="jsonKey" value="payment_instrument_id"/>
             </userInfo>
