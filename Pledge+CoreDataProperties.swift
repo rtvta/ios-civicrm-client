@@ -2,7 +2,7 @@
 //  Pledge+CoreDataProperties.swift
 //  CiviCRMClient
 //
-//  Created by Roman Tiagni on 24/05/2018.
+//  Created by Roman Tiagni on 29/05/2018.
 //  Copyright © 2018 Roman Tiagni. All rights reserved.
 //
 //
@@ -17,6 +17,7 @@ extension Pledge {
         return NSFetchRequest<Pledge>(entityName: "Pledge")
     }
 
+    @NSManaged public var changeDate: NSDate?
     @NSManaged public var contactId: Int64
     @NSManaged public var currency: String?
     @NSManaged public var financialType: String?
@@ -24,13 +25,12 @@ extension Pledge {
     @NSManaged public var frequencyUnit: String?
     @NSManaged public var nextPayAmount: Double
     @NSManaged public var nextPayDate: NSDate?
+    @NSManaged public var notYetViewed: Bool
     @NSManaged public var rowId: Int64
     @NSManaged public var startDate: NSDate?
     @NSManaged public var status: String?
     @NSManaged public var totalAmount: Double
     @NSManaged public var totalPaid: Double
-    @NSManaged public var notYetViewed: Bool
-    @NSManaged public var changeDate: NSDate?
     @NSManaged public var contact: Contact?
 
 }

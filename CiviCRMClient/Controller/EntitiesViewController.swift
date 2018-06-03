@@ -17,7 +17,6 @@ class EntitiesViewController: UIViewController {
     var dataTask:  URLSessionTask?
     var isLoading = false
     var entitiesArray: Array<[NSManagedObject]>?
-    var contacts: [Contact]!
     var currentContact: Contact? {
         didSet {
             self.entitiesArray = currentContact?.sortedRelationsArray()
@@ -93,12 +92,11 @@ class EntitiesViewController: UIViewController {
     
     // MARK: - Functions
     func loadData() {
-        if isLoading { return }
-        guard let request = CiviAPIManager.shared.defaultURLRequest() else { return }
-        
+        guard let request = CiviAPIManager.shared.defaultURLRequest() else {
+            self.errorMessage = UserMessage.credentailsMissing.rawValue
+            return
+        }
         dataTask?.cancel()
-        indicator.startAnimating()
-        tableView.contentInset = UIEdgeInsetsMake(60.0, 0.0, 0.0, 0.0)
         
         let session = URLSession.shared
         dataTask = session.dataTask(with: request) { (data, response, error) -> Void in
@@ -145,12 +143,12 @@ class EntitiesViewController: UIViewController {
                     
                     if let id = result.value(forKey: "id") as? Int {
                         self.isLoading = true
-                        self.coreDataAdapter.upsert(for: id, message: result)
-                        self.isLoading = false
+                        self.coreDataAdapter.updateContext(for: id, message: result)
                         DispatchQueue.main.async {
                             self.setCurrentContact()
                             self.indicator.stopAnimating()
                             self.tableView.contentInset = UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0)
+                            self.isLoading = false
                         }
                     }
                     
@@ -173,17 +171,26 @@ class EntitiesViewController: UIViewController {
 
     fileprivate func setCurrentContact() {
         let demoMode: Bool = UserDefaults.standard.bool(forKey: "demo_mode_preference")
-        
         let fetch: NSFetchRequest<Contact> = Contact.fetchRequest()
-        contacts = try! managedContext.fetch(fetch)
+        if demoMode {
+            fetch.predicate = NSPredicate(format: "rowId == %@", 1 as NSNumber)
+        }
+        
+        let contacts = try! managedContext.fetch(fetch)
         if contacts.count > 0 {
-            for c in contacts {
-                if  (c.rowId > 1 && !demoMode) || (c.rowId == 1 && demoMode) {
-                    currentContact = c
-                    break
-                } else {
-                    currentContact = contacts.first
-                }
+            currentContact = contacts.last
+        } else {
+            errorMessage = UserMessage.internalError.rawValue
+        }
+        
+        // In case the user changed API Key and/or contact with other id has been insered,
+        // the previos contact must be deleted from database
+        if contacts.count > 2 {
+            managedContext.delete(contacts[1])
+            do {
+                try managedContext.save()
+            } catch {
+                print(error.localizedDescription)
             }
         }
     }
@@ -255,10 +262,18 @@ extension EntitiesViewController: UITableViewDelegate, UITableViewDataSource {
         
         if tableView.contentOffset.y < draggingOffset {
             if demoMode {
-                coreDataAdapter.insertSampleData()
-                setCurrentContact()
-                tableView.reloadData()
-            } else {
+                tableView.contentInset = UIEdgeInsetsMake(60.0, 0.0, 0.0, 0.0)
+                indicator.startAnimating()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    self.coreDataAdapter.insertSampleData()
+                    self.setCurrentContact()
+                    self.indicator.stopAnimating()
+                    self.tableView.contentInset = UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0)
+                }
+                
+            } else if !isLoading {
+                tableView.contentInset = UIEdgeInsetsMake(60.0, 0.0, 0.0, 0.0)
+                indicator.startAnimating()
                 loadData()
             }
         }

@@ -12,6 +12,7 @@ import CoreData
 
 @objc(Participant)
 public class Participant: NSManagedObject, CiviEntityDisplayed {
+    // MARK: - Properties
     var alreadyViewed: Bool {
         set {
             self.notYetViewed = !newValue
@@ -28,32 +29,35 @@ public class Participant: NSManagedObject, CiviEntityDisplayed {
     }()
     
     var entityTitle: String {
-        return "Events"
+        return "Your Event(s)"
     }
     
     var entityLabel: String {
-        let eventTitle = self.eventTitle ?? ""
-        let eventType = self.eventType ?? ""
-        return "\(eventTitle) - \(eventType)"
+        let eventTitle = self.eventTitle ?? "(No Event Title)"
+        return "\(eventTitle)"
     }
     
-    func propertiesForDisplay() -> [(String, String)] {
+    // MARK: - Functions
+    func propertiesToDisplayList() -> Array<(String, String)> {
         formatter.dateFormat = "MMM dd yyyy"
         let registerDate: String = (self.registerDate as Date?) != nil ? formatter.string(from: (self.registerDate! as Date)) : ""
         formatter.dateFormat = "MMM dd yyyy hh:mm"
         let eventStartDate: String = (self.eventStartDate as Date?) != nil ? formatter.string(from: (self.eventStartDate! as Date)) : ""
         let eventEndDate: String = (self.eventEndDate as Date?) != nil ? formatter.string(from: (self.eventEndDate! as Date)) : ""
+        let amount = self.feeAmount
         
-        return [
-            ("Event Name: ", "\(self.eventTitle ?? "(No Name)")"),
-            ("Event Type: ", "\(self.eventType ?? "(No Type)")"),
-            ("From Date: ", eventStartDate),
-            ("To Date: ", eventEndDate),
-            ("Fee Amount: ", "\(self.feeAmount) \(self.feeCurrency ?? "")"),
-            ("Paid by: ", self.source ?? "(No Source)"),
-            ("Your Role: ", self.role ?? "(No Role)"),
-            ("Participant Status: ", self.status ?? "(No Status)"),
-            ("Register Date: ", registerDate),
-        ]
+        var displayList = Array<(String,String)>()
+        
+        displayList.append(("Event:", "\(self.eventTitle ?? "(No Name)")"))
+        displayList.append(("Event Type:", "\(self.eventType ?? "(No Type)")"))
+        displayList.append(("From Date:", eventStartDate))
+        displayList.append(("To Date: ", eventEndDate))
+        displayList.append(("Register Date:", registerDate))
+        displayList.append(("Fee Amount:", "\(amount) \(self.feeCurrency ?? "")"))
+        displayList.append(("Source:", self.source ?? "(No Source)"))
+        displayList.append(("Role:", self.role ?? "(No Role)"))
+        displayList.append(("Status:", self.status ?? "(No Status)"))
+        
+        return displayList
     }    
 }

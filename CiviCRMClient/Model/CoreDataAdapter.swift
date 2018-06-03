@@ -11,7 +11,7 @@ import CoreData
 
 class CoreDataAdapter {
     
-    // MARK: - Class Properties    
+    // MARK: - Properties
     private lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
@@ -31,13 +31,11 @@ class CoreDataAdapter {
         let path = Bundle.main.path(forResource: "SampleData", ofType: "plist")
         let sampleData = NSDictionary(contentsOfFile: path!)!
         let id = sampleData.value(forKey: "id") as! Int
-        upsert(for: id, message: sampleData)
+        updateContext(for: id, message: sampleData)
     }
     
-
-    
     // Upsert context from message
-    func upsert(for contactId: Int, message: NSDictionary) {
+    func updateContext(for contactId: Int, message: NSDictionary) {
         let descriptions = CiviAPIManager.shared.civiEntitiesDescription
         let contactDescription = descriptions.first!
         
@@ -53,7 +51,7 @@ class CoreDataAdapter {
         }
 
         guard let contactsDict = message[CiviAPIManager.valuesKey] as? NSDictionary,
-                let contactDict = contactsDict.object(forKey: "\(contactId)") as? NSDictionary else {return}
+                let contactDict = contactsDict.object(forKey: "\(contactId)") as? NSDictionary else { return }
         
         updateManagedObjectFromJSON(for: contactMO, with: contactDescription, from: contactDict)
         if contactMO.isInserted || !contactMO.changedValues().isEmpty {
@@ -64,13 +62,11 @@ class CoreDataAdapter {
         for i in 1..<descriptions.count {
             let description = descriptions[i]
             guard let relationsDict = contactDict.value(forKey: description.jsonKey) as? NSDictionary,
-                let relations = relationsDict[CiviAPIManager.valuesKey] as? [NSDictionary] else {continue}
-
+                let relations = relationsDict[CiviAPIManager.valuesKey] as? [NSDictionary] else { continue }
 
             let entityDescription = NSEntityDescription.entity(forEntityName: description.name, in: managedContext)!
             
             for entityDict in relations {
-                print(description.name)
                 guard let id = Int(entityDict.value(forKey: "id") as! String) as NSNumber? else {
                     continue
                 }
@@ -157,18 +153,18 @@ class CoreDataAdapter {
         }
     }
     
-    // Set values to MO
+    // Set values to managed object
     fileprivate func updateManagedObjectFromJSON(for mo: NSManagedObject, with descr: CiviEntityDescription, from message: NSDictionary) {
         for attribute in descr.attributes where !attribute.jsonKey.isEmpty{
-            guard let jsonValue = message.value(forKey: attribute.jsonKey) as? String else {continue}
-            print("    \(attribute.key), \(attribute.jsonKey), \(attribute.type) == \(jsonValue)")
+            guard let jsonValue = message.value(forKey: attribute.jsonKey) as? String else { continue }
+            
             switch attribute.type {
             case 300:
-                guard let value = Int64(jsonValue) else {continue}
+                guard let value = Int64(jsonValue) else { continue }
                 mo.setValue(value, forKey: attribute.key)
                 break
             case 500:
-                guard let value = Double(jsonValue) else {continue}
+                guard let value = Double(jsonValue) else { continue }
                 mo.setValue(value, forKey: attribute.key)
                 break
             case 700:
@@ -180,7 +176,7 @@ class CoreDataAdapter {
                     mo.setValue(value as NSDate, forKey: attribute.key)
                 } else {
                     dateFormatter.dateFormat = "yyyy-MM-dd"
-                    guard let value = dateFormatter.date(from: jsonValue) as NSDate? else {continue}
+                    guard let value = dateFormatter.date(from: jsonValue) as NSDate? else { continue }
                     mo.setValue(value as NSDate, forKey: attribute.key)
                 }
                 break

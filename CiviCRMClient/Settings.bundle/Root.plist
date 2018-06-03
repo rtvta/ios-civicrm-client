@@ -36,7 +36,7 @@
 			<key>Key</key>
 			<string>civicrm_base_url</string>
 			<key>DefaultValue</key>
-			<string>https://&lt;example.com&gt;/</string>
+			<string>https://org.crm.com</string>
 			<key>AutocapitalizationType</key>
 			<string>None</string>
 			<key>AutocorrectionType</key>
@@ -54,7 +54,7 @@
 			<key>AutocorrectionType</key>
 			<string>No</string>
 			<key>DefaultValue</key>
-			<string>sites/all/modules/civicrm/extern/rest.php</string>
+			<string>/sites/all/modules/civicrm/extern/rest.php</string>
 		</dict>
 		<dict>
 			<key>Type</key>
@@ -88,35 +88,27 @@
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 			<key>Title</key>
-			<string>Parameters</string>
-		</dict>
-		<dict>
-			<key>Type</key>
-			<string>PSMultiValueSpecifier</string>
-			<key>Title</key>
-			<string>Limit rows to</string>
-			<key>Key</key>
-			<string>limit_rows_preference</string>
-			<key>DefaultValue</key>
-			<integer>10</integer>
-			<key>Titles</key>
-			<array>
-				<string>5</string>
-				<string>10</string>
-				<string>50</string>
-			</array>
-			<key>Values</key>
-			<array>
-				<integer>5</integer>
-				<integer>10</integer>
-				<integer>50</integer>
-			</array>
-		</dict>
-		<dict>
-			<key>Type</key>
-			<string>PSGroupSpecifier</string>
-			<key>Title</key>
 			<string>Enabled Entities</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+			<key>Title</key>
+			<string>Contribution</string>
+			<key>Key</key>
+			<string>contribution_enabled</string>
+			<key>DefaultValue</key>
+			<false/>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+			<key>Title</key>
+			<string>Pledge</string>
+			<key>Key</key>
+			<string>pledge_enabled</string>
+			<key>DefaultValue</key>
+			<false/>
 		</dict>
 		<dict>
 			<key>Type</key>
@@ -140,23 +132,27 @@
 		</dict>
 		<dict>
 			<key>Type</key>
-			<string>PSToggleSwitchSpecifier</string>
+			<string>PSMultiValueSpecifier</string>
 			<key>Title</key>
-			<string>Pledge</string>
+			<string>Limit Rows</string>
 			<key>Key</key>
-			<string>pledge_enabled</string>
+			<string>limit_rows_preference</string>
 			<key>DefaultValue</key>
-			<false/>
-		</dict>
-		<dict>
-			<key>Type</key>
-			<string>PSToggleSwitchSpecifier</string>
-			<key>Title</key>
-			<string>Contribution</string>
-			<key>Key</key>
-			<string>contribution_enabled</string>
-			<key>DefaultValue</key>
-			<false/>
+			<integer>1</integer>
+			<key>Titles</key>
+			<array>
+				<string>Only last</string>
+				<string>5 lastest</string>
+				<string>10 lastest</string>
+				<string>50 lastest</string>
+			</array>
+			<key>Values</key>
+			<array>
+				<integer>1</integer>
+				<string>5</string>
+				<integer>10</integer>
+				<integer>50</integer>
+			</array>
 		</dict>
 	</array>
 </dict>

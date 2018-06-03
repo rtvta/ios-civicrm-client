@@ -35,7 +35,7 @@ class PropertiesViewController: UIViewController {
     }
     
     func configureView() {
-        propertiesDict = entityMO?.propertiesForDisplay()
+        propertiesDict = entityMO?.propertiesToDisplayList()
         self.title = entityMO?.entityLabel
     }
 
@@ -55,6 +55,7 @@ extension PropertiesViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PropertiesCell", for: indexPath)
         cell.textLabel?.text = propertiesDict?[indexPath.row].0
         cell.detailTextLabel?.text = propertiesDict?[indexPath.row].1
+        cell.selectionStyle = .none
         return cell
     }
     

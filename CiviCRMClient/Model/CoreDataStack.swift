@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 
 class CoreDataStack {
-    
+    // MARK: - Properties
     private let modelName: String
     
     init(modelName: String) {
@@ -33,6 +33,7 @@ class CoreDataStack {
         return container
     }()
  
+    // MARK: Functions
     func saveContext() {
         guard managedContext.hasChanges else { return }
         

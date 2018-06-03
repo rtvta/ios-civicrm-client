@@ -12,6 +12,7 @@ import CoreData
 
 @objc(Pledge)
 public class Pledge: NSManagedObject, CiviEntityDisplayed {
+    // MARK: - Properties
     var alreadyViewed: Bool {
         set {
             self.notYetViewed = !newValue
@@ -28,29 +29,33 @@ public class Pledge: NSManagedObject, CiviEntityDisplayed {
     }()
     
     var entityTitle: String {
-        return "Pledges"
+        return "Your Pledge(s)"
     }
     
     var entityLabel: String {
         let frequencyUnit = self.frequencyUnit ?? ""
         let financialType = self.financialType ?? ""
         let frequencyInterval = self.frequencyInterval
-        return "\(financialType): every \(frequencyInterval) \(frequencyUnit)"
+        return "\(financialType): Every \(frequencyInterval) \(frequencyUnit)"
     }
     
-    func propertiesForDisplay() -> [(String, String)] {
+    // MARK: - Functions
+    func propertiesToDisplayList() -> Array<(String, String)> {
         let startDate: String = (self.startDate as Date?) != nil ? formatter.string(from: (self.startDate! as Date)) : ""
         let nextPayDate: String = (self.nextPayDate as Date?) != nil ? formatter.string(from: (self.nextPayDate! as Date)) : ""
         
-        return [
-            ("Payment for: ", "\(self.financialType ?? "(No Data)")"),
-            ("Total Amount: ","\(self.totalAmount) \(self.currency ?? "")"),
-            ("Start Date: ", startDate),
-            ("Status: ", "\(self.status ?? "(No Status)")"),
-            ("Frequency: ", "per \(self.frequencyInterval) \(self.frequencyUnit ?? "(No Frequency)")"),
-            ("Total Paid: ", "\(self.totalPaid) \(self.currency ?? "")"),
-            ("Next Amount: ", "\(self.nextPayAmount) \(self.currency ?? "")"),
-            ("Next Date: ", nextPayDate),
-        ]
+        var displayList = Array<(String,String)>()
+        
+        displayList.append(("Pledged:","\(self.totalAmount) \(self.currency ?? "")"))
+        displayList.append(("Total Paid:", "\(self.totalPaid) \(self.currency ?? "")"))
+        displayList.append(("Balance:", "\(self.totalAmount - self.totalPaid) \(self.currency ?? "")"))
+        displayList.append(("Pledge for:", "\(self.financialType ?? "(No Data)")"))
+        displayList.append(("Pledge Made:", startDate))
+        displayList.append(("Frequency:", "every \(self.frequencyInterval) \(self.frequencyUnit ?? "(No Frequency)")"))
+        displayList.append(("Next Pay Date:", nextPayDate))
+        displayList.append(("Next Amount:", "\(self.nextPayAmount) \(self.currency ?? "")"))
+        displayList.append(("Status:", "\(self.status ?? "(No Status)")"))
+        
+        return displayList
     }
 }

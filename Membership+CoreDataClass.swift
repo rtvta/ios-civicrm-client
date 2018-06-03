@@ -12,6 +12,7 @@ import CoreData
 
 @objc(Membership)
 public class Membership: NSManagedObject, CiviEntityDisplayed {
+    // MARK: - Properties
     var alreadyViewed: Bool {
         set {
             self.notYetViewed = !newValue
@@ -26,26 +27,30 @@ public class Membership: NSManagedObject, CiviEntityDisplayed {
         formatter.dateFormat = "MMM dd yyyy"
         return formatter
     }()
-    
-    func propertiesForDisplay() -> [(String, String)] {
-        let startDate: String = (self.startDate as Date?) != nil ? formatter.string(from: (self.startDate! as Date)) : ""
-        let endDate: String = (self.endDate as Date?) != nil ? formatter.string(from: (self.endDate! as Date)) : ""
-        let joinDate: String = (self.joinDate as Date?) != nil ? formatter.string(from: (self.joinDate! as Date)) : ""
-        
-        return [
-            ("Membership Name: ", "\(self.name ?? "(No Type)")"),
-            ("From Date: ", startDate),
-            ("To Date: ", endDate),
-            ("Member Since: ", joinDate),
-            ("Membership Status: ", "\(self.status ?? "(No Status)")"),
-        ]
-    }
-    
+
     var entityLabel: String {
         let name = self.name ?? "(No Name)"
         return "\(name)"
     }
+    
     var entityTitle: String {
-        return "Memberships"
+        return "Your Membership(s)"
+    }
+    
+    // MARK: - Functions
+    func propertiesToDisplayList() -> Array<(String, String)> {
+        let startDate: String = (self.startDate as Date?) != nil ? formatter.string(from: (self.startDate! as Date)) : ""
+        let endDate: String = (self.endDate as Date?) != nil ? formatter.string(from: (self.endDate! as Date)) : ""
+        let joinDate: String = (self.joinDate as Date?) != nil ? formatter.string(from: (self.joinDate! as Date)) : ""
+        
+        var displayList = Array<(String,String)>()
+        
+        displayList.append(("Membership:", "\(self.name ?? "(No Type)")"))
+        displayList.append(("Member Since:", joinDate))
+        displayList.append(("Start Date:", startDate))
+        displayList.append(("End Date:", endDate))
+        displayList.append(("Membership Status:", "\(self.status ?? "(No Status)")"))
+        
+        return displayList
     }
 }

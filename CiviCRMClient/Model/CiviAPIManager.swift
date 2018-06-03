@@ -9,18 +9,22 @@
 import Foundation
 import CoreData
 
+// MARK: - Type asiases
 typealias CiviAttributeDescription = (key: String, jsonKey: String, type: Int)
 typealias CiviEntityDescription = (name: String, jsonKey: String, attributes: [CiviAttributeDescription])
 
+// MARK: - User masseges
 enum UserMessage: String {
     case referToAdmin = " Please refer to CiviCRM administator."
     case msgNotValid = "Message not valid."
     case extraPermissions = "You have permissions to view other contacts."
     case emptyData = "No data retreived."
-    case internalError = "Internal error occures. Please retry later."
+    case internalError = "Internal error occures."
     case dbError = "Data base error occures. Please retry later."
+    case credentailsMissing = "Please enter credentails or activate demo mode and try again."
 }
 
+// MARK: - CiviCRM API 'action' parameters
 enum Action: String {
     case get
     case create
@@ -38,7 +42,7 @@ final class CiviAPIManager {
     // MARK: - Properties
     private let userDefaults = UserDefaults.standard
     lazy var coreDataStack = CoreDataStack(modelName: "CiviCRM Data")
-    lazy var entitiesArray: [String] = ["Contact", "Participant", "Contribution", "Pledge", "Membership"]
+    lazy var entitiesArray: [String] = ["Contact", "Contribution", "Pledge", "Participant", "Membership"]
     
     final lazy var civiEntitiesDescription: Array<CiviEntityDescription> = {
         var descriptions: Array<CiviEntityDescription> = [CiviEntityDescription]()
@@ -56,10 +60,10 @@ final class CiviAPIManager {
     // MARK: - Functions
     func defaultURLRequest() -> URLRequest? {
         // Check application preference
-        guard let baseURL = userDefaults.string(forKey: "civicrm_base_url"),
-            let apiPath = userDefaults.string(forKey: "civicrm_api_path"),
-            let apiKey = userDefaults.string(forKey: "civicrm_user_api_key"),
-            let siteKey = userDefaults.string(forKey: "civicrm_site_key") else { return nil }
+        guard let baseURL = userDefaults.string(forKey: "civicrm_base_url"), !baseURL.isEmpty,
+            let apiPath = userDefaults.string(forKey: "civicrm_api_path"), !apiPath.isEmpty,
+            let apiKey = userDefaults.string(forKey: "civicrm_user_api_key"), !apiKey.isEmpty,
+            let siteKey = userDefaults.string(forKey: "civicrm_site_key"), !siteKey.isEmpty else { return nil }
         
         // Create URL object
         guard let url = URL(string: baseURL + apiPath) else { return nil }
@@ -79,40 +83,42 @@ final class CiviAPIManager {
         }
         paramsString += defaultJSONString(limit: limit)
         
-        // print for test only
-        print("RestAPIManager.urlString: " + url.absoluteString)
-        print("RestAPIManager.paramString: " + paramsString)
-        
-        guard let body = paramsString.data(using: .utf8) else { return request}
+        guard let body = paramsString.data(using: .utf8) else { return request }
         request.httpBody = body
         return request
     }
     
     // MARK: - Private functions
+    // Generates JSON strign for default request
     fileprivate func defaultJSONString(limit: Int) -> String {
         var jsonString = ""
         let options = "\"options\":{\"limit\":\(limit),\"sort\":\"id DESC\"}"
         let returnKey = "\"return\":"
-        let contactAttributesString = requestedAttributes(attributes: civiEntitiesDescription[0].attributes)
         
         jsonString += "json={"
-        jsonString += "\(returnKey)\"\(contactAttributesString)\","
         for i in 1..<civiEntitiesDescription.count {
-            if !userDefaults.bool(forKey: "\(civiEntitiesDescription[i].name.lowercased())_enabled") {
+            let entityName = civiEntitiesDescription[i].name
+            if !userDefaults.bool(forKey: "\(entityName.lowercased())_enabled") {
                 continue
             }
-            let attributesString = requestedAttributes(attributes: civiEntitiesDescription[i].attributes)
+            
             jsonString += "\"\(civiEntitiesDescription[i].jsonKey)\":{"
+            let attributesString = requestedAttributes(attributes: civiEntitiesDescription[i].attributes)
             jsonString += "\(returnKey)\"\(attributesString)\","
             jsonString += "\(options)"
             jsonString += "},"
         }
         jsonString.removeLast(1)
         jsonString += "}"
-
+        
         return jsonString
     }
     
+    /*
+     * Generates array of name, jsonKey and data type of attribute for entity, defined in Core Data.
+     * 'jsonKey' is key of userInfo parameter of attribute, defined for mapping JSON message to manged object.
+     * Returned array used in CoreDataAdapter.swift for update managed object with data from JSON message
+    */
     fileprivate func civiEntityAttributesDecription(entity: NSEntityDescription) -> Array<CiviAttributeDescription> {
         var attributes = [CiviAttributeDescription]()
         for (key, val) in entity.attributesByName {
@@ -125,6 +131,9 @@ final class CiviAPIManager {
         return attributes
     }
     
+    /* Used for restrict properties of relation entities in response message.
+     * 'return' parameter in CiviCRM API request
+    */
     fileprivate func requestedAttributes(attributes: Array<CiviAttributeDescription>) -> String {
         var attributesString = ""
         for a in attributes where a.jsonKey != "id" && !a.jsonKey.isEmpty {

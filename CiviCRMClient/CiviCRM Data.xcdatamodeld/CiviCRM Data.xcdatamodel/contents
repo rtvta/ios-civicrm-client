@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14133" systemVersion="17E202" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14135" systemVersion="17E202" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Contact" representedClassName="Contact" syncable="YES">
         <attribute name="addressId" optional="YES" attributeType="Integer 64" usesScalarValueType="YES" syncable="YES">
             <userInfo>
@@ -42,6 +42,11 @@
                 <entry key="jsonKey" value="first_name"/>
             </userInfo>
         </attribute>
+        <attribute name="gender" optional="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="jsonKey" value="gender"/>
+            </userInfo>
+        </attribute>
         <attribute name="lastName" optional="YES" attributeType="String" syncable="YES">
             <userInfo>
                 <entry key="jsonKey" value="last_name"/>
@@ -56,6 +61,11 @@
         <attribute name="phoneId" optional="YES" attributeType="Integer 64" usesScalarValueType="YES" syncable="YES">
             <userInfo>
                 <entry key="jsonKey" value="phone_id"/>
+            </userInfo>
+        </attribute>
+        <attribute name="provinceName" optional="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="jsonKey" value="state_province_name"/>
             </userInfo>
         </attribute>
         <attribute name="rowId" optional="YES" attributeType="Integer 64" usesScalarValueType="YES" syncable="YES">
@@ -101,6 +111,11 @@
                 <entry key="jsonKey" value="payment_instrument_id"/>
             </userInfo>
         </attribute>
+        <attribute name="receiptDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES">
+            <userInfo>
+                <entry key="jsonKey" value="receipt_date"/>
+            </userInfo>
+        </attribute>
         <attribute name="receiveDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES">
             <userInfo>
                 <entry key="jsonKey" value="receive_date"/>
@@ -119,6 +134,11 @@
         <attribute name="status" optional="YES" attributeType="String" syncable="YES">
             <userInfo>
                 <entry key="jsonKey" value="contribution_status"/>
+            </userInfo>
+        </attribute>
+        <attribute name="statusId" optional="YES" attributeType="Integer 64" usesScalarValueType="YES" syncable="YES">
+            <userInfo>
+                <entry key="jsonKey" value="contribution_status_id"/>
             </userInfo>
         </attribute>
         <attribute name="totalAmount" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES" syncable="YES">
@@ -150,7 +170,7 @@
         </attribute>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES">
             <userInfo>
-                <entry key="jsonKey" value="membership_name"/>
+                <entry key="jsonKey" value="membership_type_id.name"/>
             </userInfo>
         </attribute>
         <attribute name="notYetViewed" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES" syncable="YES"/>
@@ -206,7 +226,7 @@
                 <entry key="jsonKey" value="event_type"/>
             </userInfo>
         </attribute>
-        <attribute name="feeAmount" optional="YES" attributeType="Double" usesScalarValueType="YES" syncable="YES">
+        <attribute name="feeAmount" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES" syncable="YES">
             <userInfo>
                 <entry key="jsonKey" value="participant_fee_amount"/>
             </userInfo>
@@ -316,8 +336,8 @@
         </userInfo>
     </entity>
     <elements>
-        <element name="Contact" positionX="-1017" positionY="-1746" width="128" height="330"/>
-        <element name="Contribution" positionX="-648" positionY="-2002" width="128" height="225"/>
+        <element name="Contact" positionX="-1017" positionY="-1746" width="128" height="360"/>
+        <element name="Contribution" positionX="-648" positionY="-2002" width="128" height="255"/>
         <element name="Membership" positionX="-828" positionY="-1854" width="128" height="195"/>
         <element name="Participant" positionX="-648" positionY="-1746" width="128" height="285"/>
         <element name="Pledge" positionX="-648" positionY="-1396" width="128" height="270"/>

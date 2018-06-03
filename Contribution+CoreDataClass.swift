@@ -12,6 +12,7 @@ import CoreData
 
 @objc(Contribution)
 public class Contribution: NSManagedObject, CiviEntityDisplayed {
+    // MARK: - Properties
     var alreadyViewed: Bool {
         set {
             self.notYetViewed = !newValue
@@ -28,28 +29,30 @@ public class Contribution: NSManagedObject, CiviEntityDisplayed {
     }()
     
     var entityTitle: String {
-        return "Payments"
+        return "Your Contribution(s)"
     }
     
     var entityLabel: String {
-        guard let source = self.source else {
-            return "(No Description)"
+        if  let source = self.source, !source.isEmpty {
+            return  source
         }
-        if source.isEmpty {
-            return "(No Description)"
-        }
-        return  source
+        return "(No Description)"
     }
 
-    func propertiesForDisplay() -> [(String, String)] {
+    // MARK: - Functions
+    func propertiesToDisplayList() -> Array<(String, String)> {
         let receiveDate: String = (self.receiveDate as Date?) != nil ? formatter.string(from: (self.receiveDate! as Date)) : ""
+        let receiptDate: String = (self.receiptDate as Date?) != nil ? formatter.string(from: (self.receiptDate! as Date)) : ""
         
-        return [
-            ("Paid for: ", "\(self.source ?? "(No Source)")"),
-            ("Amount: ","\(self.totalAmount) \(self.currency ?? "")"),
-            ("Paid by: ", self.payInstrument ?? ""),
-            ("Recieve Date: ", receiveDate),
-            ("Contribution Status: ", "\(self.status ?? "(No Status)")"),
-        ]
+        var displayList = Array<(String,String)>()
+        
+        displayList.append(("Paid for: ", "\(self.source ?? "(No Source)")"))
+        displayList.append(("Amount: ","\(self.totalAmount) \(self.currency ?? "")"))
+        displayList.append(("Paid by: ", self.payInstrument ?? ""))
+        displayList.append(("Received Date: ", receiveDate))
+        displayList.append(("Receipt Date: ", receiptDate))
+        displayList.append(("Contribution Status: ", "\(self.status ?? "(No Status)")"))
+        
+        return displayList
     }
 }
