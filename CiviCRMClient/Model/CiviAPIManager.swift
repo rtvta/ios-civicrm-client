@@ -21,7 +21,7 @@ enum UserMessage: String {
     case emptyData = "No data retreived."
     case internalError = "Internal error occures."
     case dbError = "Data base error occures. Please retry later."
-    case credentailsMissing = "Please enter credentails or activate demo mode and try again."
+    case credentailsMissing = "Please enter credentials or activate demo mode and try again."
 }
 
 // MARK: - CiviCRM API 'action' parameters
