@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  EtitiesViewController.swift
 //  CiviCRMClient
 //
 //  Created by Roman Tiagni on 29/04/2018.
@@ -17,6 +17,8 @@ class EntitiesViewController: UIViewController {
     var dataTask:  URLSessionTask?
     var isLoading = false
     var entitiesArray: Array<[NSManagedObject]>?
+    
+    // The contact for display
     var currentContact: Contact? {
         didSet {
             self.entitiesArray = currentContact?.sortedRelationsArray()
@@ -35,8 +37,8 @@ class EntitiesViewController: UIViewController {
             dataTask?.cancel()
             indicator.stopAnimating()
             tableView.contentInset = UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0)
-            if self.errorMessage == "cancelled" {return}
-            let alert = UIAlertController(title: "iCivi says", message: self.errorMessage, preferredStyle: .alert)
+            if self.errorMessage == "cancelled" { return }
+            let alert = UIAlertController(title: "Sorry", message: self.errorMessage, preferredStyle: .alert)
             let action = UIAlertAction(title: "Close", style: .default, handler: nil)
             alert.addAction(action)
             self.present(alert, animated: true, completion: nil)
@@ -91,6 +93,9 @@ class EntitiesViewController: UIViewController {
     }
     
     // MARK: - Functions
+    
+    // Load data from CiviCRM using CiviCRM APIv3
+    // Usage reference: https://docs.civicrm.org/dev/en/latest/api/
     func loadData() {
         guard let request = CiviAPIManager.shared.defaultURLRequest() else {
             self.errorMessage = UserMessage.credentailsMissing.rawValue
@@ -117,18 +122,23 @@ class EntitiesViewController: UIViewController {
                     
                     if let isError = result.value(forKey: "is_error") as? Int, isError == 1,
                         let apiErrorMessage = result.value(forKey: "error_message") as? String {
+                        // In case CivCRM api returned the error
                         DispatchQueue.main.async {
                             self.errorMessage = apiErrorMessage + UserMessage.referToAdmin.rawValue
                         }
                         return
                     } else if let count = result.value(forKey: "count") as? Int {
+                        // The current application alow to retrieve from CiviCRM the data related only to one contact record
+                        // from 'civicrm_contact' table where the 'api_key' field value equals to 'API Key' parameter entered in App Setting
+                        // For this goal the http request sends with parameters 'entity ' = 'Contact', 'action' = 'get'.
+                        // So expected to receive data according to authenticated CMS user permissions
                         
-                        if count > 1 {
+                        if count > 1 {      // - User has "CiviCRM: view all contacts" permissions
                             DispatchQueue.main.async {
                                 self.errorMessage = UserMessage.extraPermissions.rawValue + UserMessage.referToAdmin.rawValue
                             }
                             return
-                        } else if count == 0 {
+                        } else if count == 0 {      // - User has not permissions to view any contact
                             DispatchQueue.main.async {
                                 self.errorMessage = UserMessage.emptyData.rawValue + UserMessage.referToAdmin.rawValue
                             }
@@ -141,6 +151,8 @@ class EntitiesViewController: UIViewController {
                         return
                     }
                     
+                    // In case the user has "CiviCRM: view my contact" that alows view only personal data
+                    // the received message is considered correct
                     if let id = result.value(forKey: "id") as? Int {
                         self.isLoading = true
                         self.coreDataAdapter.updateContext(for: id, message: result)
@@ -169,6 +181,7 @@ class EntitiesViewController: UIViewController {
         dataTask?.resume()
     }
 
+    // Sets contact for display according to display mode
     fileprivate func setCurrentContact() {
         let demoMode: Bool = UserDefaults.standard.bool(forKey: "demo_mode_preference")
         let fetch: NSFetchRequest<Contact> = Contact.fetchRequest()

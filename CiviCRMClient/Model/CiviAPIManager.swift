@@ -1,5 +1,5 @@
 //
-//  CiviCRMAPIManager.swift
+//  CiviAPIManager.swift
 //  CiviCRMClient
 //
 //  Created by Roman Tiagni on 13/05/2018.
@@ -13,9 +13,10 @@ import CoreData
 typealias CiviAttributeDescription = (key: String, jsonKey: String, type: Int)
 typealias CiviEntityDescription = (name: String, jsonKey: String, attributes: [CiviAttributeDescription])
 
-// MARK: - User masseges
+// MARK: - Contstants
+// User messages
 enum UserMessage: String {
-    case referToAdmin = " Please refer to CiviCRM administator."
+    case referToAdmin = "\nPlease refer to CiviCRM administator."
     case msgNotValid = "Message not valid."
     case extraPermissions = "You have permissions to view other contacts."
     case emptyData = "No data retreived."
@@ -24,7 +25,7 @@ enum UserMessage: String {
     case credentailsMissing = "Please enter credentials or activate demo mode and try again."
 }
 
-// MARK: - CiviCRM API 'action' parameters
+// CiviCRM API 'action' parameter
 enum Action: String {
     case get
     case create
@@ -89,7 +90,7 @@ final class CiviAPIManager {
     }
     
     // MARK: - Private functions
-    // Generates JSON strign for default request
+    // Generates JSON string for default request
     fileprivate func defaultJSONString(limit: Int) -> String {
         var jsonString = ""
         let options = "\"options\":{\"limit\":\(limit),\"sort\":\"id DESC\"}"
@@ -110,15 +111,12 @@ final class CiviAPIManager {
         }
         jsonString.removeLast(1)
         jsonString += "}"
-        
         return jsonString
     }
     
-    /*
-     * Generates array of name, jsonKey and data type of attribute for entity, defined in Core Data.
-     * 'jsonKey' is key of userInfo parameter of attribute, defined for mapping JSON message to manged object.
-     * Returned array used in CoreDataAdapter.swift for update managed object with data from JSON message
-    */
+    // Generates array of name, jsonKey and data type of attribute for entity, defined in Core Data.
+    // 'jsonKey' is a key of userInfo parameter of attribute, defined for mapping JSON message to manged object.
+    // Returned array used in CoreDataAdapter.swift for update managed object with data from JSON message.
     fileprivate func civiEntityAttributesDecription(entity: NSEntityDescription) -> Array<CiviAttributeDescription> {
         var attributes = [CiviAttributeDescription]()
         for (key, val) in entity.attributesByName {
@@ -127,13 +125,11 @@ final class CiviAPIManager {
             let attributeDescription: CiviAttributeDescription = (key: key, jsonKey: jsonKey, type: Int(val.attributeType.rawValue))
             attributes.append(attributeDescription)
         }
-        
         return attributes
     }
     
-    /* Used for restrict properties of relation entities in response message.
-     * 'return' parameter in CiviCRM API request
-    */
+    // Used for restrict properties of contact related entities in response message.
+    // The 'return' parameter for each related entity in CiviCRM API request.
     fileprivate func requestedAttributes(attributes: Array<CiviAttributeDescription>) -> String {
         var attributesString = ""
         for a in attributes where a.jsonKey != "id" && !a.jsonKey.isEmpty {

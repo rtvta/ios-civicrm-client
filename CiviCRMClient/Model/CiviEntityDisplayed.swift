@@ -1,5 +1,5 @@
 //
-//  CiviCRMEntityDisplayed.swift
+//  CiviEntityDisplayed.swift
 //  CiviCRMClient
 //
 //  Created by Roman Tiagni on 03/05/2018.
